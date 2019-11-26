@@ -1,87 +1,48 @@
-% !TeX spellcheck = de_DE
-\section{MalvÃ©r a spÃ´soby ukrytia malvÃ©ru}
+\section{Malvér a spôsoby ukrytia malvéru}
 \noindent
-\subsection{MalvÃ©r}
-\noindent Je to softvÃ©r, ktorÃ©ho cieÄ¾om je poÅ¡kodiÅ¥, zablokovaÅ¥, zmocniÅ¥ sa alebo odcudziÅ¥ dÃ´leÅ¾itÃ© informÃ¡cie uloÅ¾enÃ© v poÄÃ­taÄi. CieÄ¾om malvÃ©ru je zÃ­skaÅ¥ informÃ¡cie pre ÃºtoÄnÃ­ka a nÃ¡slednÃ© zneuÅ¾itie informÃ¡ciÃ­ na rÃ´zne druhy nelegÃ¡lnej Äinnosti za ÃºÄelom danej obete uÅ¡kodiÅ¥ alebo sa na nej finanÄne obohatiÅ¥. MalvÃ©r kedysi zahÅ•Åˆal rÃ´zne poÄÃ­taÄovÃ© vÃ­rusy, backdoory, spyware, ramsomware a rÃ´zne inÃ© softvÃ©ry. V sÃºÄasnosti uÅ¾ toto delenie nie je aktuÃ¡lne, pretoÅ¾e sÃºÄasnÃ© malvÃ©ry sÃº uÅ¾ kombinÃ¡ciou tÃ½chto vÃ­rusov a vyuÅ¾Ã­vajÃº rÃ´zne Äasti jednotlivÃ½ch vÃ­rusov. V nasledujÃºcej Äasti kapitoly sa podrobnejÅ¡ie budem zaoberaÅ¥ rÃ´znymi spÃ´sobmi ukrytia malvÃ©ru, ktorÃ© mÃ´Å¾u byÅ¥ v sÃºÄasnosti vyuÅ¾Ã­vanÃ© na ukrytie malvÃ©ru. 
+
+\subsection{Malvér}
+\noindent Je to softvér, ktorého cie¾om je poškodi, zablokova, zmocni sa alebo odcudzi dôleité informácie uloené v poèítaèi. Cie¾om malvéru je získa informácie pre útoèníka a následné zneuitie informácií na rôzne druhy nelegálnej èinnosti za úèelom danej obete uškodi alebo sa na nej finanène obohati. Malvér kedysi zahàòal rôzne poèítaèové vírusy, backdoory, spyware, ramsomware a rôzne iné softvéry. V súèasnosti u toto delenie nie je aktuálne, pretoe súèasné malvéry sú u kombináciou tıchto vírusov a vyuívajú rôzne èasti jednotlivıch vírusov. V nasledujúcej èasti kapitoly sa podrobnejšie budem zaobera rôznymi spôsobmi ukrytia malvéru, ktoré môu by v súèasnosti vyuívané na ukrytie malvéru. 
 
 \subsection{DLL Injection / Reflective DLL Injection}
-\noindent DLL Injection je technika pouÅ¾Ã­vanÃ¡ na ukrytie funkcie na spustenie malvÃ©ru vo vnÃºtri inÃ©ho programu. NajÄastejÅ¡ie sa na to vyuÅ¾Ã­va alokovanÃ¡ pamÃ¤Å¥ vyhradenÃ¡ pre beh infikovanÃ©ho programu, kde sa funkcia na spustenie malvÃ©ru ukryje a pre antivÃ­rusovÃ© programy je Å¥aÅ¾ko detekovateÄ¾nÃ¡. Po nakopÃ­rovanÃ­ DLL funkcie do alokovanej pamÃ¤te inÃ©ho programu mÃ´Å¾e byÅ¥ nÃ¡sledne vyvolanÃ© spustenie infikovanÃ©ho programu a spolu s nÃ­m aj spustenie malvÃ©ru. HlavnÃ½m cieÄ¾om DLL Injection je Å¡kodlivÃ½ kÃ³d ukryÅ¥ do oficiÃ¡lneho alebo overenÃ©ho programu, kde je malvÃ©r ukrytÃ½ pred antivÃ­rovÃ½m softvÃ©rom, odkiaÄ¾ mÃ´Å¾e byÅ¥ nÃ¡sledne spustenÃ½.
+\noindent DLL Injection je technika pouívaná na ukrytie funkcie na spustenie malvéru vo vnútri iného programu. Najèastejšie sa na to vyuíva alokovaná pamä vyhradená pre beh infikovaného programu, kde sa funkcia na spustenie malvéru ukryje a pre antivírusové programy je ako detekovate¾ná. Po nakopírovaní DLL funkcie do alokovanej pamäte iného programu môe by následne vyvolané spustenie infikovaného programu a spolu s ním aj spustenie malvéru. Hlavnım cie¾om DLL Injection je škodlivı kód ukry do oficiálneho alebo overeného programu, kde je malvér ukrytı pred antivírovım softvérom, odkia¾ môe by následne spustenı.
 
 \subsection{Process hollowing}
-\noindent Proces Hollowing vyuÅ¾Ã­va rovnakÃ© alebo podobnÃ© princÃ­py ukrÃ½vania Å¡kodlivÃ©ho softvÃ©ru ako DLL Injection. CieÄ¾om je schovaÅ¥ Å¡kodlivÃ½ kÃ³d do existujÃºce programu z ktorÃ©ho sa po spustenÃ­, spustÃ­ aj volanie Å¡kodlivÃ©ho malvÃ©ru.  Oproti DLL Injection ide ale ukrytie malvÃ©rovÃ©ho programu do inÃ©ho programu. MalvÃ©r si podÄ¾a potreby alokuje virtuÃ¡lnu pamÃ¤Å¥  v pamÃ¤ti inÃ©ho programu. Po spustenÃ­ infikovanÃ©ho programu malvÃ©r pozastavÃ­ thread v ktorom program beÅ¾Ã­, nÃ¡sledne zmenÃ­ obsah legitÃ­mneho sÃºboru zmapovanÃ­m pamÃ¤te cieÄ¾ovÃ©ho procesu. Po zmapovanÃ­ uvoÄ¾nÃ­ vÅ¡etku pamÃ¤Å¥ programu a alokuje pamÃ¤Å¥ pre malvÃ©r a zapÃ­Å¡e kaÅ¾dÃº z ÄastÃ­ malvÃ©ru do cieÄ¾ovej pamÃ¤te programu. MalvÃ©r volÃ¡ SetThreadContext, aby ukazoval vstupnÃ½ bod na novÃº ÄasÅ¥ kÃ³du, ktorÃº napÃ­sal. Na konci malvÃ©r obnovÃ­ pozastavenÃ½ thread volanÃ­m ResumeThread, aby sa proces dostal z pozastavenÃ©ho stavu a nasledovnÃ½m spustenÃ­m programu umoÅ¾nÃ­ zÃ­skavanie Ãºdajov.
+\noindent Proces Hollowing vyuíva rovnaké alebo podobné princípy ukrıvania škodlivého softvéru ako DLL Injection. Cie¾om je schova škodlivı kód do existujúce programu z ktorého sa po spustení, spustí aj volanie škodlivého malvéru.  Oproti DLL Injection ide ale ukrytie malvérového programu do iného programu. Malvér si pod¾a potreby alokuje virtuálnu pamä  v pamäti iného programu. Po spustení infikovaného programu malvér pozastaví thread v ktorom program beí, následne zmení obsah legitímneho súboru zmapovaním pamäte cie¾ového procesu. Po zmapovaní uvo¾ní všetku pamä programu a alokuje pamä pre malvér a zapíše kadú z èastí malvéru do cie¾ovej pamäte programu. Malvér volá SetThreadContext, aby ukazoval vstupnı bod na novú èas kódu, ktorú napísal. Na konci malvér obnoví pozastavenı thread volaním ResumeThread, aby sa proces dostal z pozastaveného stavu a nasledovnım spustením programu umoní získavanie údajov.
 
 \subsection{Thread Execution Hijacking }
-\noindent TÃ¡to technika ukrytia malvÃ©ru spoÄÃ­va v napojenÃ­ sa na uÅ¾ existujÃºci thread vyvolanÃ½ inÃ½m programom. Po zÃ­skanÃ­ prÃ­stupu do threadu malvÃ©r uvedie thread do pozastavenÃ©ho reÅ¾imu aby vykonal vloÅ¾enie volania Å¡kodlivÃ©ho malvÃ©ru do threadu inÃ©ho procesu. MalvÃ©r si alokuje virtuÃ¡lnu pamÃ¤Å¥ v programe a nÃ¡sledne do tejto pamÃ¤te vloÅ¾Ã­ Å¡kodlivÃ½ shell kÃ³d, ktorÃ½ obsahuje cestu k volaniu DLL so Å¡kodlivÃ½m malvÃ©rom.  Po vykonanÃ­ tÃ½chto Ãºkonov, spustÃ­ pozastavenÃ½ thread programu. NevÃ½hodou takÃ©hoto spustenia pozastavenÃ©ho programu je, Å¾e mÃ´Å¾e spÃ´sobiÅ¥ zlyhanie systÃ©mu v rÃ¡mci systÃ©movÃ©ho volania. Preto aby sa tomu prediÅ¡lo modernejÅ¡Ã­ malvÃ©r proces ukonÄÃ­ a vyvolÃ¡ ho znovu s uÅ¾ modifikovanou zmenou na infikovanie.
+\noindent Táto technika ukrytia malvéru spoèíva v napojení sa na u existujúci thread vyvolanı inım programom. Po získaní prístupu do threadu malvér uvedie thread do pozastaveného reimu aby vykonal vloenie volania škodlivého malvéru do threadu iného procesu. Malvér si alokuje virtuálnu pamä v programe a následne do tejto pamäte vloí škodlivı shell kód, ktorı obsahuje cestu k volaniu DLL so škodlivım malvérom.  Po vykonaní tıchto úkonov, spustí pozastavenı thread programu. Nevıhodou takéhoto spustenia pozastaveného programu je, e môe spôsobi zlyhanie systému v rámci systémového volania. Preto aby sa tomu predišlo modernejší malvér proces ukonèí a vyvolá ho znovu s u modifikovanou zmenou na infikovanie.
 
 \subsection{Portable Executable Injection}
-\noindent VÃ½hodou tohto spÃ´sobu ukrytia malvÃ©ru je vyuÅ¾itie nakopÃ­rovania malvÃ©ru do uÅ¾ existujÃºceho beÅ¾iaceho procesu pomocou shell skriptu, ktorÃ½ vyvolÃ¡ spustenie Å¡kodlivÃ©ho malvÃ©ru. Namiesto toho aby proces prepisoval cesty volanÃ­m  DLL, tÃ¡to technika zapisuje obsah malvÃ©ru priamo pomocou WriteProcessMemory. PoÄas doby zapisovania aby malvÃ©r nebol Ä¾ahko odhalenÃ½ vyuÅ¾Ã­va vnorenÃ© cykly, ktorÃ© spomaÄ¾ujÃº systÃ©m buÄ diagnostikou alebo volanÃ­m zbytoÄnÃ½ch funkciÃ­ a snaÅ¾Ã­ sa zahltiÅ¥ systÃ©m a neumoÅ¾niÅ¥ skorÃº diagnostiku malvÃ©ru.  KeÄ malvÃ©r preformuluje vÅ¡etky potrebnÃ© adresy, vÅ¡etko, Äo musÃ­ urobiÅ¥, je odovzdaÅ¥ jeho poÄiatoÄnÃº adresu CreateRemoteThread a nechaÅ¥ spustiÅ¥ malvÃ©r.
+\noindent Vıhodou tohto spôsobu ukrytia malvéru je vyuitie nakopírovania malvéru do u existujúceho beiaceho procesu pomocou shell skriptu, ktorı vyvolá spustenie škodlivého malvéru. Namiesto toho aby proces prepisoval cesty volaním  DLL, táto technika zapisuje obsah malvéru priamo pomocou WriteProcessMemory. Poèas doby zapisovania aby malvér nebol ¾ahko odhalenı vyuíva vnorené cykly, ktoré spoma¾ujú systém buï diagnostikou alebo volaním zbytoènıch funkcií a snaí sa zahlti systém a neumoni skorú diagnostiku malvéru.  Keï malvér preformuluje všetky potrebné adresy, všetko, èo musí urobi, je odovzda jeho poèiatoènú adresu CreateRemoteThread a necha spusti malvér.
 
-\section{AktuÃ¡lne vyuÅ¾Ã­vanÃ© malvÃ©ry}
-\noindent TÃ¡to kapitola obsahuje opis jednotlivÃ½ch malvÃ©rov pouÅ¾Ã­vanÃ½ch v roku 2019, ktorÃ© boli detekovanÃ© spoloÄnosÅ¥ami ako Avast a McAfee. Tieto malvÃ©ry sÃº najÄastejÅ¡ie vyuÅ¾Ã­vanÃ© v oblasti EurÃ³py. Kapitola obsahuje bliÅ¾Å¡Ã­ opis malvÃ©rov, ich vyuÅ¾itie, pouÅ¾itÃ© spÃ´soby Ãºrokov a ukrytie malvÃ©ru v systÃ©me.
+\section{Aktuálne vyuívané malvéry}
+\noindent Táto kapitola obsahuje opis jednotlivıch malvérov pouívanıch v roku 2019, ktoré boli detekované spoloènosami ako Avast a McAfee. Tieto malvéry sú najèastejšie vyuívané v oblasti Európy. Kapitola obsahuje bliší opis malvérov, ich vyuitie, pouité spôsoby úrokov a ukrytie malvéru v systéme.
 
 \subsection{Sodinokibi}
-\noindent Tento malvÃ©r bol detekovanÃ½ v obdobÃ­ okolo aprÃ­la 2019. PatrÃ­ do rodiny ransomvÃ©ru, ktorÃ½ch cieÄ¾om je Å¡ifrovaÅ¥ informÃ¡cie v zariadenÃ­ a nÃ¡sledne za deÅ¡ifrovanie pÃ½ta nemalÃ½ obnos peÅˆazÃ­. NÃ¡zov bol objavenÃ½ v hash kÃ³de, ktorÃ½ obsahoval nÃ¡zov â€Sodinokibi.exeâ€œ. vÃ­rus sa Å¡Ã­ri sÃ¡m zmeuÅ¾Ã­vanÃ­m zraniteÄ¾nosti na serveroch Oracle WebLogic. SoftvÃ©r je navrhnutÃ½ tak, aby rÃ½chlo vykonÃ¡val Å¡ifrovanie definovanÃ½ch sÃºborov v konfigurÃ¡cii ransomvÃ©ru. Prvou akciou Å¡kodlivÃ©ho softvÃ©ru je zÃ­skaÅ¥ vÅ¡etky funkcie potrebnÃ© pri  behu programu a vytvoriÅ¥ dynamickÃ½ IAT, ktorÃ½ sa pokÃºsi zahltiÅ¥ volanie systÃ©mu Windows statickou analÃ½zou. Po zahltenÃ­ systÃ©mu dÃ´jde k spusteniu malvÃ©ru. Technika vyuÅ¾Ã­vanÃ¡ na ukrytie malvÃ©ru je Portable Executable Injection ktorÃº volÃ¡ po spomalenÃ­ RunPE na jej spustenie z pamÃ¤te. tÃ¡to technika ukrytia malvÃ©ru je opÃ­sanÃ¡ v predoÅ¡lej kapitole. AnalÃ½za spoloÄnosti McAfee ukazuje podobnosÅ¥ s inÃ½m starÅ¡Ã­m malvÃ©rom GandCrab.(pridaÅ¥ odkaz na analÃ½zu respektÃ­ve literatÃºru)
+\noindent Tento malvér bol detekovanı v období okolo apríla 2019. Patrí do rodiny ransomvéru, ktorıch cie¾om je šifrova informácie v zariadení a následne za dešifrovanie pıta nemalı obnos peòazí. Názov bol objavenı v hash kóde, ktorı obsahoval názov „Sodinokibi.exe“. vírus sa šíri sám zmeuívaním zranite¾nosti na serveroch Oracle WebLogic. Softvér je navrhnutı tak, aby rıchlo vykonával šifrovanie definovanıch súborov v konfigurácii ransomvéru. Prvou akciou škodlivého softvéru je získa všetky funkcie potrebné pri  behu programu a vytvori dynamickı IAT, ktorı sa pokúsi zahlti volanie systému Windows statickou analızou. Po zahltení systému dôjde k spusteniu malvéru. Technika vyuívaná na ukrytie malvéru je Portable Executable Injection ktorú volá po spomalení RunPE na jej spustenie z pamäte. táto technika ukrytia malvéru je opísaná v predošlej kapitole. Analıza spoloènosti McAfee ukazuje podobnos s inım starším malvérom GandCrab.(prida odkaz na analızu respektíve literatúru)
 
-\subsection{Ryuk}
-\noindent (nutnÃ© doplniÅ¥)
-
-\subsection{Dharma}
-\noindent (nutnÃ© doplniÅ¥)
-
-\subsection{Muhstik}
-\noindent (nutnÃ© doplniÅ¥)
+\subsection{Emotet}
+\noindent
+Emotet je malvér ,ktorı sa primárne šíri pomocou rôznych spam emailov. Na infikovanie zariadenia pouíva rôzne skripty, makrá v dokumetoch alebo linky. Emotet stavia na infikovaní pomocou sociálneho ininierstva. Prezentuje sa ako hodnovernı zástupca napr. banky, Rôznych internetovıch obchodov, atï. . Emotet malvér sa prvıkrát objavil v roku 2014 kedy vyuíval na infikovanie rôzne JavaScript súbory.  V roku 2019 sa tento vírus objavil znova tentokrát v pokroèilejšej verzii.  V novej verzii je emonet polymorfnım malvérom èo mu umonuje vyhnú sa klasickej detekcii. Emotet pouíva modulárne kninice Dynamic Link (DLL) na nepretritı vıvoj a aktualizáciu svojich schopností. Emotet môe navyše generova falošné indikátory, ak je spustenı vo virtuálnom prostredí èo zhoršuje jeho detekciu  systéme.
 
 
-\begin{table}[!htbp]
-\begin{center}
-\begin{tabular}{p{4cm}|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
-& \multicolumn{14}{c}%
-	 {\textbf{Funkcia}}\\ \hline
-&&&& & &\multicolumn{8}{c}%
-	 {ModifikÃ¡cia}\\ 
-\textbf{Modul} &\begin{sideways} zobrazenie hlaviÃ¨ky \end{sideways} &\begin{sideways} blokovanie skriptov \end{sideways} &\begin{sideways} zmena IP \end{sideways} & \begin{sideways} zmena lokalizÃ¡cie \end{sideways} & \begin{sideways} zmazanie/blokovanie cookies \end{sideways} & \begin{sideways} blokovanie trackerov \end{sideways}  & \begin{sideways} popis \end{sideways} & \begin{sideways}pouÂÃ­vateÂ¾skÃ½ agent\end{sideways} & \begin{sideways} kÃ³dovÃ© oznaÃ¨enie prehliadaÃ¨a \end{sideways} & \begin{sideways} nÃ¡zov prehliadaÃ¨a \end{sideways} & \begin{sideways} verzia prehliadaÃ¨a \end{sideways} & \begin{sideways} platforma \end{sideways} & \begin{sideways} vÃ½robca prehliadaÃ¨a \end{sideways} & \begin{sideways} oznaÃ¨enie vÃ½robcu prehliadaÃ¨a \end{sideways} \\ \hline
-User agent switcher & & & & & &  & X & X & X & X & X & X & X & X  \\ \hline
-Ghostery &  && & & X & X &  &  & & & & & & \\  \hline
-Better privacy && &  & & X &  &  &  & & & & & & \\  \hline
-Anonymox &  && X & X & X &  & X & X & & & & & & \\  \hline
-Modify headers & & &  &  & X &  &  & X &  &  &  & & &  \\  \hline
-Request policy & & &  &  & & X  &  &  &  &  &  & & &   \\  \hline
-Live HTTP headers & X& &  &  & &  &  &  &  &  &  & & &   \\  \hline
-User agent awitcher for chrome & & &  &  & &  & X & X &  &  &  & & &   \\  \hline
-Header hacker & & &  &  & &  & X & X & X & X & X & X & X & X    \\  \hline
-Mod header & & &  &  & &  & X & X & X & X & X & X & X & X    \\  \hline
-Script no & &X &  &  & &  &  &  &  &  &  &  &  &     \\  \hline
-No script & &X &  &  & &  &  &  &  &  &  &  &  &     \\  \hline
-Proxify it & & &X  & X & &  &  &  &  &  &  &  &  &     \\  \hline
-I'm not here & & &  & X & &  &  &  &  &  &  &  &  &     \\  \hline
-Get anonymous personal edition & &X &X &X &X&X &  &  &  &  &  &  &  &     \\  \hline
-Anonymous browsing toolbar & & & X & X & &  &  &  &  &  &  &  &  &     \\  \hline
-Easy hide your IP and surf anonymously & & & X & X& &  &  & X & X & X & X &  &  &     \\  \hline
-\end{tabular}
-\caption{Moduly a ich funkcie pri anonymizÃ¡cii}
-\label{modulyVlastnosti}
-\end{center}
-\end{table}
-
-\subsection{AnonymnÃ¡ sieÂ}
-\noindent AnonymnÃ¡ sieÂ je sieÂ serverov, medzi ktorÃ½mi dÃ¡ta prechÃ¡dzajÃº ÂšifrovanÃ©. V anonymnÃ½ch sieÂach dÃ¡ta prechÃ¡dzajÃº z poÃ¨Ã­taÃ¨a pouÂÃ­vateÂ¾a, odkiaÂ¾ bola poÂiadavka poslanÃ¡, cez viacerÃ© proxy smerovaÃ¨e, z ktorÃ½ch kaÂdÃ½ sprÃ¡vu doplnÃ­ o smerovanie a zaÂšifruje vlastnÃ½m kÂ¾ÃºÃ¨om. Cesta od ...
+\subsection{ZeuS}
+\noindent
+Prvıkrát odhalenı v roku 2007 sa Zeus Trojan, ktorı sa èasto nazıva Zbot, stal jednım z najúspešnejších kúskov botnetového softvéru na svete, postihol milióny poèítaèov a vytvoril mnostvo podobnıch kusov škodlivého softvéru vytvoreného z jeho kódu. Po jeho minimalizovaní sa znovu objavil v pozmenenej podobe so zameraním na odchytávanie bankovıch operácii (Odchytávanie prihlasovacích údajov do internet bankingu). Dosahuje to prostredníctvom monitorovania webovıch stránok a zaznamenávania klávesov, keï malvér zistí, e sa pouívate¾ nachádza na bankovej webovej stránke, zaène zaznamenáva stlaèenia klávesov pouité na prihlásenie. To znamená, e trójsky kôò dokáe obís zabezpeèenie na tıchto webovıch stránkach. Infekcia prebieha pomocou spamov. Keï uívate¾ klikne na odkaz v správe alebo stiahne obsah súboru. spolu s ním stiahne a spustí aj makro. Ktoré po nainštalovaní umoòuje sledovanie zariadenia. 
 
 
-\subsection{Funkcionalita}
-\noindent  RozÂšÃ­renie tieÂ okrem splnenia ÂšpecifikÃ¡cie malo pre prehÂ¾adnosÂ a overenie funkÃ¨nosti zobrazovaÂ Ãºdaje, ktorÃ© boli na server odoslanÃ©. Zoznam Ãºdajov odoslanÃ½ch na server, sa mal ukladaÂ do krÃ¡tkodobej histÃ³rie, aby nemal pouÂÃ­vateÂ¾ k dispozÃ­ciÃ­ len najnovÂšie Ãºdaje, ale aj Ãºdaje odoslanÃ© v nejakom Ã¨asovom obdobÃ­. 
+\subsection{Dridex}
+\noindent
+Dridex je známy trójsky kôò, ktorı sa špecializuje na kráde kreditnıch údajov online bankovníctva. Tento typ škodlivého softvérusa objavil v roku 2014 a stále napreduje a vyvíja.  Novı variant Dridex je schoplnı vyhnú sa detekcii tradiènımi antivírusovımi produktami.  Dridex tie zvıšil svoju infraštruktúru kniníc. Vyuíva kninice ako DLL Dridex èo sú 64-bitové kninice DLL - s pridruenımi hashmi SHA256 - ktoré pouívajú názvy súborov naèítané legitímnymi spustite¾nımi súbormi systému Windows. Názvy súborov a hash sa však obnovujú a menia zakadım, keï sa obe prihlási do infikovaného hostite¾a Windows. Tento malvér je v súèastnosti schopnı detekova pribline 25 a 30 percent aktuálnych antivírusovıch softvérov. 
 
-\subsubsection{Funkcionalita2}
-\noindent SamozrejmosÂou bolo nastavenie zapnutia rozÂšÃ­renia pri Âštarte, prÃ­padne interval zmeny odosielanÃ½ch Ãºdajov.
-
-\subsection{VzhÂ¾ad}
-\noindent DÃ´leÂitou poÂiadavkou kladenou na rozÂšÃ­renie bolo prÃ­jemnÃ© pouÂÃ­vateÂ¾skÃ© rozhranie. Z~tohto dÃ´vodu malo rozÂšÃ­renie obsahovaÂ zoznam modifikovanÃ½ch vlastnostÃ­ a tlaÃ¨idlo pre prÃ­stup k nastaveniam rozÂšÃ­renia v jednoduchej a praktickej forme. PredpokladanÃ½ vzhÂ¾ad je zobrazenÃ½ na obrÃ¡zku Ã¨. \ref{vzhladobr}.
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=8cm]{img/vzhlad.png}
-  \caption{PredpokladanÃ½ vzhÂ¾ad rozÂšÃ­renia.}
+  \caption{Predpokladanı vzh?ad roz?írenia.}
   \label{vzhladobr}
 \end{figure}	 
-\noindent DÃ´leÂitou poÂiadavkou kladenou na rozÂšÃ­renie bolo prÃ­jemnÃ© pouÂÃ­vateÂ¾skÃ© rozhranie.\cite{anonlib} Z~tohto dÃ´vodu malo rozÂšÃ­renie obsahovaÂ zoznam modifikovanÃ½ch vlastnostÃ­ a tlaÃ¨idlo pre prÃ­stup k nastaveniam rozÂšÃ­renia v jednoduchej a praktickej forme. PredpokladanÃ½ vzhÂ¾ad je zobrazenÃ½ na obrÃ¡zku Ã¨. \ref{vzhladobr}.
+\noindent Dôle?itou po?iadavkou kladenou na roz?írenie bolo príjemné pou?ívate?ské rozhranie.\cite{anonlib} Z~tohto dôvodu malo roz?írenie obsahova? zoznam modifikovanıch vlastností a tla?idlo pre prístup k nastaveniam roz?írenia v jednoduchej a praktickej forme. Predpokladanı vzh?ad je zobrazenı na obrázku ?. \ref{vzhladobr}.
 
 \begin{algorithm}
 \lstset{
@@ -113,6 +74,6 @@ main()
 {
     printf("Hello World");
 }\end{lstlisting}
- \caption{UkÃ¡Âka algoritmu}
+ \caption{Uká?ka algoritmu}
  \label{euclid}
 \end{algorithm}
