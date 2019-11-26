@@ -36,6 +36,15 @@ Prvıkrát odhalenı v roku 2007 sa Zeus Trojan, ktorı sa èasto nazıva Zbot, stal j
 \noindent
 Dridex je známy trójsky kôò, ktorı sa špecializuje na kráde kreditnıch údajov online bankovníctva. Tento typ škodlivého softvérusa objavil v roku 2014 a stále napreduje a vyvíja.  Novı variant Dridex je schoplnı vyhnú sa detekcii tradiènımi antivírusovımi produktami.  Dridex tie zvıšil svoju infraštruktúru kniníc. Vyuíva kninice ako DLL Dridex èo sú 64-bitové kninice DLL - s pridruenımi hashmi SHA256 - ktoré pouívajú názvy súborov naèítané legitímnymi spustite¾nımi súbormi systému Windows. Názvy súborov a hash sa však obnovujú a menia zakadım, keï sa obe prihlási do infikovaného hostite¾a Windows. Tento malvér je v súèastnosti schopnı detekova pribline 25 a 30 percent aktuálnych antivírusovıch softvérov. 
 
+\subsection{Mirai}
+\noindent
+Mirai je samo sa mnoiaci vírus botnetov. Zdrojovı kód pre Mirai bol autorom verejne sprístupnenı po úspešnom a dobre propagovanom útoku na webovú stránku Krebbs. Kód botnetu Mirai infikuje zle chránené internetové zariadenia pomocou telnetu (sieovı komunikaènı protokol zaloenı na TCP)na nájdenie tıch, ktoré stále pouívajú svoje predvolené uívate¾ské meno a heslo. Úèinnos systému Mirai je spôsobená jeho schopnosou infikova desiatky tisíc tıchto nezabezpeèenıch zariadení a koordinova ich tak, aby zaèali útok DDoS proti vybranej obeti.
+
+Mirai má dve hlavné zloky, samotnı vírus a velite¾ské a kontrolné stredisko (CnC). Vírus obsahuje útoèné algoritmy, Mirai má desa algoritmov, ktoré môe spusti, a proces skenovania, ktorı aktívne h¾adá iné zariadenia, aby ohrozil ich fungovanie. CnC je samostatnı obraz, ktorı ovláda kompromitované zariadenia (BOT) a posiela im pokyny na spustenie jedného z útokov proti jednej alebo viacerım obetiam. Proces skenera prebieha nepretrite na kadom infikovanom PC pomocou protokolu telnet (na porte TCP 23 alebo 2323)
+
+CnC predstavuje jednoduché rozhranie príkazového riadku, ktoré umoòuje útoèníkovi urèi útoènı algoritmus, IP adresu obete a trvanie útoku. CnC tie èaká na to, aby jej existujúce BOTy vrátili novoobjavené adresy zariadení a poverenia, ktoré pouíva na skopírovanie vírusového kódu a následne na vytváranie novıch BOTov. Útokové algoritmy sú konfigurovate¾né z CnC, ale v predvolenom nastavení má Mirai tendenciu náhodne rozde¾ova rôzne polia (èísla portov, poradové èísla, identifikátory atï.) V útoènıch paketoch, take sa menia s kadım odoslanım paketom.
+
+
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=8cm]{img/vzhlad.png}
