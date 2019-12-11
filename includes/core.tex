@@ -15,7 +15,7 @@
 \noindent Táto technika ukrytia malvéru spoèíva v napojení sa na u existujúci thread vyvolanı inım programom. Po získaní prístupu do threadu malvér uvedie thread do pozastaveného reimu aby vykonal vloenie volania škodlivého malvéru do threadu iného procesu. Malvér si alokuje virtuálnu pamä v programe a následne do tejto pamäte vloí škodlivı shell kód, ktorı obsahuje cestu k volaniu DLL so škodlivım malvérom.  Po vykonaní tıchto úkonov, spustí pozastavenı thread programu. Nevıhodou takéhoto spustenia pozastaveného programu je, e môe spôsobi zlyhanie systému v rámci systémového volania. Preto aby sa tomu predišlo modernejší malvér proces ukonèí a vyvolá ho znovu s u modifikovanou zmenou na infikovanie.
 
 \subsection{Portable Executable Injection}
-\noindent Vıhodou tohto spôsobu ukrytia malvéru je vyuitie nakopírovania malvéru do u existujúceho beiaceho procesu pomocou shell skriptu, ktorı vyvolá spustenie èkodlivého malvéru. Namiesto toho aby proces prepisoval cesty volaním  DLL, táto technika zapisuje obsah malvéru priamo pomocou WriteProcessMemory. Poèas doby zapisovania aby malvér nebol ¾ahko odhalenı vyuíva vnorené cykly, ktoré spoma¾ujú systém buï diagnostikou alebo volaním zbytoènıch funkcií a snaí sa zahlti systém a neumoni skorú diagnostiku malvéru.  Keï malvér preformuluje všetky potrebné adresy, všetko, o musí urobi, je odovzda jeho poèiatoènú adresu CreateRemoteThread a necha spusti malvér.
+\noindent Vıhodou tohto spôsobu ukrytia malvéru je vyuitie nakopírovania malvéru do u existujúceho beiaceho procesu pomocou shell skriptu, ktorı vyvolá spustenie èkodlivého malvéru. Namiesto toho aby proces prepisoval cesty volaním  DLL, táto technika zapisuje obsah malvéru priamo pomocou WriteProcessMemory. Poèas doby zapisovania aby malvér nebol ¾ahko odhalenı vyuíva vnorené cykly, ktoré spoma?ujú systém bu? diagnostikou alebo volaním zbytoènıch funkcií a snaí sa zahlti systém a neumoni skorú diagnostiku malvéru.  Ke? malvér preformuluje všetky potrebné adresy, všetko, o musí urobi, je odovzda jeho poèiatoènú adresu CreateRemoteThread a necha spusti malvér.
 
 \subsection{Hook injection}
 \noindent
@@ -57,8 +57,27 @@ Mirai je samo sa mnoiaci vírus botnetov. Zdrojovı kód pre Mirai bol autorom ver
 
 Mirai má dve hlavné zloky, samotnı vírus a velite¾ské a kontrolné stredisko (CnC). Vírus obsahuje útoèné algoritmy, Mirai má desa algoritmov, ktoré môe spusti, a proces skenovania, ktorı aktívne h¾adá iné zariadenia, aby ohrozil ich fungovanie. CnC je samostatnı obraz, ktorı ovláda kompromitované zariadenia (BOT) a posiela im pokyny na spustenie jedného z útokov proti jednej alebo viacerım obetiam. Proces skenera prebieha nepretrite na kadom infikovanom PC pomocou protokolu telnet (na porte TCP 23 alebo 2323)
 
-CnC predstavuje jednoduché rozhranie príkazového riadku, ktoré umoòuje útoèníkovi urèi útoènı algoritmus, IP adresu obete a trvanie útoku. CnC tie èaká na to, aby jej existujúce BOTy vrátili novoobjavené adresy zariadení a poverenia, ktoré pouíva na skopírovanie vírusového kódu a následne na vytváranie novıch BOTov. Útokové algoritmy sú konfigurovate¾né z CnC, ale v predvolenom nastavení má Mirai tendenciu náhodne rozde¾ova rôzne polia (èísla portov, poradové èísla, identifikátory atï.) V útoènıch paketoch, take sa menia s kadım odoslanım paketom.
+CnC predstavuje jednoduché rozhranie príkazového riadku, ktoré umoòuje útoèníkovi urèi útoènı algoritmus, IP adresu obete a trvanie útoku. CnC tie èaká na to, aby jej existujúce BOTy vrátili novoobjavené adresy zariadení a poverenia, ktoré pouíva na skopírovanie vírusového kódu a následne na vytváranie novıch BOTov. Útokové algoritmy sú konfigurovate¾né z CnC, ale v predvolenom nastavení má Mirai tendenciu náhodne rozde¾ova rôzne polia (èísla portov, poradové èísla, identifikátory at?.) V útoènıch paketoch, take sa menia s kadım odoslanım paketom.
 
+\subsection{Osiris}
+\noindent
+Osiris je potomkom malvéru Kronos, ktorı sa zameriaval na bankovnívctvo. Podobne ako Kronos je Osiris modernejšou verziou bankového trójskeho koòa. Táto verzia malvéru vyuíva na skrıvanie metódu process hollowing. Umoòuje mu predsieranie legitımnych procesov v programe a tım sauje jeho detekciu, no niektoré antivírusy ho nie sú schopné detekova . Malvér spúša svoj útok vydávaním sa za legitímny spustite¾nı súbor. (Útoky zaznamená s malvérom Osiris boli dokumenty Microsoft Wordu.) Keï je spustenı malvér na infikovanie zariadenia vyuíva dinamické kninice, ktoré obsahujú škodlivı kód. Vydávanie sa za inı oficiálny softvér znaène sauje identifikáciu malvéru a obmedzuje monosti na zastavenie útoku. Malvér v dokumetoch Word obsahoval aj makrá, ktoré po spustení stiahli další škodlivı malvér, ktorı umouje zahåti zariadenia, sai detekciu a rozširova útok.
+
+\subsection{Loki}
+\noindent
+Loki je ïalším potomkom staršieho malvéru Kronos, rovnako ako Osiris aj Loki vyuíva na svoje ukrytie metódy podobné process hollowing na zahltenie procesov a vydávanie sa za legitímny softvér. Loki sa zameriava na krádee osobnıch údajov, zaujíma sa najmä o prihlasovacie údaje a heslá. Od augusta 2018 a do súèasnosti sa Loki zameriava na firemné poštové schránky prostredníctvom phishingovıch a spamovıch e-mailov. Phishingové e-maily zahàòajú prílohu súboru s príponou .iso, ktorá sahuje a spúša škodlivı softvér Trojan, ktorı ukradne heslá z preh¾adávaèov, pošty, klientov File Transfer Protocol (FTP), aplikácií na odosielanie správ a kryptomennıch peòaeniek.
+
+\section{Programy na odkrytie malvéru}
+\noindent
+https://github.com/m0n0ph1/Process-Hollowing
+
+https://github.com/idan1288/PHDetection
+
+https://www.andreafortuna.org/2017/10/09/understanding-process-hollowing/
+
+https://cysinfo.com/detecting-deceptive-hollowing-techniques/
+
+https://www.microsoft.com/security/blog/2017/07/12/detecting-stealthier-cross-process-injection-techniques-with-windows-defender-atp-process-hollowing-and-atom-bombing/
 
 \begin{figure}[!htbp]
   \centering
