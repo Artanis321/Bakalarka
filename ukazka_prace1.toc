@@ -1,0 +1,29 @@
+\babel@toc {english}{}
+\thispagestyle {empty}
+\contentsline {section}{\'{U}vod}{1}{section*.2}%
+\contentsline {section}{\numberline {1}Malv\'er}{2}{section.3}%
+\contentsline {subsection}{\numberline {1.1}Techniky ukr\'yvania \v cinnosti}{2}{subsection.4}%
+\contentsline {subsection}{\numberline {1.2}S\'u\v casn\'y malv\'er}{4}{subsection.5}%
+\contentsline {section}{\numberline {2}Process hollowing}{8}{section.8}%
+\contentsline {subsection}{\numberline {2.1}Princ\IeC {\'\i }p}{8}{subsection.9}%
+\contentsline {subsection}{\numberline {2.2}Vyu\v z\IeC {\'\i }van\'e API funkcie}{9}{subsection.10}%
+\contentsline {section}{\numberline {3}Existuj\'uce rie\v senia na detekciu}{11}{section.11}%
+\contentsline {subsection}{\numberline {3.1}PHDetection}{11}{subsection.12}%
+\contentsline {subsection}{\numberline {3.2}HollowFind}{11}{subsection.13}%
+\contentsline {subsection}{\numberline {3.3}Rie\v senie C}{12}{subsection.14}%
+\contentsline {section}{\numberline {4}Algoritmy na detekciu}{13}{section.15}%
+\contentsline {subsection}{\numberline {4.1}Algoritmus A}{13}{subsection.16}%
+\contentsline {subsection}{\numberline {4.2}Algoritmus B}{13}{subsection.17}%
+\contentsline {section}{\numberline {5}Implement\'acia}{14}{section.18}%
+\contentsline {subsection}{\numberline {5.1}Modul na zber d\'at}{14}{subsection.19}%
+\contentsline {subsection}{\numberline {5.2}Algoritmus A}{14}{subsection.20}%
+\contentsline {subsection}{\numberline {5.3}Algoritmus B}{14}{subsection.21}%
+\contentsline {section}{\numberline {6}V\'ysledky}{15}{section.22}%
+\contentsline {subsection}{\numberline {6.1}Experiment A}{15}{subsection.23}%
+\contentsline {subsection}{\numberline {6.2}Experiment B}{15}{subsection.24}%
+\contentsline {subsection}{\numberline {6.3}Porovnanie s existuj\'ucimi rie\v seniami}{15}{subsection.25}%
+\contentsline {section}{Z\'{a}ver}{16}{section*.26}%
+\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{I}{section*.27}%
+\contentsline {section}{Pr\'{i}lohy}{I}{section*.28}%
+\contentsline {section}{\numberline {A} ?trukt\'ura elektronick\'eho nosi?a}{II}{section.30}%
+\contentsline {section}{\numberline {B} Algoritmus}{III}{section.33}%

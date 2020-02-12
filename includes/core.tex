@@ -89,34 +89,104 @@ Loki je ïalším potomkom staršieho malvéru Kronos, rovnako ako Osiris aj Loki vyu
 		\begin{tabular}{p{4cm}|c|c|c|c|c|c|c|c}
 			& \multicolumn{7}{c}%
 			{\textbf{Technika ukrıvania}}\\ \hline
-			\textbf{Názov malvéru} &\begin{sideways} DLL Injection \end{sideways} &\begin{sideways} Process hollowing \end{sideways} &\begin{sideways} Thread Execution Hijacking \end{sideways} & \begin{sideways} Portable Executable Injection \end{sideways} & \begin{sideways} Hook injection \end{sideways} & \begin{sideways} APC Injection \end{sideways}  & \begin{sideways} Extra windows memory injection \end{sideways} \\ \hline
-			Sodinokibi & & & & X & & &	\\ \hline
-			Emotet & X & & & & & &	\\ \hline
-			ZeuS & X & & & & & & 	\\ \hline
-			Dridex & & & & X & & &	\\ \hline
-			Mirai & X & & & & & &	\\ \hline
-			Osiris & & X & & & & &	\\ \hline
-			Loki & & X & & & & &	\\ \hline
+			\textbf{Názov malvéru} &\begin{sideways} Sodinokibi \end{sideways} &\begin{sideways} Emotet \end{sideways} &\begin{sideways} ZeuS \end{sideways} & \begin{sideways} Dridex \end{sideways} & \begin{sideways} Mirai \end{sideways} & \begin{sideways} Osiris \end{sideways}  & \begin{sideways} Loki \end{sideways} \\ \hline
+			DLL Injection & & X & X & & X & &	\\ \hline
+			Process hollowing & & & & & & X & X	\\ \hline
+			Thread Execution Hijacking & & & & & & & 	\\ \hline
+			Portable Executable Injection  & X & & & X & & &	\\ \hline
+			Hook injection  & & & & & & &	\\ \hline
+			APC Injection  & & & & & & &	\\ \hline
+			Extra windows memory injection & & & & & & &	\\ \hline
 		\end{tabular}
 	\caption{Techniky ukrıvania èinnosti vyuívané súèasnım malvérom.}
 \label{modulyVlastnosti}
 \end{center}
 \end{table}
 
-\textbf{Poznámka!!! otoèi tú tabu¾ku, nech v riadkoch sú techniky a v ståpcoch malvér}
-
 \section{Process hollowing}
-Struènı úvod.
+\noindent
+
+Zvolenı spôsob ukrytia malvéru, ktorım sa bude táto práca zaobera je \textit{Process Hollowing, Hollow process}. Nasledujúca kapitola sa venuje spôsobu akım sa malvér môe ukry. Obsahuje potenciálne API funkcie, ktoré môe \textit{Process Hollowing} vyuíva na maskovanie svojho pôsobenia v systéme.
+
 \subsection{Princíp}
+\noindent
+
+Princíp ukrytia malvéru akı vyuíva \textit{Process Hollowing} je podobnı spôsobu ukrytia malvéru, ktorı vyuíva \textit{DLL Injection}. Princím spoèíva v ukrytí malvéru do existujúceho beiaceho procesu, ktorı je v systéme Windows èasto vyuívanı a spustenie malvéru z tohto procesu by spôsobovalo najmenšie podozrenie. Takımto demonštratívnym procesom môe by \textit{svchost.exe}, ktorı je v systéme Windows èasto vyuívanı. \textit{Process Hollowing} pozastaví beiace vlákno procesu \textit{svchost.exe} a následne vytvorí vlákno, ktoré alokuje dostatoènú ve¾kú práznu virtuálnu pamä pre malvér v procese. Po alokovaní virtuálneho adresného priestoru v pamäti procesu do alokovanej èasti nakopíruje škodlivı kód a následne nastaví kedy sa danı škodlivı kód má spusti. Malvér sa môe v tomto prípade spusti po spustení pozastaveného vlákna alebo pri volaní nejakej konkrétnej funkcie. Po nastavení spúšaèa malvéru sa \textit{Process Hollowing} spustí pozastavené vlákno. Malvér môe pri následnom volaní funkcie, ktorá bola nastavená ako spúšaè škodlivého kódu spusti svoju èinnos pod legitimnım procesom.  
+
 Detailnı popis + vytvori custom obrázky: jeden kde bude postupnos obrázkov virtuálneho adresného priestoru škodlivého a cie¾vového procesu s ukákou ako sa to mení poèas hollowingu; druhı, kde bude postupnos windows API volaní.
+
+obrázky v img prieèinku treba schváli
 
 Tip: ja osobne rád kreslím obrázky v https://www.draw.io/ schémy sa tam dajú potom exportova ako obrázky.
 \subsection{Vyuívané API funkcie}
-Zoznam jednotlivıch API volaní(API do zoznamu skratiek) a ich jednoduchı popis, na èo sa pouívajú, prípadne jednoduchá use case ukáka.
+\textit{Process Hollowing} vyuíva na svoje fungovanie rôzne API funkcie a ich volania. Nasledujúce nami vybrané API funkcie, môe \textit{Process Hollowing} najpravdepodobnejšie vyuíva na svoje fungovanie k ukrytiu škodlivého kódu do nejakého beiaceho procesu. 
+
+\textbf{CreateThread}
+\\
+Vytvorí vlákno na vykonanie procesu vo virtuálnom adresovom priestore volajúceho procesu.
+\\
+\textbf{CreateRemoteThread}
+\\
+Vytvorí vlákno, ktoré beí vo virtuálnom adresovom priestore iného procesu.
+\\
+\textbf{CreateRemoteThreadEx}
+\\
+Funkcia vytvára vlákno, ktoré sa spúša vo virtuálnom adresovom priestore iného procesu a prípadne špecifikujte rozšírené atribúty. Napríklad nekoneènos skupiny procesorov.
+\\
+\textbf{ResumeThread}
+\\
+Spúša pozastavené vlákno.
+\\
+\textbf{SuspendThread}
+\\
+Pozastaví zadané vlákno.
+\\
+\textbf{SwitchToThread}
+\\
+Spôsobí, e volajúce vlákno poskytne vykonanie inému vláknu, ktoré je pripravené na spustenie v aktuálnom procesore. Operaènı systém vyberie ïalšie vlákno, ktoré sa má vykona.
+\\
+\textbf{CreateProcessA}
+\\
+Vytvorí novı proces a jeho primárne vlákno. Novı proces beí v bezpeènostnom kontexte volajúceho procesu.
+\\
+\textbf{CreateProcessW}
+\\
+Vytvorí novı proces a jeho primárne vlákno. Novı proces beí v bezpeènostnom kontexte volajúceho procesu.
+\\
+\textbf{VirtuallAlloc}
+\\
+Rezervuje, potvrdzuje alebo mení stav oblasti stránok vo virtuálnom adresovom priestore volaného procesu. Pamä pridelená touto funkciou sa automaticky inicializuje na nulu.
+\\
+\textbf{VirtualAllocEx}
+\\
+Vyhradzuje, potvrdzuje alebo mení stav oblasti pamäte v rámci virtuálneho adresového priestoru špecifikovaného procesu. Funkcia inicializuje pamä, ktorú nastaví na nulu.
+\\
+\textbf{VirtuallAlloc2}
+\\
+Vyhradzuje, potvrdzuje alebo mení stav oblasti pamäte v rámci virtuálneho adresového priestoru špecifikovaného procesu. Funkcia inicializuje pamä, ktorú nastaví na nulu. Pomocou tejto funkcie môete: pre nové pridelenia urèi rozsah virtuálneho adresového priestoru a obmedzenia zarovnania vıkonu 2; špecifikova ¾ubovo¾nı poèet rozšírenıch parametrov; špecifikova preferovanı uzol NUMA pre fyzickú pamä ako rozšírenı parameter.
+\\
+\textbf{WriteProcessMemory}
+\\
+Zapisuje údaje do oblasti pamäte v zadanom procese. Celá oblas, do ktorej sa má zapísa, musí by prístupná inak operácia zlyhá.
+\\
+\textbf{ReadProcessMemory}
+\\
+Èíta udaje z pamäte v zadanom procese.
+\\
+\textbf{VirtualFree}
+\\
+Uvo¾òuje, ruší alebo uvo¾òuje a ruší oblas stránok vo virtuálnom adresovom priestore volaného procesu.
+\\
+\textbf{VirtualFreeEx.}
+\\
+Uvo¾òuje, ruší alebo uvo¾òuje a uvo¾òuje oblas pamäte vo virtuálnom adresovom priestore špecifikovaného procesu.
+\\
 
 \section{Existujúce riešenia na detekciu}
 \noindent
-Všeobecnı struènı úvod.
+Doposia¾ známe existujúce riešenia na detekciu techniky \textit{Process Hollowing} vyuívanej niektorımi malvérmy, sú urèené na forenznú analızu. Táto analıza prebieha u po infikovaní zariadenia malvérom a zistením, e sa škodlivı kód u v zariadení nachádza. Tieto riešenia neobsahujú spôsoby detekcie škodlivého kódu, ktoré by mohli odchyti malvér u pri infikovaní ¾ubovo¾ného zariadenia. 
+\\
+
 https://github.com/m0n0ph1/Process-Hollowing
 
 https://github.com/idan1288/PHDetection
@@ -126,9 +196,14 @@ https://www.andreafortuna.org/2017/10/09/understanding-process-hollowing/
 https://cysinfo.com/detecting-deceptive-hollowing-techniques/
 
 https://www.microsoft.com/security/blog/2017/07/12/detecting-stealthier-cross-process-injection-techniques-with-windows-defender-atp-process-hollowing-and-atom-bombing/
-\subsection{Riešenie A}
+\subsection{PHDetection}
+
+\textit{PHDetection} h¾adá moduly, od ktorıch závisí pôvodnı .exe program. \textit{PHDetection} kontroluje èi sú moduly naèítané do procesnej pamäte programu. Ak nájde moduly, na ktorıch závisí dotyènı program ale nenájde ich v pamäti procesu, èo naznaèuje, e proces je prázny \textit{PHDetection} detekuje, e sa jedná o Process Hollowing. Pôvodné moduly boli nahradené touto metodóu za iné ktoré obsahujú škodlivı kód. Existuje nieko¾ko súborov, ktoré nezávisia od mnohıch modulov v IAT. Program analyzovuje aj tabu¾ku importu oneskoreného naèítania volania modulov. Program bol implementovanı v jazyku C++. Program sa spúša spustením súboru pod¾a verzie systému Windows \cite{phdetection}
+
 V kadom riešení popis, akım spôsobom danı nástroj funguje, ako sa pouíva, v èom bol implementovanı + link na nástroj do literatúry.
-\subsection{Riešenie B}
+\subsection{HollowFind}
+
+Hollowfind je plugin pre program Volatility na detekciu rôznych typov techník \textit{Process Hollowing} pouívanıch vo vo¾nej prírode na obídenie, zamenenie a odklonenie techník forenznej analızy. Plugin detekuje takéto útoky zistením nezrovnalostí vo VAD a PEB, tie rozoberie adresu vstupného bodu, aby zistil akéko¾vek pokusy o presmerovanie, a tie nahlási akéko¾vek podozrivé pamäové oblasti, ktoré by mali pomôc pri detekcii akéhoko¾vek škodlivého kódu. Program bol napísanı v jazyku Phyton. Plugin sa spúšta v Programe Volatility po nainštalovaní.  \cite{hollowfind}
 \subsection{Riešenie C}
 \section{Algoritmy na detekciu}
 Struènı popis akú úlohu vlastne riešime, aké sú vstupné dáta a èo za algoritmy sme sa rozhodli vyskúša.
