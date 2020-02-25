@@ -14,10 +14,12 @@ Malvér vo všeobecnosti patrí ku škodlivému kódu. Preto je nutné jeho beiace pro
 \noindent \\ \textit{DLL Injection} je technika pouívaná na ukrytie funkcie na spustenie malvéru vo vnútri iného programu. Najastejšie sa na to vyuíva alokovaná pamä vyhradená pre beh infikovaného programu, kde sa funkcia na spustenie malvéru ukryje a pre antivírusové programy je ako detekovate¾ná. Po nakopírovaní DLL funkcie do alokovanej pamäte iného programu môe by následne vyvolané spustenie infikovaného programu a spolu s ním aj spustenie malvéru. Hlavnım cie¾om \textit{DLL Injection} je škodlivı kód ukry do oficiálneho alebo overeného programu, kde je malvér ukrytı pred antivírovım softvérom, odkia¾ môe by následne spustenı. \cite{endgame}
 
 \item 
-\textbf{Proces Hollowing} vyuíva rovnaké alebo podobné princípy ukrıvania škodlivého softvéru ako \textit{DLL Injection}. Cie¾om je schova škodlivı kód do existujúce programu z ktorého sa po spustení, spustí aj volanie škodlivého malvéru.  Oproti \textit{DLL Injection} ide ale ukrytie malvérového programu do iného programu. Malvér si pod¾a potreby alokuje virtuálnu pamä  v pamäti iného programu. Po spustení infikovaného programu malvér pozastaví vlákno v ktorom program beí, následne zmení obsah legitímneho súboru zmapovaním pamäte cie¾ového procesu.\cite{endgame} Po zmapovaní uvo¾ní všetku pamä programu a alokuje pamä pre malvér a zapíše kadú z èastí malvéru do cie¾ovej pamäte programu. Malvér nastaví kontext vo vlátkne tak aby ukazoval vstupnı bod na novú èas kódu, ktorú napísal. Na konci malvér obnoví pozastavené vlákno, aby sa proces dostal z pozastaveného stavu a nasledovnım spustením programu umoní získavanie údajov.
+\textbf{Proces Hollowing}
+\noindent \\ vyuíva rovnaké alebo podobné princípy ukrıvania škodlivého softvéru ako \textit{DLL Injection}. Cie¾om je schova škodlivı kód do existujúce programu z ktorého sa po spustení, spustí aj volanie škodlivého malvéru.  Oproti \textit{DLL Injection} ide ale ukrytie malvérového programu do iného programu. Malvér si pod¾a potreby alokuje virtuálnu pamä  v pamäti iného programu. Po spustení infikovaného programu malvér pozastaví vlákno v ktorom program beí, následne zmení obsah legitímneho súboru zmapovaním pamäte cie¾ového procesu.\cite{endgame} Po zmapovaní uvo¾ní všetku pamä programu a alokuje pamä pre malvér a zapíše kadú z èastí malvéru do cie¾ovej pamäte programu. Malvér nastaví kontext vo vlátkne tak aby ukazoval vstupnı bod na novú èas kódu, ktorú napísal. Na konci malvér obnoví pozastavené vlákno, aby sa proces dostal z pozastaveného stavu a nasledovnım spustením programu umoní získavanie údajov.
 
 \item 
 \textbf{Thread Execution Hijacking }
+\noindent \\
 Táto technika ukrytia malvéru spoèíva v napojení sa na u existujúce vlákno vyvolanı inım programom. Po získaní prístupu do vlákna malvér uvedie vlákno do pozastaveného reimu aby vykonal vloenie volania škodlivého malvéru do vlákna iného procesu. Malvér si alokuje virtuálnu pamä v programe a následne do tejto pamäte vloí škodlivı shell kód, ktorı obsahuje cestu k volaniu DLL so škodlivım malvérom.  Po vykonaní tıchto úkonov, spustí pozastavené vlákno programu. Nevıhodou takéhoto spustenia pozastaveného programu je, e môe spôsobi zlyhanie systému v rámci systémového volania. \cite{endgame} Preto aby sa tomu predišlo modernejší malvér proces ukonèí a vyvolá ho znovu s u modifikovanou zmenou na infikovanie.
 
 \item 
@@ -37,6 +39,7 @@ Hook injection je technika pouívaná na zachytávanie volania funkcií. Malvér mô
 
 \item 
 \textbf{Extra windows memory injection}
+\noindent \\
 Tento spôsob schovávania softvéru sa spolieha na rozširovanie pamäte aplikaènıch okien v systéme. Pri otváraní nového okna aplikácie, softvér špecifikuje ïalšie bajty pamäte, ktoré rozšíria ve¾kos alokovanej pamäte pre spustenú aplikáciu.\cite{endgame} Tento proces sa nazıva \textit{Extra Windows Memory}(EWM). V tejto èasti ale nevzniká dostatok miesta na uloenie údajov. Aby sa toto obmedzenie obišlo, škodlivı softvér zapíše kód do zdie¾anej sekcie aplikácie a do EWM vloí ukazovate¾ na danú èast. Do tejto rozšírenej èasti zie¾anej pamäte ïalej softvér zapíše ukazovate¾ funkcie do pamäte, ktorá obsahuje shell skript na spustenie malvéru. Malvér následne nastaví v EWM fukciu na zmenu hodnôt na zadanom ofsete. Èím malvér môe jednoducho zmeni posun ukazovate¾a funckie pamäti aplikácie a nasmerova ho do EWM, na kód so škodlivım shell skriptom.
 \end{itemize}
 \vspace{20px}
@@ -120,68 +123,69 @@ obrázky v img prieèinku treba schváli
 Tip: ja osobne rád kreslím obrázky v https://www.draw.io/ schémy sa tam dajú potom exportova ako obrázky.
 \subsection{Vyuívané API funkcie}
 \textit{Process Hollowing} vyuíva na svoje fungovanie rôzne API funkcie a ich volania. Nasledujúce nami vybrané API funkcie, môe \textit{Process Hollowing} najpravdepodobnejšie vyuíva na svoje fungovanie k ukrytiu škodlivého kódu do nejakého beiaceho procesu. 
-
+\begin{itemize}
+\item
 \textbf{CreateThread}
 \\
 Vytvorí vlákno na vykonanie procesu vo virtuálnom adresovom priestore volajúceho procesu.
-\\
+\item
 \textbf{CreateRemoteThread}
 \\
 Vytvorí vlákno, ktoré beí vo virtuálnom adresovom priestore iného procesu.
-\\
+\item
 \textbf{CreateRemoteThreadEx}
 \\
 Funkcia vytvára vlákno, ktoré sa spúša vo virtuálnom adresovom priestore iného procesu a prípadne špecifikujte rozšírené atribúty. Napríklad nekoneènos skupiny procesorov.
-\\
+\item
 \textbf{ResumeThread}
 \\
 Spúša pozastavené vlákno.
-\\
+\item
 \textbf{SuspendThread}
 \\
 Pozastaví zadané vlákno.
-\\
+\item
 \textbf{SwitchToThread}
 \\
 Spôsobí, e volajúce vlákno poskytne vykonanie inému vláknu, ktoré je pripravené na spustenie v aktuálnom procesore. Operaènı systém vyberie ïalšie vlákno, ktoré sa má vykona.
-\\
+\item
 \textbf{CreateProcessA}
 \\
 Vytvorí novı proces a jeho primárne vlákno. Novı proces beí v bezpeènostnom kontexte volajúceho procesu.
-\\
+\item
 \textbf{CreateProcessW}
 \\
 Vytvorí novı proces a jeho primárne vlákno. Novı proces beí v bezpeènostnom kontexte volajúceho procesu.
-\\
+\item
 \textbf{VirtuallAlloc}
 \\
 Rezervuje, potvrdzuje alebo mení stav oblasti stránok vo virtuálnom adresovom priestore volaného procesu. Pamä pridelená touto funkciou sa automaticky inicializuje na nulu.
-\\
+\item
 \textbf{VirtualAllocEx}
 \\
 Vyhradzuje, potvrdzuje alebo mení stav oblasti pamäte v rámci virtuálneho adresového priestoru špecifikovaného procesu. Funkcia inicializuje pamä, ktorú nastaví na nulu.
-\\
+\item
 \textbf{VirtuallAlloc2}
 \\
 Vyhradzuje, potvrdzuje alebo mení stav oblasti pamäte v rámci virtuálneho adresového priestoru špecifikovaného procesu. Funkcia inicializuje pamä, ktorú nastaví na nulu. Pomocou tejto funkcie môete: pre nové pridelenia urèi rozsah virtuálneho adresového priestoru a obmedzenia zarovnania vıkonu 2; špecifikova ¾ubovo¾nı poèet rozšírenıch parametrov; špecifikova preferovanı uzol NUMA pre fyzickú pamä ako rozšírenı parameter.
-\\
+\item
 \textbf{WriteProcessMemory}
 \\
 Zapisuje údaje do oblasti pamäte v zadanom procese. Celá oblas, do ktorej sa má zapísa, musí by prístupná inak operácia zlyhá.
-\\
+\item
 \textbf{ReadProcessMemory}
 \\
 Èíta udaje z pamäte v zadanom procese.
-\\
+\item
 \textbf{VirtualFree}
 \\
 Uvo¾òuje, ruší alebo uvo¾òuje a ruší oblas stránok vo virtuálnom adresovom priestore volaného procesu.
-\\
+\item
 \textbf{VirtualFreeEx.}
 \\
 Uvo¾òuje, ruší alebo uvo¾òuje a uvo¾òuje oblas pamäte vo virtuálnom adresovom priestore špecifikovaného procesu.
 \\
-
+\end{itemize}
 \section{Existujúce riešenia na detekciu}
 \noindent
 Doposia¾ známe existujúce riešenia na detekciu techniky \textit{Process Hollowing} vyuívanej niektorımi malvérmy, sú urèené na forenznú analızu. Táto analıza prebieha u po infikovaní zariadenia malvérom a zistením, e sa škodlivı kód u v zariadení nachádza. Tieto riešenia neobsahujú spôsoby detekcie škodlivého kódu, ktoré by mohli odchyti malvér u pri infikovaní ¾ubovo¾ného zariadenia. 
@@ -215,7 +219,23 @@ Len v prípade ak sa rozhodneme vyskúša viacero prístupov.
 Struènı úvod do implementácie, programovací jazyk, vıvojové prostredie + jednoduchı diagram fungovania celého systému.
 \subsection{Modul na zber dát}
 Popis implementácie modulu na zber dát (t.j. modul ktorı produkuje dvojice PID + API hook)
-\subsection{Algoritmus A}
+\subsection{Koneènı stavovı automat}
+
+Koneènı automat je teoretickı vıpoètovı model pouívanı v informatike na štúdium rôznych formálych jazykoch. Popisuje ve¾mi jednoduchı poèítaè, ktorı môe by v jednom z nieko¾kıch stavov, medzi ktorımi prechádza na základe symbolov, ktoré èíta zo vstupu. Mnoina stavov je koneèná , koneènı automat nemá iadnu ïalšiu pamä, okrem informácie o aktuálnom stave. V informatike sa rozlišuje okrem základného deterministického èi nedeterministického automatu tie Mealyho a Moorov automat.
+
+Koneènı automat je definovanı ako usporiadaná pätica (S, ?, ?, s, F) kde:\\
+S je koneèná neprázdna mnoina stavov. \\
+? je koneèná neprázdna mnoina vstupnıch symbolov, nazıvaná abeceda.\\
+? je prechodová funkcia respektíve prechodová tabu¾ka popisujúca prechod medzi jednotlivımi stavmi.\\
+s je poèatoèná stav patriaci do mnoiny stavov S.\\
+F je mnoina finálych akceptujúcich stavov.\\
+
+Na zaèiatku sa automat nachádza v definovanom poèiatoènom stave. Ïalej v kadom kroku preèíta jeden symbol zo vstupu a prejde do stavu, ktorı je danı hodnotou, ktorá v prechodovej tabu¾ke zodpovedá aktuálnemu stavu a preèítanému symbolu. Potom pokraèuje èítaním ïalšieho symbolu zo vstupu, ïalším prechodom pod¾a prechodovej tabu¾ky atï.
+
+Pod¾a toho, èi automat skonèí po preèítaní vstupe v stave, ktorı patrí do mnoiny prijímajúcich stavov, platí, e automat buï danı vstup prijal, alebo neprijal. Mnoina všetkıch reazcov, ktoré danı automat príjme, tvorí regulárny jazyk.
+
+V našom prípade abecedu tvorí mnoina nami vybranıch API windows funcií, ktoré by potenciálne mal najèastejšie vyuíva malvér vyuívajúci techniku \textit{Process Hollowing} na ukrytie svojej èinnosti. 
+
 Popis implementácie konkrétneho detekèného algoritmu + UML diagram mono ak tam budú nejaké triedy a pod.
 \subsection{Algoritmus B}
 \section{Vısledky}
