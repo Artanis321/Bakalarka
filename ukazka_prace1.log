@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  25 FEB 2020 17:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  31 MAY 2020 18:40
 entering extended mode
 **./ukazka_prace1.tex
 (ukazka_prace1.tex
@@ -891,23 +891,43 @@ LaTeX Warning: Citation `phdetection' on page 11 undefined on input line 205.
 
 LaTeX Warning: Citation `hollowfind' on page 11 undefined on input line 210.
 
-[11] [12] [13]
-Overfull \hbox (7.75325pt too wide) in paragraph at lines 219--220
+[11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 217--223
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--223
+
+ []
+
+[13] [14]
+Overfull \hbox (7.75325pt too wide) in paragraph at lines 226--230
 []\T1/lmr/m/n/12 Stru£ný úvod do im-ple-men-tá-cie, pro-gramovací jazyk, vývo-j
 ové prostredie + jednoduchý
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 226--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 231--235
+
+ []
+
+
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 222.
+(hyperref)                removing `\textasciicaron' on input line 235.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--232
+Underfull \hbox (badness 10000) in paragraph at lines 239--245
 
  []
 
-[14] [15]) [16] (includes/conclusion.tex)
+[15] [16]) [17] (includes/conclusion.tex)
 Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
@@ -922,7 +942,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-[17
+[18
 
 
 ]
@@ -994,8 +1014,8 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 40.
  ) 
 Here is how much of TeX's memory you used:
- 11457 strings out of 492450
- 163287 string characters out of 3132532
+ 11458 strings out of 492450
+ 163294 string characters out of 3132532
  488939 words of memory out of 3000000
  15443 multiletter control sequences out of 15000+200000
  76610 words of font info for 47 fonts, out of 3000000 for 9000
@@ -1009,9 +1029,9 @@ ype1/public/lm/lmr6.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmri12.pfb
 ><D:/App Windows/mikteX/fonts/type1/public/lm/lmss10.pfb><D:/App Windows/mikteX
 /fonts/type1/public/lm/lmssbx10.pfb><D:/App Windows/mikteX/fonts/type1/public/l
 m/lmsso10.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on ukazka_prace1.pdf (29 pages, 2020924 bytes).
+Output written on ukazka_prace1.pdf (30 pages, 2026352 bytes).
 PDF statistics:
- 346 PDF objects out of 1000 (max. 8388607)
- 79 named destinations out of 1000 (max. 500000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 80 named destinations out of 1000 (max. 500000)
  222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

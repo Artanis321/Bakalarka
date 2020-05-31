@@ -211,14 +211,27 @@ Hollowfind je plugin pre program Volatility na detekciu rôznych typov techník \t
 \subsection{Riešenie C}
 \section{Algoritmy na detekciu}
 Struènı popis akú úlohu vlastne riešime, aké sú vstupné dáta a èo za algoritmy sme sa rozhodli vyskúša.
+
+Práca sa zaoberá návrhom a implementáciou spôsobu detegovania malvéru, ktorı na ukrytie svojej èinnosti v PC pouíva \textit{Process Hollowing}. Teda ukrıva svojú èinnos za iné bené programy, ktoré sú v poèítaèi celkom bené a na prvı poh¾ad nie sú podozrivé. Aplikácia urèená na detegovanie takéhoto spôsobu ukrıvania malvéru bude bea v reálnom èase, teda je schopná detegova malvér poèas jeho behu. Vstupné dáta do tejto aplikácie budú predstavova volané API funkcie škodlivım softvérom a z tıchto API funckií bude aplikácia vyhodnocova a poskytova vısledky èi v systéme operuje alebo neoperuje malvér. Aplikácia bude pozostáva z dvoch modulov. Modul na zber dát, ktorı predstavuje spôsob odchytávania volanıch API funkcií a aplikácie urèenej na detegovanie malvéru. Modul na zber dát, bude DLL kninica, ktorá po vloení do podozrivého programu bude odchytáva volania vybranıch API funkcií. Vloenie takejto DLL kninice môe by globálne teda bude sledova volania API funkcií všetkıch beiacich procesov. Alebo môe by lokálne a teda bude sledova len vybrané beiace procesy, ktoré sa môu javi ako podozrivé a najpravdepodobnejšie môu ukrıva beiaci malvér.  
 \subsection{Algoritmus A}
 Detailnı popis princípu algoritmu + pseudokód, mono nejakı obrázok.
+\\
+\\
+Algoritmus má na vstupe dve podstatné premenné, ktoré vyuíva na vyhodnocovanie detegovania malvéru. Prvú vstupnú premennú predstavuje statická matica, ktorá obsahuje prechody medzi jednotlivımi stavmi na vyhodnocovanie èinnosti malvéru a ako sa menia tieto stavy pri volaní vybranıch jednotlivıch API funkcií. Je reprezentovaná nami navrhnutım koneènım stavovım automatom. Druhou vstupnou premennou je textovı súbor obsahujúci odchytené volané API funkcie, nejakého podozrivého beiaceho procesu. \\
+\\
+Princíp algoritmu spoèíva v èítaní textového súboru z modulu na zber dát. Algoritmus pri spustení vloí modul na zber dát teda DLL kninicu do podozdrivıch procesov v PC, ktoré následne odchytávajú volané API funckie a zapisujú do textového súboru. Následne nastavı poèiatoènı stav \textbf{start} do pomocnej premennej, ktorá slúi pre algoritmus ako flag na zistenie v ktorom stave sa malvér nachádza. Algoritmus na detegovanie si zo súboru potiahne volanú API funciu. Následne sa algoritmus presunie do matice v ktorej porovná o akú API funckiu sa jedná. Pokia¾ vybraná API funkcia sa v matici nachádza zisuje algoritmus v akom stave je malvér. Algoritmus pod¾a volanej API funkcie a stavu v ktorom je malvér z matice zisuje do akého stavu sa má algoritmus posunú. Pokia¾ taká funkcia v matici existuje a je tam aj novı stav do ktorého sa má algoritmus posunú, tak sa posunie. Následne algoritmus vyhodnocuje èi stav v ktorom sa nachádza malvér dospel do koneèného stavu ak áno algoritmus zahlási, e detegoval malvér a program sa ukonèí. Pokia¾ ale volaná API funcia nieje v matici. Stav do ktorého sa má algoritmus posunú sa nemení. Algoritmus ešte nedeteguje malvér, pokraèuje algoritmus na ïalšiu volanú API funckiu zapísanú v textovom súbore z modulu na zber dát a algoritmus sa opakuje.
 \subsection{Algoritmus B}
 Len v prípade ak sa rozhodneme vyskúša viacero prístupov.
 \section{Implementácia}
-Struènı úvod do implementácie, programovací jazyk, vıvojové prostredie + jednoduchı diagram fungovania celého systému.
+Struènı úvod do implementácie, programovací jazyk, vıvojové prostredie + jednoduchı diagram fungovania celého systému.\\
+\\
+Pre implementáciu riešenia je zvolenı programovanı jazyk C++, pretoe primárnym testovavím prostredím budú najèastejšie pouívané systémy Windows. Na simuláciu testovanie prostredia sa pouije \textbf{Virtual Box} v ktorom budeme simulova bené pouívanie systému. \\
+Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje pracova s najnovšími verziami systému a aj u¾ahèi jednuduchšiu implementáciu algoritmu.  
 \subsection{Modul na zber dát}
 Popis implementácie modulu na zber dát (t.j. modul ktorı produkuje dvojice PID + API hook)
+\\
+\\
+Modul na zber dát predstavuje DLL kninicu vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funcií, ku ktorım je následne definované aj ich volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu, ktoré sú následne pouité v aplikácii detegovanie malvéru v beiacom procese. Druhá èas aplikácie u slúi len na nahradenie pôvodnej volanej API funkcie, modifikovanou tou istou funckiou, ktorá je rozšírenia o zapisovanie volanej API do súboru. Pôvodnú funkciu \textit{CreateThread} urèenú na vytvorenie vlákna v tomto module nahradíme funciou \textit{HookCreateThread}, ktorá okrem volania pôvodnej funkcie volá aj funckiu na zapísanie API funcie do predpripraveného súboru.
 \subsection{Koneènı stavovı automat}
 
 Koneènı automat je teoretickı vıpoètovı model pouívanı v informatike na štúdium rôznych formálych jazykoch. Popisuje ve¾mi jednoduchı poèítaè, ktorı môe by v jednom z nieko¾kıch stavov, medzi ktorımi prechádza na základe symbolov, ktoré èíta zo vstupu. Mnoina stavov je koneèná , koneènı automat nemá iadnu ïalšiu pamä, okrem informácie o aktuálnom stave. V informatike sa rozlišuje okrem základného deterministického èi nedeterministického automatu tie Mealyho a Moorov automat.
