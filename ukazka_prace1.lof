@@ -1,2 +1,9 @@
 \babel@toc {english}{}
 \thispagestyle {empty}
+\contentsline {figure}{\numberline {1}{\ignorespaces Uk\'a\v zka zmien adresn\'eho priestoru po\v cas Hollowingu.}}{9}{figure.11}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Modul\'arne zn\'azornenie vyv\'yjan\'eho algoritmu.}}{13}{figure.18}%
+\contentsline {figure}{\numberline {3}{\ignorespaces UML diagram vyv\'yjan\'eho algoritmu.}}{14}{figure.22}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Uk\'a\v zka defin\IeC {\'\i }cie API funkcie SetThreadContext.}}{15}{figure.25}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Uk\'a\v zka funkcie writeFuncionToFile.}}{16}{figure.27}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Uk\'a\v zka nahradenia p\^ovodnej funkcie SetThreadContext upravenou funkciou HookSetThreadContext.}}{16}{figure.29}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Defin\IeC {\'\i }cia mutexu na za\v ciatku programu.}}{19}{figure.37}%
