@@ -121,11 +121,6 @@ Zvolenı spôsob ukrytia malvéru, ktorım sa bude táto práca zaobera je \textit{Pr
 \end{figure}
 Princíp ukrytia malvéru akı vyuíva \textit{Process Hollowing} je podobnı spôsobu ukrytia malvéru, ktorı vyuíva \textit{DLL Injection}. Princím spoèíva v ukrytí malvéru do existujúceho beiaceho procesu, ktorı je v systéme Windows èasto vyuívanı a spustenie malvéru z tohto procesu by spôsobovalo najmenšie podozrenie. Takımto demonštratívnym procesom môe by \textit{svchost.exe}, ktorı je v systéme Windows èasto vyuívanı. \textit{Process Hollowing} pozastaví beiace vlákno procesu \textit{svchost.exe} a následne vytvorí vlákno, ktoré alokuje dostatoènú ve¾kú práznu virtuálnu pamä pre malvér v procese. Po alokovaní virtuálneho adresného priestoru v pamäti procesu do alokovanej èasti nakopíruje škodlivı kód a následne nastaví kedy sa danı škodlivı kód má spusti. Malvér sa môe v tomto prípade spusti po spustení pozastaveného vlákna alebo pri volaní nejakej konkrétnej funkcie. Po nastavení spúšaèa malvéru sa \textit{Process Hollowing} spustí pozastavené vlákno. Malvér môe pri následnom volaní funkcie, ktorá bola nastavená ako spúšaè škodlivého kódu spusti svoju èinnos pod legitimnım procesom.  
 
-Detailnı popis + vytvori custom obrázky: jeden kde bude postupnos obrázkov virtuálneho adresného priestoru škodlivého a cie¾vového procesu s ukákou ako sa to mení poèas hollowingu; druhı, kde bude postupnos windows API volaní.
-
-obrázky v img prieèinku treba schváli
-
-Tip: ja osobne rád kreslím obrázky v https://www.draw.io/ schémy sa tam dajú potom exportova ako obrázky.
 \subsection{Vyuívané API funkcie}
 \textit{Process Hollowing} vyuíva na svoje fungovanie rôzne API funkcie a ich volania. Nasledujúce nami vybrané API funkcie, môe \textit{Process Hollowing} najpravdepodobnejšie vyuíva na svoje fungovanie k ukrytiu škodlivého kódu do nejakého beiaceho procesu. 
 \begin{itemize}
@@ -182,13 +177,17 @@ Zapisuje údaje do oblasti pamäte v zadanom procese. Celá oblas, do ktorej sa má
 \\
 Èíta udaje z pamäte v zadanom procese.
 \item
-\textbf{VirtualFree}
+\textbf{CopyMemory}
 \\
-Uvo¾òuje, ruší alebo uvo¾òuje a ruší oblas stránok vo virtuálnom adresovom priestore volaného procesu.
+Kopíruje pamä do vyhradenej alokovanej pamäti.
 \item
-\textbf{VirtualFreeEx.}
+\textbf{SetThreadContext}
 \\
-Uvo¾òuje, ruší alebo uvo¾òuje a uvo¾òuje oblas pamäte vo virtuálnom adresovom priestore špecifikovaného procesu.
+Nastavuje kontext pre aktuálne vlákno.
+\item
+\textbf{ExitThread}
+\\
+Ukonèí aktuálne vykonávané vlákno.
 \\
 \end{itemize}
 \section{Existujúce riešenia na detekciu}
@@ -218,19 +217,46 @@ Hollowfind je plugin pre program Volatility na detekciu rôznych typov techník \t
 \noindent
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=12cm]{img/UML2.jpg}
-	\caption{Modulárne znázornenie vyvıjaného algoritmu.}
-	\label{UMLModul}
+	\includegraphics[width=12cm]{img/Automat.jpg}
+	\caption{Koneènı stavovı automat.}
+	\label{Automat}
 \end{figure}
 
-Práca sa zaoberá návrhom a implementáciou spôsobu detegovania malvéru, ktorı na ukrytie svojej èinnosti v PC pouíva \textit{Process Hollowing}. Teda ukrıva svojú èinnos za iné bené programy, ktoré sú v poèítaèi celkom bené a na prvı poh¾ad nie sú podozrivé. Aplikácia urèená na detegovanie takéhoto spôsobu ukrıvania malvéru bude bea v reálnom èase, teda je schopná detegova malvér poèas jeho behu. Vstupné dáta do tejto aplikácie budú predstavova volané API funkcie škodlivım softvérom a z tıchto API funckií bude aplikácia vyhodnocova a poskytova vısledky èi v systéme operuje alebo neoperuje malvér. Aplikácia bude pozostáva z nasledujúcich èastí. Mutex, ktorı bude zabezpeèova plynulos a bezpeènos programu. Modul na injectovanie DLL, ktorı bude vklada DLL kninicu na odchytávanie volanıch API. Modul na vyhodnocovanie prítomnosti mavéru, ktorı sa skladá z viacerıch èastí. Modulu na naèítanie najnovších záznamov z DLL kninice. Koneèného stavového automatu reprezentovaného Maticou, oproti ktorej bude aplikácia porovnáva prechody medzi jednotlivımi stavmi pod¾a volanıch API. Archiváciou, ktorá zabezpeèí archiváciu dát po preèítaní najnovších záznamov z DLL kninice.   
+Navrhnutı algoritmus na detegciu malvéru vyuívajúceho na svoje ukrytie v systéme \textit{Process Hollowing}, tvorí 5 prechodnıch stavov. Cez tieto sa algoritmus dostáva vïaka vybranım Windows API funkciám. Tieto funkcie umoòujú sledova volania jednotlivıch procesov, kde by mohol ukry malvér svoju èinnos. Jednotlivé API tak môeme rozdeli do 5 skupín.
+\begin{itemize}
+\item
+\textbf{WAPI1}
+Sú API funkcie, ktoré umoòujú vytvára nové vlákna procesov alebo získa prístupy do u existujúcich vlákien. 
+\item
+\textbf{WAPI2}
+Predstavujú API, ktoré slúia na alokáciu pamäte pre dané vlákno alebo rozširujú virtuálnu pamä existujúceho procesu. 
+\item
+\textbf{WAPI3}
+Tieto funkcie umoòujú manipulova s pamäou. Ako je kopírovanie pamäte, zapisovanie do pamäte atï..
+\item
+\textbf{WAPI4}
+Tieto API funkcie nastavujú kontext daného vlákna a umoòujú nastavi \textit{Instruction Pointer}, ktorı pri volaní spustí aj funcionalitu malvéru.  
+\item
+\textbf{WAPI5}
+Poslednou skupinou sú API, ktoré spúšajú pozastavené vlákno alebo ukonèi funcionalitu aktuálneho vlákna.
+\end{itemize}
+
+Algoritmus na detegovanie funguje na jednoduchom princípe. Podozrivı proces získa prístup do beiaceho vlákna legitímneho procesu. Vo vlákne daného procesu malvér alokuje virtuálnu pamä èím následne umoní do tejto pamäte zapísa svoj škodlivı kód. Poèas tıchto vıkonov operácií malvér volá jednotlivé API. Pri správnom odhade postupnosti volanıch API, je algoritmus schopnı vyhodnoti v reálnom èase èi v zariadení existuje hrozba v podobe malvéru a informova o tom uivate¾a.
 
 \section{Implementácia}
 Struènı úvod do implementácie, programovací jazyk, vıvojové prostredie + jednoduchı diagram fungovania celého systému.\\
 \\
-Pre implementáciu riešenia je zvolenı programovanı jazyk C++, pretoe primárnym testovavím prostredím budú najèastejšie pouívané systémy Windows. Na simuláciu testovanie prostredia sa pouije \textbf{Virtual Box} v ktorom budeme simulova bené pouívanie systému. \\
+Pre implementáciu riešenia je zvolenı programovanı jazyk C++, pretoe primárnym testovavím prostredím budú najèastejšie pouívané systémy Windows. Na simuláciu testovanie prostredia sa pouije \textbf{Virtual Box} v ktorom budeme simulova bené pouívanie systému.
 Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje pracova s najnovšími verziami systému a aj u¾ahèi jednuduchšiu implementáciu algoritmu.
 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=12cm]{img/UML2.jpg}
+	\caption{Moduly aplikácie}
+	\label{UMLDiagram}
+\end{figure}
+
+Práca sa zaoberá návrhom a implementáciou spôsobu detegovania malvéru, ktorı na ukrytie svojej èinnosti v PC pouíva \textit{Process Hollowing}. Teda ukrıva svojú èinnos za iné bené programy, ktoré nie sú podozrivé. Aplikácia urèená na detegovanie takéhoto spôsobu ukrıvania malvéru bude bea v reálnom èase, teda je schopná detegova malvér poèas jeho behu. Vstupné dáta do tejto aplikácie budú predstavova volané API funkcie škodlivım softvérom a z tıchto API funckií bude aplikácia vyhodnocova a poskytova vısledky èi v systéme operuje alebo neoperuje malvér. Aplikácia bude pozostáva z nasledujúcich èastí. Mutex, ktorı bude zabezpeèova plynulos a bezpeènos programu. Modul na injectovanie DLL, ktorı bude vklada DLL kninicu na odchytávanie volanıch API. Modul na vyhodnocovanie prítomnosti mavéru, ktorı sa skladá z viacerıch èastí. Modulu na naèítanie najnovších záznamov z DLL kninice. Koneèného stavového automatu reprezentovaného Maticou, oproti ktorej bude aplikácia porovnáva prechody medzi jednotlivımi stavmi pod¾a volanıch API. Archiváciou, ktorá zabezpeèí archiváciu dát po preèítaní najnovších záznamov z DLL kninice.  
 \subsection{Algoritmus A}
 
 \begin{figure}[!htbp]
@@ -244,30 +270,80 @@ Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje p
 Aplikácia na zaèiatku inicializuje mutex, ktorı slúi na bezpeèné zapisovanie a èítanie záznamov zo súboru. Následne aplikácia spustí modul na zber na dát, ktorı monitoruje aké API sa volajú v systéme Windows. Pre jednoduchšie monitorovanie vyuívame vo¾ne dostupnú aplikáciu \textit{Detours}. Aplikácia si nastaví poèiatoènú hodnutu prechodného stavu, ktorı slúi na vyhodnocovanie prítomnosti malvéru. Po nastavení všetkıch poèiatoènıch hodnôt aplikácia prejde na samotnú detegciu malvéru. Vlákno sa uspí na stanovenú dobu a po nastavení mutexu zaèína aplikácia samotnı proces detegovania. Aplikácia si naèíta najnovšie záznami z modulu na zber dát. Zo záznamu aplikácia vyberie volanú API funkciu a zisuje èi k danej API existuje hodnota v matici koneèného automatu. Ak áno, aplikácia zisuje aktuálny prechodnı stav a následne aj pomocou koneèného stavového automatu novú hodnotu do ktorej sa prechodnı stav následne zmení. Po vykonaní zmeny nastane kontrola na existenciu ïalších záznamov v súbore ak súbor obsahuje ïalšie záznami, naèíta si ïalší záznam a proces sa opakuje. Ak u aplikácia naèítala všetky záznami spraví sa archivácia záznamov a aplikácia vyhodnocuje prechodnı stav koneèného stavového automatu. Ak prechodnı stav nieje v koneènom stave mutex sa uvo¾ní a aplikácia èaká ïalšie záznami z modulu na zber dát a cyklus sa opakuje. Keï sa prechodnı stav dostane do konecného stavu aplikácia oznámi existenciu malvéru a ukonèí sa.  
 \subsection{Modul na zber dát}
 \noindent
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=11cm]{img/HookSetThreadContext.jpg}
-	\caption{Ukáka definície API funkcie SetThreadContext.}
-	\label{SetThreadContext}
-\end{figure}
-\\
-Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funcií ako môeme vydie na obrázku, ku ktorım je následne definované aj ich volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile}, ktoré sú následne pouité v aplikácii na detegovanie malvéru v beiacom procese. \\
+
+Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funcií ako môeme vydie na obrázku, ku ktorım je následne definované aj ich volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile}, ktoré sú následne pouité v aplikácii na detegovanie malvéru v beiacom procese. 
+
+\begin{lstlisting}[language=C++ , caption={Funkcia writeFunctionToFile}]
+void writeFunctionToFile(string originalFuncion) 
+{
+	DWORD ret = WaitForSingleObject(hMutex, INFINITE);
+	
+	if (ret == WAIT_OBJECT_0)
+	{
+		std::cout << originalFuncion << std::endl;
+		time_t now = time(NULL);
+		tm* ltm = localtime(&now);
+		ofstream myFile;
+		myFile.open("hookAplicationResult.txt", 
+		ofstream::app | ofstream::out);
+		if (myFile.is_open())
+		{
+			myFile << ltm->tm_hour << ":" << ltm->tm_min << ":" 
+			<< ltm->tm_sec << ";" + originalFuncion << endl;
+			myFile.close();
+		}
+		ReleaseMutex(hMutex);
+	}
+}
+\end{lstlisting}
 Druhá èas aplikácie u slúi len na nahradenie pôvodnej volanej API funkcie, modifikovanou tou istou funckiou, ktorá je rozšírenia o zapisovanie volanej API do súboru. Pôvodnú funkciu \textit{SetThreadContext} urèenú na nastavenie \textit{Instriction Pointer} v tomto module nahradíme funciou \textit{HookSetThreadContext}, ktorá okrem volania pôvodnej funkcie volá aj funkciu \textbf{writeFunctionToFile} na zapísanie API funkcie do predpripraveného súboru.
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=11cm]{img/writeFunctionToFile.jpg}
-	\caption{Ukáka funkcie writeFuncionToFile.}
-	\label{writeFuncion}
-\end{figure}
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=11cm]{img/DetoursAttach.jpg}
-	\caption{Ukáka nahradenia pôvodnej funkcie SetThreadContext upravenou funkciou HookSetThreadContext.}
-	\label{detours}
-\end{figure}
+\begin{lstlisting}[language=C++ , caption={Definícia API HookSetThreadContext}]
+static BOOL(__stdcall *RealSetThreadContext)
+			(HANDLE, const CONTEXT*) = SetThreadContext;
+
+BOOL WINAPI HookSetThreadContext(
+HANDLE        hThread,
+const CONTEXT* lpContext
+)
+{
+writeFunctionToFile("SetThreadContext");
+return RealSetThreadContext(hThread, lpContext);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++ , caption={Nahradenie pôvodnej funkcie SetThreadContext}]
+switch (ul_reason_for_call)
+{
+	case DLL_PROCESS_ATTACH:
+	{
+		DetourAttach(&(PVOID&)RealSetThreadContext, 
+						HookSetThreadContext);
+		DetourTransactionCommit();
+		break;
+	}
+	case DLL_PROCESS_DETACH:
+	{
+		DetourDetach(&(PVOID&)RealSetThreadContext, 
+						HookSetThreadContext);
+		DetourTransactionCommit();
+		break;
+	}
+}
+\end{lstlisting}
 
 \subsection{Detours}
 \textit{Detours} je softvér urèenı na monitorovanie a inštruovanie API volaní v systéme Windows. Tento softvér podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Je k dispozícii na základe \textit{Open source} licencie a je vo¾ne dostupnı pre komunitu.
+
+\subsection{Mutex}
+Mutex je synchronizaènı objekt, ktorı slúi na signalizáciu pouívania nejakého objektu v procesnom vlákne. Mutex slúi na koordináciu viacerıch aplikácií (dvoch vlákien), ktoré vyadujú prístup k rovnakému objektu súèastne. Napríklad aby sa zabránilo zápisu dvoch vlákien súèastne do zdie¾aného objektu alebo pamäti. Take kadá aplikácia alebo vlákno èaká na uvo¾nonenie mutexu, ktoré signalizuje, e daná pamä nieje vyuívaná a môe sa do nej bezpeène zapisova bez toho aby došlo zápisu dvoch aplikácii súèastne. V tejto aplikácii mutex slúi na zabránenie zapisovaniu záznamov do súboru modulom na zber dát a èítaním záznamov z toho istého súboru detegènou aplikáciou súèastne.
+\begin{lstlisting}[language=C++ , caption={Inicializácia Mutexu}]
+HANDLE mutexOnThreadSafe;
+int main()
+{
+mutexOnThreadSafe = 
+CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
+
+\end{lstlisting}
 
 \subsection{Koneènı stavovı automat}
 
@@ -317,14 +393,6 @@ Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového autom
 		\label{maticaPrechodov}
 	\end{center}
 \end{table}
-\subsection{Mutex}
-Mutex je synchronizaènı objekt, ktorı slúi na signalizáciu pouívania nejakého objektu v procesnom vlákne. Mutex slúi na koordináciu viacerıch aplikácií (dvoch vlákien), ktoré vyadujú prístup k rovnakému objektu súèastne. Napríklad aby sa zabránilo zápisu dvoch vlákien súèastne do zdie¾aného objektu alebo pamäti. Take kadá aplikácia alebo vlákno èaká na uvo¾nonenie mutexu, ktoré signalizuje, e daná pamä nieje vyuívaná a môe sa do nej bezpeène zapisova bez toho aby došlo zápisu dvoch aplikácii súèastne. V tejto aplikácii mutex slúi na zabránenie zapisovaniu záznamov do súboru modulom na zber dát a èítaním záznamov z toho istého súboru detegènou aplikáciou súèastne.
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=12cm]{img/Mutex.jpg}
-	\caption{Definícia mutexu na zaèiatku programu.}
-	\label{Mutex}
-\end{figure}   
 
 \section{Vısledky}
 Struènı úvod do testovania nami vytvoreného riešenia/riešení. Zoznam experimentov.

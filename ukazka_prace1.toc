@@ -11,19 +11,19 @@
 \contentsline {subsection}{\numberline {3.1}PHDetection}{12}{subsection.14}%
 \contentsline {subsection}{\numberline {3.2}HollowFind}{12}{subsection.15}%
 \contentsline {section}{\numberline {4}Algoritmy na detekciu}{13}{section.16}%
-\contentsline {section}{\numberline {5}Implement\'acia}{14}{section.19}%
-\contentsline {subsection}{\numberline {5.1}Algoritmus A}{14}{subsection.20}%
-\contentsline {subsection}{\numberline {5.2}Modul na zber d\'at}{15}{subsection.23}%
-\contentsline {subsection}{\numberline {5.3}Detours}{16}{subsection.30}%
-\contentsline {subsection}{\numberline {5.4}Kone\v cn\'y stavov\'y automat}{17}{subsection.31}%
-\contentsline {subsection}{\numberline {5.5}Matica kone\v cn\'eho stavov\'eho automatu}{17}{subsection.32}%
-\contentsline {subsection}{\numberline {5.6}Mutex}{19}{subsection.35}%
-\contentsline {section}{\numberline {6}V\'ysledky}{20}{section.38}%
-\contentsline {subsection}{\numberline {6.1}Experiment A}{20}{subsection.39}%
-\contentsline {subsection}{\numberline {6.2}Experiment B}{20}{subsection.40}%
-\contentsline {subsection}{\numberline {6.3}Porovnanie s existuj\'ucimi rie\v seniami}{20}{subsection.41}%
-\contentsline {section}{Z\'{a}ver}{21}{section*.42}%
-\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{I}{section*.43}%
-\contentsline {section}{Pr\'{i}lohy}{I}{section*.44}%
-\contentsline {section}{\numberline {A} ?trukt\'ura elektronick\'eho nosi?a}{II}{section.46}%
-\contentsline {section}{\numberline {B} Algoritmus}{III}{section.49}%
+\contentsline {section}{\numberline {5}Implement\'acia}{15}{section.19}%
+\contentsline {subsection}{\numberline {5.1}Algoritmus A}{16}{subsection.22}%
+\contentsline {subsection}{\numberline {5.2}Modul na zber d\'at}{17}{subsection.25}%
+\contentsline {subsection}{\numberline {5.3}Detours}{19}{subsection.78}%
+\contentsline {subsection}{\numberline {5.4}Mutex}{19}{subsection.79}%
+\contentsline {subsection}{\numberline {5.5}Kone\v cn\'y stavov\'y automat}{20}{subsection.87}%
+\contentsline {subsection}{\numberline {5.6}Matica kone\v cn\'eho stavov\'eho automatu}{20}{subsection.88}%
+\contentsline {section}{\numberline {6}V\'ysledky}{22}{section.91}%
+\contentsline {subsection}{\numberline {6.1}Experiment A}{22}{subsection.92}%
+\contentsline {subsection}{\numberline {6.2}Experiment B}{22}{subsection.93}%
+\contentsline {subsection}{\numberline {6.3}Porovnanie s existuj\'ucimi rie\v seniami}{22}{subsection.94}%
+\contentsline {section}{Z\'{a}ver}{23}{section*.95}%
+\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{I}{section*.96}%
+\contentsline {section}{Pr\'{i}lohy}{I}{section*.97}%
+\contentsline {section}{\numberline {A} ?trukt\'ura elektronick\'eho nosi?a}{II}{section.99}%
+\contentsline {section}{\numberline {B} Algoritmus}{III}{section.102}%

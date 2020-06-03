@@ -3,12 +3,23 @@
 \usepackage[cp1250]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+	frame=tb, % draw a frame at the top and bottom of the code block
+	tabsize=3, % tab space width
+	showstringspaces=false, % don't mark spaces in strings
+	commentstyle=\color{green}, % comment color
+	keywordstyle=\color{blue}, % keyword color
+	stringstyle=\color{red} % string color
+}
 
 \FEIauthor{Lukáš Gnip}
 \FEItitle{Moderné techniky na ukrývanie èinnosti malvéru}
 \FEItitleEn{Modern Hiding Techniques in Malware}
-\FEIregNr{FEI-5382-5982}
-\FEIsupervisor{Mgr. Ing. Matú? Jókay, PhD.}
+\FEIregNr{FEI-5382-73886}
+\FEIsupervisor{Ing. Peter Švec}
 
 \begin{document}
 \frontmatter
@@ -16,7 +27,7 @@
 \FEIpdfInfo
 \FEIcover
 \FEItitlePage
-\FEIassignment {includes/assignment.jpeg}
+\FEIassignment {includes/Zadanie.jpg}
 \FEIabstract{includes/abstract}{anonymizácia, identifikácia pou?ívate?a, zásuvný modul, Mozilla Firefox, internet}
 \FEIabstractEn{includes/abstractEN}{anonymization, identification of user, plugin, Mozilla Firefox, internet}
 %\FEIdeclaration{includes/declaration}  %toto nie je predpisane
