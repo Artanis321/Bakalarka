@@ -213,7 +213,7 @@ V kadom riešení popis, akım spôsobom danı nástroj funguje, ako sa pouíva, v èo
 
 Hollowfind je plugin pre program Volatility na detekciu rôznych typov techník \textit{Process Hollowing} pouívanıch vo vo¾nej prírode na obídenie, zamenenie a odklonenie techník forenznej analızy. Plugin detekuje takéto útoky zistením nezrovnalostí vo VAD a PEB, tie rozoberie adresu vstupného bodu, aby zistil akéko¾vek pokusy o presmerovanie, a tie nahlási akéko¾vek podozrivé pamäové oblasti, ktoré by mali pomôc pri detekcii akéhoko¾vek škodlivého kódu. Program bol napísanı v jazyku Phyton. Plugin sa spúšta v Programe Volatility po nainštalovaní.  \cite{hollowfind}
 
-\section{Algoritmy na detekciu}
+\section{Algoritmus na detekciu}
 \noindent
 \begin{figure}[!htbp]
 	\centering
@@ -257,7 +257,7 @@ Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje p
 \end{figure}
 
 Práca sa zaoberá návrhom a implementáciou spôsobu detegovania malvéru, ktorı na ukrytie svojej èinnosti v PC pouíva \textit{Process Hollowing}. Teda ukrıva svojú èinnos za iné bené programy, ktoré nie sú podozrivé. Aplikácia urèená na detegovanie takéhoto spôsobu ukrıvania malvéru bude bea v reálnom èase, teda je schopná detegova malvér poèas jeho behu. Vstupné dáta do tejto aplikácie budú predstavova volané API funkcie škodlivım softvérom a z tıchto API funckií bude aplikácia vyhodnocova a poskytova vısledky èi v systéme operuje alebo neoperuje malvér. Aplikácia bude pozostáva z nasledujúcich èastí. Mutex, ktorı bude zabezpeèova plynulos a bezpeènos programu. Modul na injectovanie DLL, ktorı bude vklada DLL kninicu na odchytávanie volanıch API. Modul na vyhodnocovanie prítomnosti mavéru, ktorı sa skladá z viacerıch èastí. Modulu na naèítanie najnovších záznamov z DLL kninice. Koneèného stavového automatu reprezentovaného Maticou, oproti ktorej bude aplikácia porovnáva prechody medzi jednotlivımi stavmi pod¾a volanıch API. Archiváciou, ktorá zabezpeèí archiváciu dát po preèítaní najnovších záznamov z DLL kninice.  
-\subsection{Algoritmus A}
+\subsection{Algoritmus}
 
 \begin{figure}[!htbp]
 	\centering
@@ -273,58 +273,50 @@ Aplikácia na zaèiatku inicializuje mutex, ktorı slúi na bezpeèné zapisovanie a 
 
 Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funcií ako môeme vydie na obrázku, ku ktorım je následne definované aj ich volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile}, ktoré sú následne pouité v aplikácii na detegovanie malvéru v beiacom procese. 
 
-\begin{lstlisting}[language=C++ , caption={Funkcia writeFunctionToFile}]
-void writeFunctionToFile(string originalFuncion) 
+\begin{lstlisting}[caption=\mbox{},label={vypis1}]
+void writeFunctionToFile(std::string originalFuncion) 
 {
 	DWORD ret = WaitForSingleObject(hMutex, INFINITE);
 	
 	if (ret == WAIT_OBJECT_0)
 	{
-		std::cout << originalFuncion << std::endl;
 		time_t now = time(NULL);
 		tm* ltm = localtime(&now);
-		ofstream myFile;
-		myFile.open("hookAplicationResult.txt", 
-		ofstream::app | ofstream::out);
+		std::ofstream myFile("api_data.txt", std::ofstream::app | std::ofstream::out);
+		
 		if (myFile.is_open())
 		{
-			myFile << ltm->tm_hour << ":" << ltm->tm_min << ":" 
-			<< ltm->tm_sec << ";" + originalFuncion << endl;
+			myFile << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << ";" + originalFuncion << endl;
 			myFile.close();
 		}
+		
 		ReleaseMutex(hMutex);
 	}
 }
 \end{lstlisting}
 Druhá èas aplikácie u slúi len na nahradenie pôvodnej volanej API funkcie, modifikovanou tou istou funckiou, ktorá je rozšírenia o zapisovanie volanej API do súboru. Pôvodnú funkciu \textit{SetThreadContext} urèenú na nastavenie \textit{Instriction Pointer} v tomto module nahradíme funciou \textit{HookSetThreadContext}, ktorá okrem volania pôvodnej funkcie volá aj funkciu \textbf{writeFunctionToFile} na zapísanie API funkcie do predpripraveného súboru.
-\begin{lstlisting}[language=C++ , caption={Definícia API HookSetThreadContext}]
-static BOOL(__stdcall *RealSetThreadContext)
-			(HANDLE, const CONTEXT*) = SetThreadContext;
+\begin{lstlisting}[caption=\mbox{},label={vypis2}]
+static BOOL(__stdcall *RealSetThreadContext)(HANDLE, const CONTEXT*) = SetThreadContext;
 
-BOOL WINAPI HookSetThreadContext(
-HANDLE        hThread,
-const CONTEXT* lpContext
-)
+BOOL WINAPI HookSetThreadContext(HANDLE hThread, const CONTEXT* lpContext)
 {
-writeFunctionToFile("SetThreadContext");
-return RealSetThreadContext(hThread, lpContext);
+	writeFunctionToFile("SetThreadContext");
+	return RealSetThreadContext(hThread, lpContext);
 }
 \end{lstlisting}
 
-\begin{lstlisting}[language=C++ , caption={Nahradenie pôvodnej funkcie SetThreadContext}]
+\begin{lstlisting}[caption=\mbox{},label={vypis3}]
 switch (ul_reason_for_call)
 {
 	case DLL_PROCESS_ATTACH:
 	{
-		DetourAttach(&(PVOID&)RealSetThreadContext, 
-						HookSetThreadContext);
+		DetourAttach(&(PVOID&)RealSetThreadContext, HookSetThreadContext);
 		DetourTransactionCommit();
 		break;
 	}
 	case DLL_PROCESS_DETACH:
 	{
-		DetourDetach(&(PVOID&)RealSetThreadContext, 
-						HookSetThreadContext);
+		DetourDetach(&(PVOID&)RealSetThreadContext, HookSetThreadContext);
 		DetourTransactionCommit();
 		break;
 	}
@@ -336,12 +328,9 @@ switch (ul_reason_for_call)
 
 \subsection{Mutex}
 Mutex je synchronizaènı objekt, ktorı slúi na signalizáciu pouívania nejakého objektu v procesnom vlákne. Mutex slúi na koordináciu viacerıch aplikácií (dvoch vlákien), ktoré vyadujú prístup k rovnakému objektu súèastne. Napríklad aby sa zabránilo zápisu dvoch vlákien súèastne do zdie¾aného objektu alebo pamäti. Take kadá aplikácia alebo vlákno èaká na uvo¾nonenie mutexu, ktoré signalizuje, e daná pamä nieje vyuívaná a môe sa do nej bezpeène zapisova bez toho aby došlo zápisu dvoch aplikácii súèastne. V tejto aplikácii mutex slúi na zabránenie zapisovaniu záznamov do súboru modulom na zber dát a èítaním záznamov z toho istého súboru detegènou aplikáciou súèastne.
-\begin{lstlisting}[language=C++ , caption={Inicializácia Mutexu}]
+\begin{lstlisting}[caption=\mbox{},label={vypis4}]
 HANDLE mutexOnThreadSafe;
-int main()
-{
-mutexOnThreadSafe = 
-CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
+mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
 
 \end{lstlisting}
 
