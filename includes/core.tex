@@ -273,7 +273,7 @@ Aplikácia na zaèiatku inicializuje mutex, ktorı slúi na bezpeèné zapisovanie a 
 
 Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funcií ako môeme vydie na obrázku, ku ktorım je následne definované aj ich volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile}, ktoré sú následne pouité v aplikácii na detegovanie malvéru v beiacom procese. 
 
-\begin{lstlisting}[caption=\mbox{},label={vypis1}]
+\begin{lstlisting}[caption=Implementácia funkcie writeFunctionToFile.,label={vypis1}]
 void writeFunctionToFile(std::string originalFuncion) 
 {
 	DWORD ret = WaitForSingleObject(hMutex, INFINITE);
@@ -295,7 +295,7 @@ void writeFunctionToFile(std::string originalFuncion)
 }
 \end{lstlisting}
 Druhá èas aplikácie u slúi len na nahradenie pôvodnej volanej API funkcie, modifikovanou tou istou funckiou, ktorá je rozšírenia o zapisovanie volanej API do súboru. Pôvodnú funkciu \textit{SetThreadContext} urèenú na nastavenie \textit{Instriction Pointer} v tomto module nahradíme funciou \textit{HookSetThreadContext}, ktorá okrem volania pôvodnej funkcie volá aj funkciu \textbf{writeFunctionToFile} na zapísanie API funkcie do predpripraveného súboru.
-\begin{lstlisting}[caption=\mbox{},label={vypis2}]
+\begin{lstlisting}[caption=Definícia API volania SetThreadContext.,label={vypis2}]
 static BOOL(__stdcall *RealSetThreadContext)(HANDLE, const CONTEXT*) = SetThreadContext;
 
 BOOL WINAPI HookSetThreadContext(HANDLE hThread, const CONTEXT* lpContext)
@@ -305,7 +305,7 @@ BOOL WINAPI HookSetThreadContext(HANDLE hThread, const CONTEXT* lpContext)
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption=\mbox{},label={vypis3}]
+\begin{lstlisting}[caption=Nahradenie pôvodnej funkcie SetThreadContext.,label={vypis3}]
 switch (ul_reason_for_call)
 {
 	case DLL_PROCESS_ATTACH:
@@ -328,7 +328,7 @@ switch (ul_reason_for_call)
 
 \subsection{Mutex}
 Mutex je synchronizaènı objekt, ktorı slúi na signalizáciu pouívania nejakého objektu v procesnom vlákne. Mutex slúi na koordináciu viacerıch aplikácií (dvoch vlákien), ktoré vyadujú prístup k rovnakému objektu súèastne. Napríklad aby sa zabránilo zápisu dvoch vlákien súèastne do zdie¾aného objektu alebo pamäti. Take kadá aplikácia alebo vlákno èaká na uvo¾nonenie mutexu, ktoré signalizuje, e daná pamä nieje vyuívaná a môe sa do nej bezpeène zapisova bez toho aby došlo zápisu dvoch aplikácii súèastne. V tejto aplikácii mutex slúi na zabránenie zapisovaniu záznamov do súboru modulom na zber dát a èítaním záznamov z toho istého súboru detegènou aplikáciou súèastne.
-\begin{lstlisting}[caption=\mbox{},label={vypis4}]
+\begin{lstlisting}[caption=Inicializácia mutexu.,label={vypis4}]
 HANDLE mutexOnThreadSafe;
 mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
 

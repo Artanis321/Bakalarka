@@ -120,7 +120,6 @@
 \usepackage{changepage}
 \usepackage{scrextend}
 \usepackage{xstring}
-\usepackage{caption}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -560,6 +559,19 @@ na z\'{a}klade poznatkov z\'{i}skan\'{y}ch po\v{c}as \v{s}t\'{u}dia a inform\'{a
 	\newpage
 	\pagestyle{empty}
 }
+
+\newcommand\FEIlistOfListings{    
+	\IfEqCase*{\FEIenglish}{
+		{0}{\def\@zoznamList{Zoznam v\a'ypisov}}
+		{1}{\def\@zoznamList{List of listings}}
+	}[]
+	\renewcommand{\lstlistlistingname}{\bf\fontsize{22pt}{1.3}\selectfont \@zoznamList}
+	\pagestyle{plain}
+	\lstlistoflistings
+	\newpage
+	\pagestyle{plain}
+}
+
 
 \newcommand\FEIlistOfFiguresAndTables{	
 	\pagestyle{empty}
