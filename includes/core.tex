@@ -6,7 +6,7 @@
 \vspace{20px}
 \subsection{Techniky ukrıvania èinnosti}
 \noindent 
-Malvér vo všeobecnosti patrí ku škodlivému kódu. Preto je nutné jeho beiace procesy utaji. Ak chce by malvér úspešnı v získavaní údajov alebo finanènıch prostriedkov, musí by jeho beh ukrytı pred potenciálnym antivírusom, prípadne forenznım ininierom ktorı je schopnı ho odhali. Za tımto úèelom sa vyuívajú rôzne techniky na ukrytie malvéru buï v pamäti poèítaèa, rôznych shell scriptoch alebo dynamickıch kniniciach, aby boli èo najmenej detegovate¾né.
+Malvér vo všeobecnosti patrí ku škodlivému kódu. Preto je nutné jeho beiace procesy utaji. Ak chce by malvér úspešnı v získavaní údajov alebo finanènıch prostriedkov, musí by jeho beh ukrytı pred potenciálnym antivírusom, prípadne forenznım ininierom ktorı je schopnı ho odhali. Za tımto úèelom sa vyuívajú rôzne techniky na ukrytie malvéru buï v pamäti poèítaèa, rôznych shell scriptoch alebo dynamickıch kniniciach, aby boli èo najmenej detegovate¾né. \cite{malicious}
 
 \begin{itemize}
 	\item 
@@ -61,12 +61,12 @@ Emotet je malvér, ktorı sa primárne šíri pomocou rôznych spam emailov.\cite{emot
 \item
 \textbf{ZeuS}
 \noindent \\
-Prvıkrát odhalenı v roku 2007 sa Zeus Trojan, ktorı sa èasto nazıva Zbot, stal jednım z najúspešnejších kúskov botnetového softvéru na svete, postihol milióny poèítaèov a vytvoril mnostvo podobnıch kusov škodlivého softvéru vytvoreného z jeho kódu. Po jeho minimalizovaní sa znovu objavil v pozmenenej podobe so zameraním na odchytávanie bankovıch operácii (Odchytávanie prihlasovacích údajov do internet bankingu).\cite{zeuS3} Dosahuje to prostredníctvom monitorovania webovıch stránok a zaznamenávania klávesov, keï malvér zistí, e sa pouívate¾ nachádza na bankovej webovej stránke, zaène zaznamenáva stlaèenia klávesov pouité na prihlásenie. To znamená, e trójsky kôò dokáe obís zabezpeèenie na tıchto webovıch stránkach. Infekcia prebieha pomocou spamov. Keï uívate¾ klikne na odkaz v správe alebo stiahne obsah súboru. spolu s ním stiahne a spustí aj makro. Ktoré po nainštalovaní umoòuje sledovanie zariadenia. 
+Prvıkrát odhalenı v roku 2007 sa Zeus Trojan, ktorı sa èasto nazıva Zbot, stal jednım z najúspešnejších kúskov botnetového softvéru na svete, postihol milióny poèítaèov a vytvoril mnostvo podobnıch kusov škodlivého softvéru vytvoreného z jeho kódu. Po jeho minimalizovaní sa znovu objavil v pozmenenej podobe so zameraním na odchytávanie bankovıch operácii (Odchytávanie prihlasovacích údajov do internet bankingu).\cite{zeus2} Dosahuje to prostredníctvom monitorovania webovıch stránok a zaznamenávania klávesov, keï malvér zistí, e sa pouívate¾ nachádza na bankovej webovej stránke, zaène zaznamenáva stlaèenia klávesov pouité na prihlásenie. To znamená, e trójsky kôò dokáe obís zabezpeèenie na tıchto webovıch stránkach. Infekcia prebieha pomocou spamov. Keï uívate¾ klikne na odkaz v správe alebo stiahne obsah súboru. spolu s ním stiahne a spustí aj makro. Ktoré po nainštalovaní umoòuje sledovanie zariadenia. 
 
 \item
 \textbf{Dridex}
 \noindent \\
-Dridex je známy trójsky kôò, ktorı sa špecializuje na kráde kreditnıch údajov online bankovníctva. Tento typ škodlivého softvéru sa objavil v roku 2014 a stále napreduje a vyvíja. Novı variant Dridex je schoplnı vyhnú sa detekcii tradiènımi antivírusovımi produktami.  Dridex tie zvıšil svoju infraštruktúru kniníc, ktoré pouívajú názvy súborov naèítané legitímnymi spustite¾nımi súbormi systému Windows. Názvy súborov a hash sa však obnovujú a menia zakadım, keï sa obe prihlási do infikovaného hostite¾a Windows. Tento malvér je v súèastnosti schopnı detekova pribline 25 a 30 percent aktuálnych antivírusovıch softvérov. 
+Dridex je známy trójsky kôò, ktorı sa špecializuje na kráde kreditnıch údajov online bankovníctva. Tento typ škodlivého softvéru sa objavil v roku 2014 a stále napreduje a vyvíja. Novı variant Dridex je schoplnı vyhnú sa detekcii tradiènımi antivírusovımi produktami.  Dridex tie zvıšil svoju infraštruktúru kniníc, ktoré pouívajú názvy súborov naèítané legitímnymi spustite¾nımi súbormi systému Windows. Názvy súborov a hash sa však obnovujú a menia zakadım, keï sa obe prihlási do infikovaného hostite¾a Windows. Tento malvér je v súèastnosti schopnı detekova pribline 25 a 30 percent aktuálnych antivírusovıch softvérov. \cite{dridex}
 
 \item
 \textbf{Mirai}
@@ -80,12 +80,12 @@ CnC predstavuje jednoduché rozhranie príkazového riadku, ktoré umoòuje útoèníko
 \item
 \textbf{Osiris}
 \noindent \\
-Osiris je potomkom malvéru Kronos, ktorı sa zameriaval na bankovnívctvo. Podobne ako Kronos je Osiris modernejšou verziou bankového trójskeho koòa.\cite{osiris} Táto verzia malvéru vyuíva na skrıvanie metódu process hollowing. Umoòuje mu predsieranie legitımnych procesov v programe a tım sauje jeho detekciu, no niektoré antivírusy ho nie sú schopné detekova. Malvér spúša svoj útok vydávaním sa za legitímny spustite¾nı súbor. (Útoky zaznamená s malvérom Osiris boli dokumenty Microsoft Wordu.) Keï je spustenı malvér na infikovanie zariadenia vyuíva dinamické kninice, ktoré obsahujú škodlivı kód. Vydávanie sa za inı oficiálny softvér znaène sauje identifikáciu malvéru a obmedzuje monosti na zastavenie útoku.\cite{osiriS3} Malvér v dokumetoch Word obsahoval aj makrá, ktoré po spustení stiahli další škodlivı malvér, ktorı umouje zahåti zariadenia, sai detekciu a rozširova útok.
+Osiris je potomkom malvéru Kronos, ktorı sa zameriaval na bankovnívctvo. Podobne ako Kronos je Osiris modernejšou verziou bankového trójskeho koòa.\cite{osiris} Táto verzia malvéru vyuíva na skrıvanie metódu process hollowing. Umoòuje mu predsieranie legitımnych procesov v programe a tım sauje jeho detekciu, no niektoré antivírusy ho nie sú schopné detekova. Malvér spúša svoj útok vydávaním sa za legitímny spustite¾nı súbor. (Útoky zaznamená s malvérom Osiris boli dokumenty Microsoft Wordu.) Keï je spustenı malvér na infikovanie zariadenia vyuíva dinamické kninice, ktoré obsahujú škodlivı kód. Vydávanie sa za inı oficiálny softvér znaène sauje identifikáciu malvéru a obmedzuje monosti na zastavenie útoku.\cite{osiris2} Malvér v dokumetoch Word obsahoval aj makrá, ktoré po spustení stiahli další škodlivı malvér, ktorı umouje zahåti zariadenia, sai detekciu a rozširova útok.
 
 \item
 \textbf{Loki}
 \noindent \\
-Loki je ïalším potomkom staršieho malvéru Kronos, rovnako ako Osiris aj Loki vyuíva na svoje ukrytie metódy podobné process hollowing na zahltenie procesov a vydávanie sa za legitímny softvér. Loki sa zameriava na krádee osobnıch údajov, zaujíma sa najmä o prihlasovacie údaje a heslá. Od augusta 2018 a do súèasnosti sa Loki zameriava na firemné poštové schránky prostredníctvom phishingovıch a spamovıch e-mailov. Phishingové e-maily zahàòajú prílohu súboru s príponou .iso, ktorá sahuje a spúša škodlivı softvér Trojan, ktorı ukradne heslá z preh¾adávaèov, pošty, klientov File Transfer Protocol (FTP), aplikácií na odosielanie správ a kryptomennıch peòaeniek.
+Loki je ïalším potomkom staršieho malvéru Kronos, rovnako ako Osiris aj Loki vyuíva na svoje ukrytie metódy podobné process hollowing na zahltenie procesov a vydávanie sa za legitímny softvér. Loki sa zameriava na krádee osobnıch údajov, zaujíma sa najmä o prihlasovacie údaje a heslá. Od augusta 2018 a do súèasnosti sa Loki zameriava na firemné poštové schránky prostredníctvom phishingovıch a spamovıch e-mailov. Phishingové e-maily zahàòajú prílohu súboru s príponou .iso, ktorá sahuje a spúša škodlivı softvér Trojan, ktorı ukradne heslá z preh¾adávaèov, pošty, klientov File Transfer Protocol (FTP), aplikácií na odosielanie správ a kryptomennıch peòaeniek. \cite{Loki}
 \end{itemize}
 \begin{table}[!htbp]
 	\begin{center}
@@ -115,14 +115,14 @@ Zvolenı spôsob ukrytia malvéru, ktorım sa bude táto práca zaobera je \textit{Pr
 \noindent
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=11cm]{img/Diagram.jpg}
+	\includegraphics[width=12cm]{img/Diagram.jpg}
 	\caption{ Ukáka zmien adresného priestoru poèas Hollowingu.}
 	\label{vzhladobr}
 \end{figure}
-Princíp ukrytia malvéru akı vyuíva \textit{Process Hollowing} je podobnı spôsobu ukrytia malvéru, ktorı vyuíva \textit{DLL Injection}. Princím spoèíva v ukrytí malvéru do existujúceho beiaceho procesu, ktorı je v systéme Windows èasto vyuívanı a spustenie malvéru z tohto procesu by spôsobovalo najmenšie podozrenie. Takımto demonštratívnym procesom môe by \textit{svchost.exe}, ktorı je v systéme Windows èasto vyuívanı. \textit{Process Hollowing} pozastaví beiace vlákno procesu \textit{svchost.exe} a následne vytvorí vlákno, ktoré alokuje dostatoènú ve¾kú práznu virtuálnu pamä pre malvér v procese. Po alokovaní virtuálneho adresného priestoru v pamäti procesu do alokovanej èasti nakopíruje škodlivı kód a následne nastaví kedy sa danı škodlivı kód má spusti. Malvér sa môe v tomto prípade spusti po spustení pozastaveného vlákna alebo pri volaní nejakej konkrétnej funkcie. Po nastavení spúšaèa malvéru sa \textit{Process Hollowing} spustí pozastavené vlákno. Malvér môe pri následnom volaní funkcie, ktorá bola nastavená ako spúšaè škodlivého kódu spusti svoju èinnos pod legitimnım procesom.  
+Princíp ukrytia malvéru akı vyuíva \textit{Process Hollowing} je podobnı spôsobu ukrytia malvéru, ktorı vyuíva \textit{DLL Injection}. Princím spoèíva v ukrytí malvéru do existujúceho beiaceho procesu, ktorı je v systéme Windows èasto vyuívanı a spustenie malvéru z tohto procesu by spôsobovalo najmenšie podozrenie.\cite{hollowing} Takımto demonštratívnym procesom môe by \textit{svchost.exe}, ktorı je v systéme Windows èasto vyuívanı. \textit{Process Hollowing} pozastaví beiace vlákno procesu \textit{svchost.exe} a následne vytvorí vlákno, ktoré alokuje dostatoènú ve¾kú práznu virtuálnu pamä pre malvér v procese. Po alokovaní virtuálneho adresného priestoru v pamäti procesu do alokovanej èasti nakopíruje škodlivı kód a následne nastaví kedy sa danı škodlivı kód má spusti. Malvér sa môe v tomto prípade spusti po spustení pozastaveného vlákna alebo pri volaní nejakej konkrétnej funkcie. Po nastavení spúšaèa malvéru sa \textit{Process Hollowing} spustí pozastavené vlákno. Malvér môe pri následnom volaní funkcie, ktorá bola nastavená ako spúšaè škodlivého kódu spusti svoju èinnos pod legitimnım procesom.  
 
 \subsection{Vyuívané API funkcie}
-\textit{Process Hollowing} vyuíva na svoje fungovanie rôzne API funkcie a ich volania. Nasledujúce nami vybrané API funkcie, môe \textit{Process Hollowing} najpravdepodobnejšie vyuíva na svoje fungovanie k ukrytiu škodlivého kódu do nejakého beiaceho procesu. 
+\textit{Process Hollowing} vyuíva na svoje fungovanie rôzne API funkcie a ich volania. Nasledujúce nami vybrané API funkcie\cite{winapi}, môe \textit{Process Hollowing} najpravdepodobnejšie vyuíva na svoje fungovanie k ukrytiu škodlivého kódu do nejakého beiaceho procesu. 
 \begin{itemize}
 \item
 \textbf{CreateThread}
@@ -139,11 +139,11 @@ Funkcia vytvára vlákno, ktoré sa spúša vo virtuálnom adresovom priestore iného 
 \item
 \textbf{ResumeThread}
 \\
-Spúša pozastavené vlákno.
+Funkcia kontroluje poèet pozastavení vlánkien. Ak je poèet pozastavení väèší ako nula tak vlákno ostáva pozastavené. V opaènom prípade ak poèet pozastavení sa rovná nule, spúša pozastavené vlákno.
 \item
 \textbf{SuspendThread}
 \\
-Pozastaví zadané vlákno.
+Po zavolaní sa vykonávanie zadaného vlákna pozastaví a zvıši sa poèet pozastavení vlákna. Pozastavenie vlákna spôsobí, e vlákno zastaví èinnos aplikácie.
 \item
 \textbf{SwitchToThread}
 \\
@@ -175,11 +175,11 @@ Zapisuje údaje do oblasti pamäte v zadanom procese. Celá oblas, do ktorej sa má
 \item
 \textbf{ReadProcessMemory}
 \\
-Èíta udaje z pamäte v zadanom procese.
+Kopíruje údaje v zadanom rozsahu adries z adresného priestoru zadaného procesu do vyrovnávacej pamäte aktuálneho procesu.
 \item
 \textbf{CopyMemory}
 \\
-Kopíruje pamä do vyhradenej alokovanej pamäti.
+Kopíruje pamä do vyhradenej alokovanej pamäti. Celá oblas pamäte, do ktorej sa má zapísa, musí by prístupná.
 \item
 \textbf{SetThreadContext}
 \\
@@ -187,7 +187,7 @@ Nastavuje kontext pre aktuálne vlákno.
 \item
 \textbf{ExitThread}
 \\
-Ukonèí aktuálne vykonávané vlákno.
+Keï sa táto funkcia volá, poradovník udalostí aktuálneho vlákna sa zruší, všetky èakajúce vstupno-vıstupné udalosti iniciované vláknom sa zrušia a vlákno ukonèí svoju èinnos. 
 \item
 \textbf{NtUnmapViewOfSection}
 \\
@@ -197,20 +197,10 @@ Odmapuje pamä vybraného beiaceho procesu.
 \section{Existujúce riešenia na detekciu}
 \noindent
 Doposia¾ známe existujúce riešenia na detekciu techniky \textit{Process Hollowing} vyuívanej niektorımi malvérmy, sú urèené na forenznú analızu. Táto analıza prebieha u po infikovaní zariadenia malvérom a zistením, e sa škodlivı kód u v zariadení nachádza. Tieto riešenia neobsahujú spôsoby detekcie škodlivého kódu, ktoré by mohli odchyti malvér u pri infikovaní ¾ubovo¾ného zariadenia. 
-\\
 
-https://github.com/m0n0ph1/Process-Hollowing
-
-https://github.com/idan1288/PHDetection
-
-https://www.andreafortuna.org/2017/10/09/understanding-process-hollowing/
-
-https://cysinfo.com/detecting-deceptive-hollowing-techniques/
-
-https://www.microsoft.com/security/blog/2017/07/12/detecting-stealthier-cross-process-injection-techniques-with-windows-defender-atp-process-hollowing-and-atom-bombing/
 \subsection{PHDetection}
 
-\textit{PHDetection} h¾adá moduly, od ktorıch závisí pôvodnı .exe program. \textit{PHDetection} kontroluje èi sú moduly naèítané do procesnej pamäte programu. Ak nájde moduly, na ktorıch závisí dotyènı program ale nenájde ich v pamäti procesu, èo naznaèuje, e proces je prázny \textit{PHDetection} detekuje, e sa jedná o Process Hollowing. Pôvodné moduly boli nahradené touto metodóu za iné ktoré obsahujú škodlivı kód. Existuje nieko¾ko súborov, ktoré nezávisia od mnohıch modulov v IAT. Program analyzovuje aj tabu¾ku importu oneskoreného naèítania volania modulov. Program bol implementovanı v jazyku C++. Program sa spúša spustením súboru pod¾a verzie systému Windows \cite{phdetection}
+\textit{PHDetection} h¾adá moduly, od ktorıch závisí pôvodnı .exe program. \textit{PHDetection} kontroluje èi sú moduly naèítané do procesnej pamäte programu. Ak nájde moduly, na ktorıch závisí dotyènı program ale nenájde ich v pamäti procesu, èo naznaèuje, e proces je prázny \textit{PHDetection} detekuje, e sa jedná o Process Hollowing. Pôvodné moduly boli nahradené touto metodóu za iné ktoré obsahujú škodlivı kód. Existuje nieko¾ko súborov, ktoré nezávisia od mnohıch modulov v IAT. Program analyzovuje aj tabu¾ku importu oneskoreného naèítania volania modulov. Program bol implementovanı v jazyku C++. Program sa spúša spustením súboru pod¾a verzie systému Windows. \cite{phdetection}
 
 V kadom riešení popis, akım spôsobom danı nástroj funguje, ako sa pouíva, v èom bol implementovanı + link na nástroj do literatúry.
 \subsection{HollowFind}
@@ -230,25 +220,86 @@ Navrhnutı algoritmus na detegciu malvéru vyuívajúceho na svoje ukrytie v systém
 \begin{itemize}
 \item
 \textbf{WAPI1}
-Sú API funkcie, ktoré umoòujú vytvára nové vlákna procesov alebo získa prístupy do u existujúcich vlákien. 
+Sú API funkcie, ktoré umoòujú vytvára nové vlákna procesov alebo získa prístupy do u existujúcich vlákien. \\
+CreateThread,
+SuspendThread,
+CreateProcessA.
 \item
 \textbf{WAPI2}
-Predstavujú API primátrne urèené na odmapovanie pamäte existujúceho procesu.
+Predstavujú API primátrne urèené na odmapovanie pamäte existujúceho procesu. \\
+NtUnmapViewOfSection.
 \item
 \textbf{WAPI3}
-Predstavujú API, ktoré slúia na alokáciu pamäte pre dané vlákno alebo rozširujú virtuálnu pamä existujúceho procesu. 
+Predstavujú API, ktoré slúia na alokáciu pamäte pre dané vlákno alebo rozširujú virtuálnu pamä existujúceho procesu. \\
+VirtualAlloc,
+VirtualAllocEx.
 \item
 \textbf{WAPI4}
-Tieto funkcie umoòujú manipulova s pamäou. Ako je kopírovanie pamäte, zapisovanie do pamäte atï..
+Tieto funkcie umoòujú manipulova s pamäou. Ako je kopírovanie pamäte, zapisovanie do pamäte atï.. \\
+WriteProcessMemory,
+CopyMemory.
 \item
 \textbf{WAPI5}
-Tieto API funkcie nastavujú kontext daného vlákna a umoòujú nastavi \textit{Instruction Pointer}, ktorı pri volaní spustí aj funkcionalitu malvéru.  
+Tieto API funkcie nastavujú kontext daného vlákna a umoòujú nastavi \textit{Instruction Pointer}, ktorı pri volaní spustí aj funkcionalitu malvéru. \\
+SetThreadContext 
 \item
 \textbf{WAPI6}
-Poslednou skupinou sú API, ktoré spúšajú pozastavené vlákno alebo ukonèi funkcionalitu aktuálneho vlákna.
+Poslednou skupinou sú API, ktoré spúšajú pozastavené vlákno alebo ukonèi funkcionalitu aktuálneho vlákna.\\
+ResumeThread,
+ExitThread.
 \end{itemize}
 
 Algoritmus na detegovanie funguje na jednoduchom princípe. Podozrivı proces získa prístup do beiaceho vlákna legitímneho procesu. Vo vlákne daného procesu malvér alokuje virtuálnu pamä èím následne umoní do tejto pamäte zapísa svoj škodlivı kód. Poèas tıchto vıkonov operácií malvér volá jednotlivé API. Pri správnom odhade postupnosti volanıch API, je algoritmus schopnı vyhodnoti v reálnom èase èi v zariadení existuje hrozba v podobe malvéru a informova o tom uivate¾a.
+
+\subsection{Koneènı stavovı automat}
+
+Koneènı automat je teoretickı vıpoètovı model pouívanı v informatike na štúdium rôznych formálych jazykoch. Popisuje ve¾mi jednoduchı poèítaè, ktorı môe by v jednom z nieko¾kıch stavov, medzi ktorımi prechádza na základe symbolov, ktoré èíta zo vstupu. Mnoina stavov je koneèná , koneènı automat nemá iadnu ïalšiu pamä, okrem informácie o aktuálnom stave. V informatike sa rozlišuje okrem základného deterministického èi nedeterministického automatu tie Mealyho a Moorov automat.
+
+Koneènı automat je definovanı ako usporiadaná pätica (S, $\Sigma$ , $\sigma$, s, F) kde:\\
+S je koneèná neprázdna mnoina stavov. \\
+$\Sigma$ je koneèná neprázdna mnoina vstupnıch symbolov, nazıvaná abeceda.\\
+$\sigma$ je prechodová funkcia respektíve prechodová tabu¾ka popisujúca prechod medzi jednotlivımi stavmi.\\
+s je poèatoèná stav patriaci do mnoiny stavov S.\\
+F je mnoina finálych akceptujúcich stavov.\\
+
+Na zaèiatku sa automat nachádza v definovanom poèiatoènom stave. Ïalej v kadom kroku preèíta jeden symbol zo vstupu a prejde do stavu, ktorı je danı hodnotou, ktorá v prechodovej tabu¾ke zodpovedá aktuálnemu stavu a preèítanému symbolu. Potom pokraèuje èítaním ïalšieho symbolu zo vstupu, ïalším prechodom pod¾a prechodovej tabu¾ky atï.
+
+Pod¾a toho, èi automat skonèí po preèítaní vstupe v stave, ktorı patrí do mnoiny prijímajúcich stavov, platí, e automat buï danı vstup prijal, alebo neprijal. Mnoina všetkıch reazcov, ktoré danı automat príjme, tvorí regulárny jazyk.
+
+V našom prípade abecedu tvorí mnoina nami vybranıch API windows funkcií, ktoré by potenciálne mal najèastejšie vyuíva malvér vyuívajúci techniku \textit{Process Hollowing} na ukrytie svojej èinnosti. 
+
+\subsection{Matica koneèného stavového automatu}
+Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového automatu. tieto prechody sú definované ako volania vybranıch API, ktoré posúvajú automat cez jednotlivé stavy pod¾a toho v akom stave je aktuálne automat a do akého nového stavu sa automat dostane. Koneèná mnoina stavov je reprezentovaná stavmi {"štart","vytvorenie vlákna", "alokácia pamäte", "kopírovanie malvéru", "nastavenie IP", "spustenie vlákna" }. Poèiatoènı stav automatu je \textbf{štart} a koneènı stav je \textbf{spustenie vlákna}, ktorı oznamuje existenciu malvéru v zariadení.
+
+\begin{table}[!htbp]
+	\begin{center}
+		\begin{tabular}{p{5cm}|c|c|c|c|c|c|c}
+			& \multicolumn{7}{c}%
+			{\textbf{Prechodové stavy}}\\ \hline
+			\textbf{Volané API funkcie} &\begin{sideways} Štart \end{sideways} &\begin{sideways} Vytvorenie procesu/ Získanie prístupu do procesu \end{sideways} &\begin{sideways} Odmapovanie pamäte existujúceho procesu \end{sideways} &\begin{sideways} Alokácia virtuálnej pamäte \end{sideways} & \begin{sideways} Kopírovanie malvéru do alokovanej pamäte \end{sideways} & \begin{sideways} Nastavenie IP na spustenie malvéru \end{sideways} & \begin{sideways} Spustenie vlákna/ Spustenie pozastaveného procesu \end{sideways}  \\ \hline
+			Skratky stavov & S0 & S1 & S2 & S3 & S4 & S5 & S6 \\ \hline
+			CreateThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			CreateRemoteThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			CreateRemoteThreadEx & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			CreateProcessA & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			CreateProcessW & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			SwitchToThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			OpenThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			SuspendThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
+			NtUnmapViewOfSection & S0 & S2 & S2 & S3 & S4 & S5 & S6 \\ \hline
+			VirtualAlloc & S0 & S1 & S3 & S3 & S4 & S5 & S6 \\ \hline
+			VirtualAllocEx & S0 & S1 & S3 & S3 & S4 & S5 & S6 \\ \hline
+			CopyMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
+			WriteProcessMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
+			ResumeThread & S0 & S1 & S2 & S3 & S4 & S6 & S6 \\ \hline
+			ExitThread & S0 & S1 & S2 & S3 & S4 & S6 & S6 \\ \hline
+			SetThreadPriority & S0 & S1 & S2 & S3 & S5 & S5 & S6 \\ \hline
+			
+		\end{tabular}
+		\caption{Matica prechodov medzi stavmi pri volaniach API.}
+		\label{maticaPrechodov}
+	\end{center}
+\end{table}
 
 \section{Implementácia}
 Struènı úvod do implementácie, programovací jazyk, vıvojové prostredie + jednoduchı diagram fungovania celého systému.\\
@@ -331,7 +382,8 @@ switch (ul_reason_for_call)
 \end{lstlisting}
 
 \subsection{Detours}
-\textit{Detours} je softvér urèenı na monitorovanie a inštruovanie API volaní v systéme Windows. Tento softvér podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Je k dispozícii na základe \textit{Open source} licencie a je vo¾ne dostupnı pre komunitu.
+\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Je k dispozícii na základe \textit{Open source} licencie a je vo¾ne dostupnı pre komunitu.
+Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza pokyny cie¾ovej funkcie skokom na funkciu zadanú pouívate¾om. Kód cie¾ovej funkcie je modifikovanı v pamäti, nie na disku, èo umoòuje zachytávanie binárnych funkcií. \cite{detours} Po naèítaní do procesu môe kninica DLL obís akúko¾vek funkciu v procese, èi u v aplikácii alebo v systémovıch kniniciach, ako sú napríklad rozhrania Windows API.
 
 \subsection{Mutex}
 Mutex je synchronizaènı objekt, ktorı slúi na signalizáciu pouívania nejakého objektu v procesnom vlákne. Mutex slúi na koordináciu viacerıch aplikácií (dvoch vlákien), ktoré vyadujú prístup k rovnakému objektu súèastne. Napríklad aby sa zabránilo zápisu dvoch vlákien súèastne do zdie¾aného objektu alebo pamäti. Take kadá aplikácia alebo vlákno èaká na uvo¾nonenie mutexu, ktoré signalizuje, e daná pamä nieje vyuívaná a môe sa do nej bezpeène zapisova bez toho aby došlo zápisu dvoch aplikácii súèastne. V tejto aplikácii mutex slúi na zabránenie zapisovaniu záznamov do súboru modulom na zber dát a èítaním záznamov z toho istého súboru detegènou aplikáciou súèastne.
@@ -340,56 +392,6 @@ HANDLE mutexOnThreadSafe;
 mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
 
 \end{lstlisting}
-
-\subsection{Koneènı stavovı automat}
-
-Koneènı automat je teoretickı vıpoètovı model pouívanı v informatike na štúdium rôznych formálych jazykoch. Popisuje ve¾mi jednoduchı poèítaè, ktorı môe by v jednom z nieko¾kıch stavov, medzi ktorımi prechádza na základe symbolov, ktoré èíta zo vstupu. Mnoina stavov je koneèná , koneènı automat nemá iadnu ïalšiu pamä, okrem informácie o aktuálnom stave. V informatike sa rozlišuje okrem základného deterministického èi nedeterministického automatu tie Mealyho a Moorov automat.
-
-Koneènı automat je definovanı ako usporiadaná pätica (S, $\Sigma$ , $\sigma$, s, F) kde:\\
-S je koneèná neprázdna mnoina stavov. \\
-$\Sigma$ je koneèná neprázdna mnoina vstupnıch symbolov, nazıvaná abeceda.\\
-$\sigma$ je prechodová funkcia respektíve prechodová tabu¾ka popisujúca prechod medzi jednotlivımi stavmi.\\
-s je poèatoèná stav patriaci do mnoiny stavov S.\\
-F je mnoina finálych akceptujúcich stavov.\\
-
-Na zaèiatku sa automat nachádza v definovanom poèiatoènom stave. Ïalej v kadom kroku preèíta jeden symbol zo vstupu a prejde do stavu, ktorı je danı hodnotou, ktorá v prechodovej tabu¾ke zodpovedá aktuálnemu stavu a preèítanému symbolu. Potom pokraèuje èítaním ïalšieho symbolu zo vstupu, ïalším prechodom pod¾a prechodovej tabu¾ky atï.
-
-Pod¾a toho, èi automat skonèí po preèítaní vstupe v stave, ktorı patrí do mnoiny prijímajúcich stavov, platí, e automat buï danı vstup prijal, alebo neprijal. Mnoina všetkıch reazcov, ktoré danı automat príjme, tvorí regulárny jazyk.
-
-V našom prípade abecedu tvorí mnoina nami vybranıch API windows funkcií, ktoré by potenciálne mal najèastejšie vyuíva malvér vyuívajúci techniku \textit{Process Hollowing} na ukrytie svojej èinnosti. 
-
-\subsection{Matica koneèného stavového automatu}
-Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového automatu. tieto prechody sú definované ako volania vybranıch API, ktoré posúvajú automat cez jednotlivé stavy pod¾a toho v akom stave je aktuálne automat a do akého nového stavu sa automat dostane. Koneèná mnoina stavov je reprezentovaná stavmi {"štart","vytvorenie vlákna", "alokácia pamäte", "kopírovanie malvéru", "nastavenie IP", "spustenie vlákna" }. Poèiatoènı stav automatu je \textbf{štart} a koneènı stav je \textbf{spustenie vlákna}, ktorı oznamuje existenciu malvéru v zariadení.
-
-\begin{table}[!htbp]
-	\begin{center}
-		\begin{tabular}{p{5cm}|c|c|c|c|c|c|c}
-			& \multicolumn{7}{c}%
-			{\textbf{Prechodové stavy}}\\ \hline
-			\textbf{Volané API funkcie} &\begin{sideways} Štart \end{sideways} &\begin{sideways} Vytvorenie procesu/ Získanie prístupu do procesu \end{sideways} &\begin{sideways} Odmapovanie pamäte existujúceho procesu \end{sideways} &\begin{sideways} Alokácia virtuálnej pamäte \end{sideways} & \begin{sideways} Kopírovanie malvéru do alokovanej pamäte \end{sideways} & \begin{sideways} Nastavenie IP na spustenie malvéru \end{sideways} & \begin{sideways} Spustenie vlákna/ Spustenie pozastaveného procesu \end{sideways}  \\ \hline
-			Skratky stavov & S0 & S1 & S2 & S3 & S4 & S5 & S6 \\ \hline
-			CreateThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			CreateRemoteThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			CreateRemoteThreadEx & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			CreateProcessA & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			CreateProcessW & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			SwitchToThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			OpenThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			SuspendThread & S1 & S1 & S1 & S1 & S1 & S1 & S1 \\ \hline
-			NtUnmapViewOfSection & S0 & S2 & S2 & S3 & S4 & S5 & S6 \\ \hline
-			VirtualAlloc & S0 & S1 & S3 & S3 & S4 & S5 & S6 \\ \hline
-			VirtualAllocEx & S0 & S1 & S3 & S3 & S4 & S5 & S6 \\ \hline
-			CopyMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
-			WriteProcessMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
-			ResumeThread & S0 & S1 & S2 & S3 & S4 & S6 & S6 \\ \hline
-			ExitThread & S0 & S1 & S2 & S3 & S4 & S6 & S6 \\ \hline
-			SetThreadPriority & S0 & S1 & S2 & S3 & S5 & S5 & S6 \\ \hline
-			
-		\end{tabular}
-		\caption{Matica prechodov medzi stavmi pri volaniach API.}
-		\label{maticaPrechodov}
-	\end{center}
-\end{table}
 
 \section{Vısledky}
 Struènı úvod do testovania nami vytvoreného riešenia/riešení. Zoznam experimentov.

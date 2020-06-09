@@ -28,6 +28,7 @@
 \@writefile{lot}{\thispagestyle {empty}}
 \@writefile{toc}{\contentsline {section}{\'{U}vod}{1}{section*.2}\protected@file@percent }
 \citation{malvare}
+\citation{malicious}
 \citation{endgame}
 \citation{endgame}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Malv\'er}{2}{section.3}\protected@file@percent }
@@ -41,10 +42,14 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2}S\'u\v casn\'y malv\'er}{4}{subsection.5}\protected@file@percent }
 \citation{emotet2}
 \citation{emotet}
-\citation{zeuS3}
+\citation{zeus2}
+\citation{dridex}
 \citation{mirai}
 \citation{osiris}
-\citation{osiriS3}
+\citation{osiris2}
+\citation{Loki}
+\citation{hollowing}
+\citation{winapi}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Techniky ukr\'yvania \v cinnosti vyu\v z\IeC {\'\i }van\'e s\'u\v casn\'ym malv\'erom.\relax }}{8}{table.caption.6}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{modulyVlastnosti}{{1}{8}{Techniky ukrývania èinnosti využívané súèasným malvérom.\relax }{table.caption.6}{}}
@@ -61,27 +66,28 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4}Algoritmus na detekciu}{13}{section.14}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Kone\v cn\'y stavov\'y automat.\relax }}{14}{figure.caption.15}\protected@file@percent }
 \newlabel{Automat}{{2}{14}{Koneèný stavový automat.\relax }{figure.caption.15}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Implement\'acia}{15}{section.16}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Moduly aplik\'acie\relax }}{15}{figure.caption.17}\protected@file@percent }
-\newlabel{UMLDiagram}{{3}{15}{Moduly aplikácie\relax }{figure.caption.17}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Algoritmus}{16}{subsection.18}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces UML diagram vyv\'yjan\'eho algoritmu.\relax }}{16}{figure.caption.19}\protected@file@percent }
-\newlabel{UMLDiagram}{{4}{16}{UML diagram vyvýjaného algoritmu.\relax }{figure.caption.19}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Modul na zber d\'at}{17}{subsection.20}\protected@file@percent }
-\newlabel{vypis1}{{1}{17}{Implementácia funkcie writeFunctionToFile}{lstlisting.21}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Implement\'acia funkcie writeFunctionToFile.}{17}{lstlisting.21}\protected@file@percent }
-\newlabel{vypiS3}{{2}{18}{Definícia API volania SetThreadContext}{lstlisting.41}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Defin\IeC {\'\i }cia API volania SetThreadContext.}{18}{lstlisting.41}\protected@file@percent }
-\newlabel{vypiS4}{{3}{18}{Nahradenie pôvodnej funkcie SetThreadContext}{lstlisting.49}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}Nahradenie p\^ovodnej funkcie SetThreadContext.}{18}{lstlisting.49}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Detours}{19}{subsection.65}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Mutex}{19}{subsection.66}\protected@file@percent }
-\newlabel{vypiS5}{{4}{19}{Inicializácia mutexu}{lstlisting.67}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}Inicializ\'acia mutexu.}{19}{lstlisting.67}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Kone\v cn\'y stavov\'y automat}{19}{subsection.71}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Matica kone\v cn\'eho stavov\'eho automatu}{20}{subsection.72}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Matica prechodov medzi stavmi pri volaniach API.\relax }}{21}{table.caption.73}\protected@file@percent }
-\newlabel{maticaPrechodov}{{2}{21}{Matica prechodov medzi stavmi pri volaniach API.\relax }{table.caption.73}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Kone\v cn\'y stavov\'y automat}{15}{subsection.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Matica kone\v cn\'eho stavov\'eho automatu}{15}{subsection.17}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Matica prechodov medzi stavmi pri volaniach API.\relax }}{16}{table.caption.18}\protected@file@percent }
+\newlabel{maticaPrechodov}{{2}{16}{Matica prechodov medzi stavmi pri volaniach API.\relax }{table.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Implement\'acia}{17}{section.19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Moduly aplik\'acie\relax }}{17}{figure.caption.20}\protected@file@percent }
+\newlabel{UMLDiagram}{{3}{17}{Moduly aplikácie\relax }{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Algoritmus}{18}{subsection.21}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces UML diagram vyv\'yjan\'eho algoritmu.\relax }}{18}{figure.caption.22}\protected@file@percent }
+\newlabel{UMLDiagram}{{4}{18}{UML diagram vyvýjaného algoritmu.\relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Modul na zber d\'at}{19}{subsection.23}\protected@file@percent }
+\newlabel{vypis1}{{1}{19}{Implementácia funkcie writeFunctionToFile}{lstlisting.24}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Implement\'acia funkcie writeFunctionToFile.}{19}{lstlisting.24}\protected@file@percent }
+\newlabel{vypiS3}{{2}{20}{Definícia API volania SetThreadContext}{lstlisting.44}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Defin\IeC {\'\i }cia API volania SetThreadContext.}{20}{lstlisting.44}\protected@file@percent }
+\newlabel{vypiS4}{{3}{20}{Nahradenie pôvodnej funkcie SetThreadContext}{lstlisting.52}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}Nahradenie p\^ovodnej funkcie SetThreadContext.}{20}{lstlisting.52}\protected@file@percent }
+\citation{detours}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Detours}{21}{subsection.68}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Mutex}{21}{subsection.69}\protected@file@percent }
+\newlabel{vypiS5}{{4}{21}{Inicializácia mutexu}{lstlisting.70}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}Inicializ\'acia mutexu.}{21}{lstlisting.70}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {6}V\'ysledky}{22}{section.74}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Experiment A}{22}{subsection.75}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Experiment B}{22}{subsection.76}\protected@file@percent }
@@ -89,7 +95,21 @@
 \@writefile{toc}{\contentsline {section}{Z\'{a}ver}{23}{section*.78}\protected@file@percent }
 \bibstyle{FEIstyle}
 \bibdata{includes/bibliography}
-\@writefile{toc}{\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{I}{section*.79}\protected@file@percent }
+\bibcite{emotet2}{1}
+\bibcite{mirai}{2}
+\bibcite{endgame}{3}
+\bibcite{Loki}{4}
+\bibcite{malvare}{5}
+\bibcite{zeus2}{6}
+\bibcite{sinobiki}{7}
+\bibcite{osiris}{8}
+\bibcite{emotet}{9}
+\bibcite{winapi}{10}
+\bibcite{dridex}{11}
+\bibcite{hollowing}{12}
+\bibcite{malicious}{13}
+\bibcite{osiris2}{14}
+\@writefile{toc}{\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{24}{section*.79}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{Pr\'{i}lohy}{I}{section*.80}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{section.82}\protected@file@percent }
 \@writefile{pri}{\contentsline {priloh}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{priloh.83}\protected@file@percent }

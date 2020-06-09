@@ -1,6 +1,14 @@
 %  priklad uvadzania literatury pre FEIstyle.bst
 %  naformatovane vstupy: book
 
+@BOOK{malicious,
+  TITLE = {PRACTICAL MALWARE ANALYSIS},
+  SUBTITLE = {The Hands-On Guide to Dissecting Malicious Software},
+  AUTHOR = {Sikorski M, Honig A},
+  YEAR = {2012},
+  PUBLISHER = {no starch press},
+}
+
 @online{malvare,
     author = "Eset",
     title = "Malver",
@@ -11,7 +19,7 @@
 
 @online{sinobiki,
     author = "McAfee Labs",
-    title = "McAfee ATR Analyzes Sodinokibi aka REvil Ransomware-as-a-Service & What The Code Tells Us",
+    title = "McAfee ATR Analyzes Sodinokibi aka REvil Ransomware-as-a-Service \& What The Code Tells Us",
     url  = "https://www.mcafee.com/blogs/other-blogs/mcafee-labs/mcafee-atr-analyzes-sodinokibi-aka-revil-ransomware-as-a-service-what-the-code-tells-us/",
     addendum = "(accessed: 01.09.2016)",
     keywords = "sinobiki"
@@ -39,12 +47,6 @@
     author = "MalwareBytes",
     title = "Emotet",
     url  = "https://www.malwarebytes.com/emotet/"
-}
-
-@misc{dridex,
-    author = "kaspersky",
-    title = "Zeus Virus",
-    url  = "https://usa.kaspersky.com/resource-center/threats/zeus-virus"
 }
 
 @misc{mirai,
@@ -81,4 +83,54 @@
     author = "monnappa22",
     title = "HollowFind",
     url  = "https://github.com/monnappa22/HollowFind"
+}
+
+@misc{{detours,
+    author = "Microsoft",
+    title = "Detours",
+    url  = "https://github.com/microsoft/Detours"
+}
+
+@online{winapi,
+    author = "Microsoft",
+    title = "Processthreadsapi.h header - Win32 apps",
+    url  = "https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/",
+    addendum = "(accessed: 01.09.2016)",
+    keywords = "api"
+}
+
+@article{dridex,
+    author = "Charlie Osborne",
+    title = "New Dridex malware strain avoids antivirus software detection",
+    journal = "Zero Day ",
+    volume = "",
+    number = "",
+    pages = "",
+    year = "2019",
+    DOI = "https://www.zdnet.com/article/new-dridex-malware-strain-avoids-antivirus-software-detection/",
+    keywords = "dridex"
+}
+
+@article{Loki,
+    author = "Eranhimonyshakedreiner",
+    title = "Loki Number Seven - Loki Malware Keeps Stealing Your Credentials",
+    journal = "CYBERARK ",
+    volume = "",
+    number = "",
+    pages = "",
+    year = "2018",
+    DOI = "https://www.cyberark.com/resources/threat-research-blog/loki-number-seven-loki-malware-keeps-stealing-your-credentials/",
+    keywords = "Loki"
+}
+
+@article{hollowing,
+    author = "ELI SALEM",
+    title = "ASTAROTH MALWARE USES LEGITIMATE OS AND ANTIVIRUS PROCESSES TO STEAL PASSWORDS AND PERSONAL DATA",
+    journal = "cybereason",
+    volume = "",
+    number = "",
+    pages = "",
+    year = "2019",
+    DOI = "https://www.cybereason.com/blog/information-stealing-malware-targeting-brazil-full-research/",
+    keywords = "hollowing"
 }
