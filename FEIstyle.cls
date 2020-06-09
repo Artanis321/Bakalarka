@@ -120,6 +120,7 @@
 \usepackage{changepage}
 \usepackage{scrextend}
 \usepackage{xstring}
+\usepackage{caption,setspace}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}

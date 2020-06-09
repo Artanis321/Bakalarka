@@ -1,2 +1,1 @@
-\contentsline {priloh}{\numberline {A} ?trukt\'ura elektronick\'eho nosi?a}{II}{priloh.100}%
-\contentsline {priloh}{\numberline {B} Algoritmus}{III}{priloh.103}%
+\contentsline {priloh}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{priloh.83}%
