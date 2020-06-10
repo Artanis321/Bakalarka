@@ -98,6 +98,7 @@
 \ExecuteOptions{dp}
 \LoadClass[\myset]{\parentclass}
 
+\usepackage[hyphens,spaces,obeyspaces]{url}
 \usepackage{times}
 \usepackage[overload]{textcase}
 \usepackage{chngcntr}  
