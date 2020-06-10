@@ -127,25 +127,26 @@ Celkovı preh¾ad pouítıch techník v súèasnım vzorkách škodlivého kódu môeme vid
 \section{Process hollowing}
 \noindent
 
-Zvolenı spôsob ukrytia malvéru, ktorım sa bude táto práca zaobera je \textit{Process Hollowing, Hollow process}. Nasledujúca kapitola sa venuje spôsobu akım sa malvér môe ukry. Obsahuje potenciálne API funkcie, ktoré môe \textit{Process Hollowing} vyuíva na maskovanie svojho pôsobenia v systéme.
+Zvolenı spôsob ukrytia malvéru, ktorım sme sa v tejto práci zaoberali je \textit{process hollowing}. Nasledujúca kapitola sa venuje spôsobu akım sa malvér môe ukry pomocou spomínanej techniky. Taktie obsahuje potenciálne API funkcie pomocou ktorıch môe by technika \textit{process hollowing} implementovaná.
 
-\subsection{Princíp}
-\noindent
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=12cm]{img/Diagram.jpg}
 	\caption{ Ukáka zmien adresného priestoru poèas Hollowingu.}
 	\label{vzhladobr}
 \end{figure}
-Princíp ukrytia malvéru akı vyuíva \textit{Process Hollowing} je podobnı spôsobu ukrytia malvéru, ktorı vyuíva \textit{DLL Injection}. Princím spoèíva v ukrytí malvéru do existujúceho beiaceho procesu, ktorı je v systéme Windows èasto vyuívanı a spustenie malvéru z tohto procesu by spôsobovalo najmenšie podozrenie.\cite{hollowing} Takımto demonštratívnym procesom môe by \textit{svchost.exe}, ktorı je v systéme Windows èasto vyuívanı. \textit{Process Hollowing} pozastaví beiace vlákno procesu \textit{svchost.exe} a následne vytvorí vlákno, ktoré alokuje dostatoènú ve¾kú práznu virtuálnu pamä pre malvér v procese. Po alokovaní virtuálneho adresného priestoru v pamäti procesu do alokovanej èasti nakopíruje škodlivı kód a následne nastaví kedy sa danı škodlivı kód má spusti. Malvér sa môe v tomto prípade spusti po spustení pozastaveného vlákna alebo pri volaní nejakej konkrétnej funkcie. Po nastavení spúšaèa malvéru sa \textit{Process Hollowing} spustí pozastavené vlákno. Malvér môe pri následnom volaní funkcie, ktorá bola nastavená ako spúšaè škodlivého kódu spusti svoju èinnos pod legitimnım procesom.  
+
+\subsection{Princíp}
+
+Princíp ukrytia malvéru, ktorı vyuíva \textit{process hollowing} je do istej miery podobnı technike \textit{DLL Injection}. Hlavnı cie¾ metódy spoèíva v ukrytí škodlivého kódu do beného procesu, ktorı v systéme Windows spôsobuje èo najmenšie podozrenie \cite{hollowing}. Takımto procesom môe by napríklad \textit{svchost.exe}, ktorı je v systéme bene spustenı aj vo viacerıch inštanciách. \textit{Process hollowing} vytvorí pozastavenı proces \textit{svchost.exe} (prípadne získa prístup u k beiacemu procesu) a odmapuje jeho pamä. Po odmapovaní alokuje dostatok miesta vo virtuálnom adresnom priestore procesu. Následne, po alokácii nakopíruje škodlivı kód a nastaví novı vstupnı bod programu. Po ukonèení tıchto krokov obnoví pozastavenı proces. Vısledkom je navonok beiaci štandardnı proces \textit{svchost.exe}, ktorı ale vo vnútri vykonáva škodlivú èinnos. Schematické znázornenie priebehu tejto techniky môeme vidie na obrázku è.\ref{vzhladobr}.
 
 \subsection{Vyuívané API funkcie}
-\textit{Process Hollowing} vyuíva na svoje fungovanie rôzne API funkcie a ich volania. Nasledujúce nami vybrané API funkcie\cite{winapi}, môe \textit{Process Hollowing} najpravdepodobnejšie vyuíva na svoje fungovanie k ukrytiu škodlivého kódu do nejakého beiaceho procesu. 
+\textit{Process hollowing} vyuíva na svoje fungovanie rôzne štandardné API volania. Nasledujúce nami vybrané API funkcie\cite{winapi}, môu by vyuité pri technike \textit{rocess hollowing}:
 \begin{itemize}
 \item
 \textbf{CreateThread}
 \\
-Vytvorí vlákno na vykonanie procesu vo virtuálnom adresovom priestore volajúceho procesu.
+Vytvorí nové vlákno vo virtuálnom adresnom priestore procesu, ktorı danú funkciu zavolal.
 \item
 \textbf{CreateRemoteThread}
 \\
@@ -153,63 +154,52 @@ Vytvorí vlákno, ktoré beí vo virtuálnom adresovom priestore iného procesu.
 \item
 \textbf{CreateRemoteThreadEx}
 \\
-Funkcia vytvára vlákno, ktoré sa spúša vo virtuálnom adresovom priestore iného procesu a prípadne špecifikujte rozšírené atribúty. Napríklad nekoneènos skupiny procesorov.
+Funkcia vytvára vlákno, ktoré sa spúša vo virtuálnom adresovom priestore iného procesu a prípadne špecifikujte rozšírené atribúty, ako napr. nastavenie na ktorom procesore bude dané vlákno bea.
+\\
+\\
 \item
 \textbf{ResumeThread}
 \\
-Funkcia kontroluje poèet pozastavení vlánkien. Ak je poèet pozastavení väèší ako nula tak vlákno ostáva pozastavené. V opaènom prípade ak poèet pozastavení sa rovná nule, spúša pozastavené vlákno.
+Funkcia dekrementuje hodnotu, ktorá špecifikuje, ko¾krát bolo vlákno pozastavané. V prípade ak sa hodnota dostane na nulu, vlakno je obnovené. V opaènom prípade ostáva pozastavené. 
 \item
 \textbf{SuspendThread}
 \\
-Po zavolaní sa vykonávanie zadaného vlákna pozastaví a zvıši sa poèet pozastavení vlákna. Pozastavenie vlákna spôsobí, e vlákno zastaví èinnos aplikácie.
+Pozastavenie vykonávanie èinnosti špecifikovaného vlákna.
 \item
 \textbf{SwitchToThread}
 \\
-Spôsobí, e volajúce vlákno poskytne vykonanie inému vláknu, ktoré je pripravené na spustenie v aktuálnom procesore. Operaènı systém vyberie ïalšie vlákno, ktoré sa má vykona.
+Spôsobuje prepnutie aktuálneho vlákna, na vlákno, ktoré je pripravené bea na procesore. Tento vıber vykonáva operaènı systém.
 \item
 \textbf{CreateProcessA}
-\\
-Vytvorí novı proces a jeho primárne vlákno. Novı proces beí v bezpeènostnom kontexte volajúceho procesu.
-\item
-\textbf{CreateProcessW}
-\\
-Vytvorí novı proces a jeho primárne vlákno. Novı proces beí v bezpeènostnom kontexte volajúceho procesu.
+Vytvorí novı proces a jeho hlavné vlákno. Novı proces beí s rovnakımi oprávneniami ako proces, ktorı danú funkciu zavolal.
 \item
 \textbf{VirtuallAlloc}
 \\
-Rezervuje, potvrdzuje alebo mení stav oblasti stránok vo virtuálnom adresovom priestore volaného procesu. Pamä pridelená touto funkciou sa automaticky inicializuje na nulu.
+Alokuje alebo mení oprávnenia stránok vo virtuálnom adresom priestore procesu, ktorı danú funkciu zavolal. Alokovaná pamä je automaticky inicializovaná na nulu.
 \item
 \textbf{VirtualAllocEx}
 \\
-Vyhradzuje, potvrdzuje alebo mení stav oblasti pamäte v rámci virtuálneho adresového priestoru špecifikovaného procesu. Funkcia inicializuje pamä, ktorú nastaví na nulu.
-\item
-\textbf{VirtuallAlloc2}
-\\
-Vyhradzuje, potvrdzuje alebo mení stav oblasti pamäte v rámci virtuálneho adresového priestoru špecifikovaného procesu. Funkcia inicializuje pamä, ktorú nastaví na nulu.
+Funguje rovnako ako \textit{VirtualAlloc}, s tım rozdielom, e alokuje pamä v rámci virtuálneho adresného priestoru iného procesu.
 \item
 \textbf{WriteProcessMemory}
 \\
-Zapisuje údaje do oblasti pamäte v zadanom procese. Celá oblas, do ktorej sa má zapísa, musí by prístupná inak operácia zlyhá.
+Zapisuje údaje do pamäti v zadanom procese. Celá oblas, do ktorej sa zapisuje, musí ma potrebné oprávnenia na zápis.
 \item
 \textbf{ReadProcessMemory}
 \\
-Kopíruje údaje v zadanom rozsahu adries z adresného priestoru zadaného procesu do vyrovnávacej pamäte aktuálneho procesu.
-\item
-\textbf{CopyMemory}
-\\
-Kopíruje pamä do vyhradenej alokovanej pamäti. Celá oblas pamäte, do ktorej sa má zapísa, musí by prístupná.
+Èíta údaje z virtuálneho adresného priestoru špecifikovaného procesu.
 \item
 \textbf{SetThreadContext}
 \\
-Nastavuje kontext pre aktuálne vlákno.
+Nastavuje kontext (t.j. obsah registrov) pre špecifikované vlákno.
 \item
 \textbf{ExitThread}
 \\
-Keï sa táto funkcia volá, poradovník udalostí aktuálneho vlákna sa zruší, všetky èakajúce vstupno-vıstupné udalosti iniciované vláknom sa zrušia a vlákno ukonèí svoju èinnos. 
+Keï sa táto funkcia zavolá, všetky udalosti aktuálneho vlákna sa zrušia. Podobne všetky èakajúce vstupno-vıstupné udalosti iniciované vláknom sa zrušené a vlákno ukonèí svoju èinnos. 
 \item
 \textbf{NtUnmapViewOfSection}
 \\
-Odmapuje pamä vybraného beiaceho procesu.
+Odmapuje pamä vybraného procesu.
 \\
 \end{itemize}
 \section{Existujúce riešenia na detekciu}\label{existingsolutions}
