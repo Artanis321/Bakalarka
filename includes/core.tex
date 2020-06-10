@@ -194,7 +194,7 @@ Keï sa táto funkcia volá, poradovník udalostí aktuálneho vlákna sa zruší, všetky
 Odmapuje pamä vybraného beiaceho procesu.
 \\
 \end{itemize}
-\section{Existujúce riešenia na detekciu}
+\section{Existujúce riešenia na detekciu}\label{existingsolutions}
 \noindent
 Doposia¾ známe existujúce riešenia na detekciu techniky \textit{Process Hollowing} vyuívanej niektorımi malvérmy, sú urèené na forenznú analızu. Táto analıza prebieha u po infikovaní zariadenia malvérom a zistením, e sa škodlivı kód u v zariadení nachádza. Tieto riešenia neobsahujú spôsoby detekcie škodlivého kódu, ktoré by mohli odchyti malvér u pri infikovaní ¾ubovo¾ného zariadenia. 
 
@@ -301,7 +301,7 @@ Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového autom
 	\end{center}
 \end{table}
 
-\section{Implementácia}
+\section{Implementácia}\label{implementation}
 Struènı úvod do implementácie, programovací jazyk, vıvojové prostredie + jednoduchı diagram fungovania celého systému.\\
 \\
 Pre implementáciu riešenia sme zvolili programovanı jazyk C++, pretoe primárnym testovavím prostredím budú najèastejšie pouívané systémy Windows. Na simuláciu testovanie prostredia pouijeme \textbf{Virtual Box} v ktorom budeme simulova bené pouívanie systému.
@@ -393,7 +393,7 @@ mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
 
 \end{lstlisting}
 
-\section{Vısledky}
+\section{Vısledky}\label{results}
 Struènı úvod do testovania nami vytvoreného riešenia/riešení. Zoznam experimentov.
 Našu aplikáciu budeme testova vo \textit{Virtual Boxe}, na systéme Windows 10. Aplikáciu budeme testova na reálych vzorkách malvéru, ktoré vyuívajú \textit{Process Hollowing} na ukrytie svojej èinnosti. 
 \subsection{Experiment A}
