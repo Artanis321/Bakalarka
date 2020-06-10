@@ -6,87 +6,105 @@
 \vspace{20px}
 \subsection{Techniky ukrıvania èinnosti}
 \noindent 
-Malvér vo všeobecnosti patrí ku škodlivému kódu. Preto je nutné jeho beiace procesy utaji. Ak chce by malvér úspešnı v získavaní údajov alebo finanènıch prostriedkov, musí by jeho beh ukrytı pred potenciálnym antivírusom, prípadne forenznım ininierom ktorı je schopnı ho odhali. Za tımto úèelom sa vyuívajú rôzne techniky na ukrytie malvéru buï v pamäti poèítaèa, rôznych shell scriptoch alebo dynamickıch kniniciach, aby boli èo najmenej detegovate¾né. \cite{malicious}
+Malvér vo všeobecnosti patrí ku škodlivému kódu. Preto je nutné jeho beiace procesy utaji. Ak chce by malvér úspešnı v získavaní údajov alebo finanènıch prostriedkov, musí by jeho beh ukrytı pred potenciálnym antivírusom, prípadne forenznım ininierom ktorı je schopnı ho odhali. Za tımto úèelom sa vyuívajú rôzne techniky na ukrytie malvéru buï v pamäti poèítaèa, rôznych shell skriptoch alebo dynamickıch kniniciach, aby boli èo najmenej detegovate¾né. \cite{malicious}
 
 \begin{itemize}
 	\item 
 \textbf{DLL Injection / Reflective DLL Injection}
-\noindent \\ \textit{DLL Injection} je technika pouívaná na ukrytie funkcie na spustenie malvéru vo vnútri iného programu. Najastejšie sa na to vyuíva alokovaná pamä vyhradená pre beh infikovaného programu, kde sa funkcia na spustenie malvéru ukryje a pre antivírusové programy je ako detekovate¾ná. Po nakopírovaní DLL funkcie do alokovanej pamäte iného programu môe by následne vyvolané spustenie infikovaného programu a spolu s ním aj spustenie malvéru. Hlavnım cie¾om \textit{DLL Injection} je škodlivı kód ukry do oficiálneho alebo overeného programu, kde je malvér ukrytı pred antivírovım softvérom, odkia¾ môe by následne spustenı. \cite{endgame}
+\noindent \\ \textit{DLL Injection} je technika, pri ktorej malvér zapíše cestu ku škodlivému DLL súboru do virtuálneho adresného priestoru legitímneho procesu a následne zabezpeèí aby danı proces túto dynamickú kninicu naèítal. Postup je nasledovnı: 
+
+\begin{itemize}
+	\item Škodlivı kód získa prístup ku legitímnemu procesu.
+	\item V rámci legitímneho procesu alokuje priestor dostatoène ve¾kı na zapísanie cesty ku škodlivému DLL súboru.
+	\item Malvér zapíše cestu ku škodlivému DLL súboru do virtuálneho adresného priestoru legitímneho procesu.
+	\item Malvér na záver spustí vlákno v rámci legitímneho procesu, ktorého cie¾om je naèíta a spusti DLL súbor.
+\end{itemize}
+
+Hlavnım cie¾om \textit{DLL Injection} je škodlivı kód ukry do legitímneho procesu, kde je malvér ukrytı pred antivírovım softvérom, odkia¾ môe by následne spustenı \cite{endgame}.
 
 \item 
 \textbf{Proces Hollowing}
-\noindent \\ vyuíva rovnaké alebo podobné princípy ukrıvania škodlivého softvéru ako \textit{DLL Injection}. Cie¾om je schova škodlivı kód do existujúce programu z ktorého sa po spustení, spustí aj volanie škodlivého malvéru.  Oproti \textit{DLL Injection} ide ale ukrytie malvérového programu do iného programu. Malvér si pod¾a potreby alokuje virtuálnu pamä  v pamäti iného programu. Po spustení infikovaného programu malvér pozastaví vlákno v ktorom program beí, následne zmení obsah legitímneho súboru zmapovaním pamäte cie¾ového procesu.\cite{endgame} Po zmapovaní uvo¾ní všetku pamä programu a alokuje pamä pre malvér a zapíše kadú z èastí malvéru do cie¾ovej pamäte programu. Malvér nastaví kontext vo vlátkne tak aby ukazoval vstupnı bod na novú èas kódu, ktorú napísal. Na konci malvér obnoví pozastavené vlákno, aby sa proces dostal z pozastaveného stavu a nasledovnım spustením programu umoní získavanie údajov.
+\noindent \\ Vyuíva podobné princípy ukrıvania škodlivého softvéru ako \textit{DLL Injection}. Cie¾om je ukry škodlivı kód do existujúce procesu, z ktorého sa následne bude vykonáva\cite{endgame}. Princíp je podobnı ako pri technike \textit{DLL Injection}:
+\begin{itemize}
+	\item Malvér spustí novı pozastavenı legitímny proces, do ktorého sa plánuje ukry.
+	\item Škodlivı kód odmapuje pamä legitímneho procesu.
+	\item Do virtuálneho adresného priestoru legitímneho procesu nakopíruje svoj škodlivı kód.
+	\item Po dokonèení kopírovania nastaví novı vstupnı bod procesu a obnoví pozastavenı proces.
+\end{itemize}
 
+Ako môeme vidie, hlavnı rozdiel spoèíva najmä v odmapovaní existujúceho kódu. V prípade \textit{Process Hollowing} techniky bude v rámci neškodného procesu bea vıhradne iba škodlivı kód, na rozdiel od \textit{DLL injection}, kde v rámci jedného procesu sa nachádza škodlivı kód spolu s pôvodnım. Vısledkom môe by napr. spustenı benı proces \textit{svchost.exe}, ktorı ale v skutoènosti vykonáva škodlivú aktivitu.
 \item 
 \textbf{Thread Execution Hijacking }
 \noindent \\
-Táto technika ukrytia malvéru spoèíva v napojení sa na u existujúce vlákno vyvolanı inım programom. Po získaní prístupu do vlákna malvér uvedie vlákno do pozastaveného reimu aby vykonal vloenie volania škodlivého malvéru do vlákna iného procesu. Malvér si alokuje virtuálnu pamä v programe a následne do tejto pamäte vloí škodlivı shell kód, ktorı obsahuje cestu k volaniu DLL so škodlivım malvérom.  Po vykonaní tıchto úkonov, spustí pozastavené vlákno programu. Nevıhodou takéhoto spustenia pozastaveného programu je, e môe spôsobi zlyhanie systému v rámci systémového volania. \cite{endgame} Preto aby sa tomu predišlo modernejší malvér proces ukonèí a vyvolá ho znovu s u modifikovanou zmenou na infikovanie.
+Pri tejto technike existujú urèité podobnosti s metódou \textit{Process Hollowing} a \textit{DLL injection} \cite{endgame}. Hlavnı princíp spoèíva v získaní prístupu u k existujúcemu vláknu legitímneho procesu, do ktorého chceme vloi škodlivı kód. Po získaní prístupu k vláknu, malvér dané vlákno pozastaví. Samotné injektovanie môe uskutoèni podobne ako pri \textit{DLL injection}, zapísaním cesty k DLL súboru a následnom naèítaní. Nevıhodou takéhoto spustenia pozastaveného programu je, e môe spôsobi pád systému v rámci systémového volania. Vıhodou ostáva, e technika nepotrebuje vytvori nové vlákno alebo proces a pouije u existujúce.
 
 \item 
 \textbf{Portable Executable Injection}
 \noindent \\ 
-Vıhodou tohto spôsobu ukrytia malvéru je vyuitie nakopírovania malvéru do u existujúceho beiaceho procesu pomocou shell skriptu\cite{endgame}, ktorı vyvolá spustenie škodlivého malvéru. Namiesto toho aby proces prepisoval cesty volaním  DLL, táto technika zapisuje obsah malvéru priamo do pamäte. Poèas doby zapisovania aby malvér nebol ¾ahko odhalenı vyuíva vnorené cykly, ktoré spoma¾ujú systém buï diagnostikou alebo volaním zbytoènıch funkcií a snaí sa zahlti systém a neumoni skorú diagnostiku malvéru. Keï malvér preformuluje všetky potrebné adresy, všetko, èo musí urobi, je odovzda jeho poèiatoènú adresu vláknu a necha spusti malvér.
+Vıhodou tohoto spôsobu ukrytia malvéru je vyuitie nakopírovania celého PE súboru do existujúceho procesu \cite{endgame}. Ako vıhodu môeme taktie povavaova, e malvér nepotrebuje uloi iadne súbory na disk ale len priamo prekopíruje dáta PE súboru do legitímneho procesu. Hlavnou nevıhodou je, e sa zmení bázová adresa procesu a z toho dôvodu je nutné prepoèíta nové adresy v legitímnom procese tak, aby bolo zabezpeèené korektné správanie novo vloeného PE súboru.
 
 \item 
 \textbf{Hook injection}
 \noindent \\
-Hook injection je technika pouívaná na zachytávanie volania funkcií. Malvér môe vyuíva hook injection funkcie na naèítanie škodlivého súboru v DLL pri spustení udalosti v konkrétnom vlákne. Malvér na to vyuíva volanie funkcie, ktorı obsahuje štyri parametre.\cite{endgame} Prvı je tip udalosti na, ktorı sa spustí škodlivı malvér napríklad na stlaèenie klávesnice alebo tlaèidla na myši. Druhı je ukazovate¾ na funkciu, ktorá sa ma po stlaèení daného tlaèidla vykona. Tretí je modul obsahujúci danú funkciu. Preto je pred volaním funkcie, vidie volania do LoadLibrary. Poslednı parameter je vlákno ktoré má vykona procedúru a hook injection. Pokia¾ je poslednı parameter prázdny alebo nastavenı na nulu tak danú procedúru vykonajú všetky beiace vlákna.  Malvér sa ale zameriava len na jedno vlákno, kvôli zníeniu detekcii svojej práce.
+Hookovanie je všeobecne technika pouívaná na zachytávanie API volaní. \textit{Hook injection} vyuíva túto techniku na naèítanie škodlivého DLL, pri zachytení urèitej udalosti v konkrétnom vlákne \cite{endgame}. Pomocou prislušného API volania vieme nainštalova hook na špecifickú udalos v systéme (napr. stlaèenie klávesy), pre konkrétne vlákno v systéme. Taktie vieme špecifikova smerník na funkciu, ktorá sa má zavola ak daná udalos nastane. V tejto funkcii následne vieme urèi e sa má naèíta napr. škodlivé DLL. Môeme si všimnú e väšèina techník sa samotné naèítanie kódu vyuíva metódu naèítania škodlivého DLL do regulérneho procesu a hlavné rozdiely spoèívajú najmä v riešení ako donúni cudzí proces túto funkcionalitu vyvola.
 
 \item 
 \textbf{APC Injection}
 \noindent \\
-Škodlivı softvér môe vyuíva vıhody asynchrónnych volaní procedúr (APC), aby prinútil ïalšie vlákno spusti svoj vlastnı kód jeho pripojením do fronty cie¾ového vlákna.\cite{endgame} Kadé vlákno má rad asynchrónnych volaní procedúr, ktoré èakajú na vykonanie, keï cie¾ové vlákno vstupuje do zmenite¾ného stavu. Vlákno vstúpi do vıstraného stavu. Malvér zvyèajne h¾adá akéko¾vek vlákno, ktoré je v zmenite¾nom stave, aby zaradil APC do vlákna. Èo umoòuje jeho následnım spustením infikova zariadenie malvérom.
+Škodlivı softvér môe vyuíva vıhody tzv. \textit{Asynchronous Procedure Calls} (APC), aby prinútil iné vlákno spusti svoj vlastnı kód \cite{endgame}. Túto funkcionalitu vie dosiahnú tak, e vloí dané vlákno do APC fronty. Kadé vlákno má vlastnú APC frontu, z ktorej vykonáva volania ak sa nachádza v pozastavenom stave a èaká na konkrétne udalosti. Podobne ako v predchádzajúcich prípadoch môe malvér do APC fronty vloi smerník na funkciu, v ktorej sa naèíta škodlivé DLL. Malvér zvyèajne h¾adá ¾ubovo¾né vlákno ktoré sa nachádza v špeciálnom stave, pri ktorom vykonáva postupne poloky v APC fronte. Takıchto vláken je väèšinou v systéme ve¾a.
 
 \item 
 \textbf{Extra windows memory injection}
 \noindent \\
-Tento spôsob schovávania softvéru sa spolieha na rozširovanie pamäte aplikaènıch okien v systéme. Pri otváraní nového okna aplikácie, softvér špecifikuje ïalšie bajty pamäte, ktoré rozšíria ve¾kos alokovanej pamäte pre spustenú aplikáciu.\cite{endgame} Tento proces sa nazıva \textit{Extra Windows Memory}(EWM). V tejto èasti ale nevzniká dostatok miesta na uloenie údajov. Aby sa toto obmedzenie obišlo, škodlivı softvér zapíše kód do zdie¾anej sekcie aplikácie a do EWM vloí ukazovate¾ na danú èast. Do tejto rozšírenej èasti zie¾anej pamäte ïalej softvér zapíše ukazovate¾ funkcie do pamäte, ktorá obsahuje shell skript na spustenie malvéru. Malvér následne nastaví v EWM fukciu na zmenu hodnôt na zadanom ofsete. Èím malvér môe jednoducho zmeni posun ukazovate¾a funkcie pamäti aplikácie a nasmerova ho do EWM, na kód so škodlivım shell skriptom.
+Tento spôsob schovávania softvéru sa spolieha na monos špecifikova dodatoènú pamä pri registrácii aplikaènıch okien v systéme. Pri registrácii nového okna aplikácie, softvér špecifikuje ïalšie bajty pamäte, ktoré rozšíria ve¾kos alokovanej pamäte pre spustenú aplikáciu \cite{endgame}, nazıvané aj \textit{Extra Windows Memory}(EWM). V tejto èasti ale nevzniká dostatok miesta na uloenie dát. Aby sa toto obmedzenie obišlo, škodlivı softvér zapíše kód do zdie¾anej pamäte a do EWM vloí ukazovate¾ na danú èast. Do tejto rozšírenej èasti zie¾anej pamäte ïalej softvér zapíše smerník na funkciu, ktorá obsahuje kód na naèítanie malvéru. Malvér môe nakoniec vyvola spustenie tohoto kódu pomocou konkrétnych Windows API volaní.
 \end{itemize}
 \vspace{20px}
 \subsection{Súèasnı malvér}
 \noindent \\
-Táto kapitola obsahuje opis jednotlivıch malvérov pouívanıch v roku 2019, ktoré boli detekované spoloènosami ako Avast a McAfee. Tieto malvéry sú najèastejšie vyuívané v oblasti Európy. Kapitola obsahuje bliší opis malvérov, ich vyuitie, pouité spôsoby úrokov a ukrytie malvéru v systéme.
+Táto kapitola obsahuje opis jednotlivıch vzoriek škodlivého kódu z roku 2019, ktoré boli detegované spoloènosami ako Avast a McAfee. Tieto vzorky sú najèastejšie vyuívané v oblasti Európy. Kapitola obsahuje bliší opis jednotlivıch vzoriek, ich vyuitie, pouité spôsoby útokov a ukrytie malvéru v systéme.
 
 \begin{itemize}
 \item
 \textbf{Sodinokibi}
 \noindent \\
-Tento malvér bol detekovanı v období okolo apríla 2019. Patrí do rodiny ransomvéru, ktorıch cie¾om je šifrova informácie v zariadení a následne za dešifrovanie pıta nemalı obnos peòazí.\cite{sinobiki} Názov bol objavenı v hash kóde, ktorı obsahoval názov "Sodinokibi.exe". vírus sa šíri sám zmeuívaním zranite¾nosti na serveroch Oracle WebLogic. Softvér je navrhnutı tak, aby rıchlo vykonával šifrovanie definovanıch súborov v konfigurácii ransomvéru. Prvou akciou škodlivého softvéru je získa vetky funkcie potrebné pri  behu programu a vytvori dynamickı IAT, ktorı sa pokúsi zahlti volanie systému Windows statickou analızou. Po zahltení systému dôjde k spusteniu malvéru. Technika vyuívaná na ukrytie malvéru je Portable Executable Injection ktorú volá po spomalení RunPE na jej spustenie z pamäte. táto technika ukrytia malvéru je opísaná v predošlej kapitole. Analıza spoloènosti McAfee ukazuje podobnos s inım starším malvérom GandCrab.(prida odkaz na analızu respektíve literatúru)
+Tento malvér bol detekovanı v období okolo apríla 2019. Patrí do rodiny ransomvéru, ktorıch cie¾om je zašifrova dáta v zariadení a následne za dešifrovanie pıta peniaze \cite{sinobiki} (väèšinou v podobe kryptomeny). Názov bol objavenı v heši, ktorı obsahoval názov \textit{Sodinokibi.exe}. Vírus sa šíri sám zmeuívaním zranite¾nosti v serveroch, ktoré pouívajú \textit{Oracle WebLogic}. Kód je navrhnutı tak, aby rıchlo vykonával šifrovanie špecifickıch súborov, definovanıch v konfigurácii ransomvéru. Prvou akciou škodlivého kódu je naèíta všetky externé funkcie potrebné poèas behu programu. Technika vyuívaná na ukrytie malvéru je \textit{Portable Executable Injection}. Analıza spoloènosti McAfee ukazuje podobnos s inım starším malvérom GandCrab.
 
 \item
 \textbf{Emotet}
 \noindent \\
-Emotet je malvér, ktorı sa primárne šíri pomocou rôznych spam emailov.\cite{emotet2} Na infikovanie zariadenia pouíva rôzne skripty, makrá v dokumetoch alebo linky. Emotet stavia na infikovaní pomocou sociálneho ininierstva. Prezentuje sa ako hodnovernı zástupca napr. banky, Rôznych internetovıch obchodov, atï. . Emotet malvér sa prvıkrát objavil v roku 2014 kedy vyuíval na infikovanie rôzne JavaScript súbory.\cite{emotet} V roku 2019 sa tento vírus objavil znova tentokrát v pokroèilejšej verzii.  V novej verzii je Emotet polymorfnım malvérom èo mu umoòuje vyhnú sa klasickej detekcii. Emotet pouíva modulárne kninice Dynamic Link (DLL) na nepretritı vıvoj a aktualizáciu svojich schopností. Emotet môe navyše generova falošné indikátory, ak je spustenı vo virtuálnom prostredí èo zhoršuje jeho detekciu  systéme.
+Emotet je malvér, ktorı sa primárne šíri pomocou rôznych spam emailov \cite{emotet2}. Na infikovanie zariadenia pouíva rôzne skripty, makrá v dokumetoch alebo linky. Emotet sa teda spolieha najmä na techniky sociálneho ininierstva. Prezentuje sa ako hodnovernı zástupca napr. banky, rôznych internetovıch obchodov, a pod. Emotet sa prvıkrát objavil v roku 2014 kedy vyuíval na infikovanie rôzne JavaScript súbory \cite{emotet}. V roku 2019 sa tento vírus objavil znova tentokrát u v pokroèilejšej verzii.  V novej verzii je Emotet u polymorfnım škodlivım kódom, èo mu umoòuje vyhnú sa klasickej detekcii. Emotet môe navyše generova falošné funkcionalitu, ak je spustenı vo virtuálnom prostredí èo zhoršuje jeho detekciu systéme.
 
 \item
 \textbf{ZeuS}
 \noindent \\
-Prvıkrát odhalenı v roku 2007 sa Zeus Trojan, ktorı sa èasto nazıva Zbot, stal jednım z najúspešnejších kúskov botnetového softvéru na svete, postihol milióny poèítaèov a vytvoril mnostvo podobnıch kusov škodlivého softvéru vytvoreného z jeho kódu. Po jeho minimalizovaní sa znovu objavil v pozmenenej podobe so zameraním na odchytávanie bankovıch operácii (Odchytávanie prihlasovacích údajov do internet bankingu).\cite{zeus2} Dosahuje to prostredníctvom monitorovania webovıch stránok a zaznamenávania klávesov, keï malvér zistí, e sa pouívate¾ nachádza na bankovej webovej stránke, zaène zaznamenáva stlaèenia klávesov pouité na prihlásenie. To znamená, e trójsky kôò dokáe obís zabezpeèenie na tıchto webovıch stránkach. Infekcia prebieha pomocou spamov. Keï uívate¾ klikne na odkaz v správe alebo stiahne obsah súboru. spolu s ním stiahne a spustí aj makro. Ktoré po nainštalovaní umoòuje sledovanie zariadenia. 
+Prvıkrát odhalenı v roku 2007 sa Zeus Trojan, ktorı sa èasto nazıva Zbot, stal jednım z najúspešnejších botnetov na svete a postihol milióny poèítaèov \cite{zeus2}. Taktie bolo vytvorernıch mnostvo variantov, ktoré boli zaloené na tomto malvéri. Po èase sa znovu objavil v pozmenenej podobe so zameraním na odchytávanie bankovıch operácii (odchytávanie prihlasovacích údajov do internet bankingu). Dosahuje to prostredníctvom monitorovania webovıch stránok a zaznamenávania klávesov. Keï malvér zistí, e sa pouívate¾ nachádza na webovej stránke banky, zaène zaznamenáva stlaèenia klávesov pouité na prihlásenie. Infekcia prebieha pomocou spamov. Keï uívate¾ klikne na odkaz v správe alebo stiahne obsah súboru, spolu s ním stiahne a spustí aj makro, ktoré po nainštalovaní umoòuje sledovanie zariadenia. 
 
 \item
 \textbf{Dridex}
 \noindent \\
-Dridex je známy trójsky kôò, ktorı sa špecializuje na kráde kreditnıch údajov online bankovníctva. Tento typ škodlivého softvéru sa objavil v roku 2014 a stále napreduje a vyvíja. Novı variant Dridex je schoplnı vyhnú sa detekcii tradiènımi antivírusovımi produktami.  Dridex tie zvıšil svoju infraštruktúru kniníc, ktoré pouívajú názvy súborov naèítané legitímnymi spustite¾nımi súbormi systému Windows. Názvy súborov a hash sa však obnovujú a menia zakadım, keï sa obe prihlási do infikovaného hostite¾a Windows. Tento malvér je v súèastnosti schopnı detekova pribline 25 a 30 percent aktuálnych antivírusovıch softvérov. \cite{dridex}
+Dridex je známy trójsky kôò, ktorı sa špecializuje na kráde kreditnıch údajov v online bankovníctve. Tento typ škodlivého kódu sa objavil v roku 2014 a stále sa postupne vyvíja. Novı variant Dridex je schoplnı vyhnú sa detekcii tradiènımi antivírusovımi produktami. Tento malvér je v súèastnosti schopnı detekova pribline 25 a 30 percent aktuálnych antivírusovıch softvérov. \cite{dridex}
 
 \item
 \textbf{Mirai}
 \noindent \\
-\textit{Mirai} je samo sa mnoiaci vírus botnetov. Zdrojovı kód pre \textit{Mirai} bol autorom verejne sprístupnenı po úspešnom a dobre propagovanom útoku na webovú stránku Krebbs. Kód botnetu Mirai infikuje zle chránené internetové zariadenia pomocou telnetu (sieovı komunikaènı protokol zaloenı na TCP) na nájdenie tıch, ktoré stále pouívajú svoje predvolené uivate¾ské meno a heslo. Úèinnos systému \textit{Mirai} je spôsobená jeho schopnosou infikova desiatky tisíc tıchto nezabezpeèenıch zariadení a koordinova ich tak, aby zaèali útok DDoS proti vybranej obeti. \cite{mirai}
+\textit{Mirai} je samošírite¾nı typ škodlivého súboru na vytvorenie botnetu. Zdrojovı kód pre \textit{Mirai} bol autormi verejne sprístupnenı po úspešnom a dobre propagovanom útoku na webovú stránku Krebbs. Kód botnetu Mirai infikuje zariadania pripojené k internetu, ktoré vyuívajú telnet protokol (sieovı komunikaènı protokol zaloenı na TCP) na nájdenie tıch, ktoré stále pouívajú svoje predvolené uivate¾ské meno a heslo. Úèinnos málvéru \textit{Mirai} je spôsobená jeho schopnosou infikova desiatky tisíc tıchto nezabezpeèenıch zariadení a koordinova ich tak, aby zaèali útok DDoS proti vybranej obeti. \cite{mirai}
 
-Mirai má dve hlavné zloky, samotnı vírus a velite¾ské a kontrolné stredisko (CnC). CnC je samostatnı obraz, ktorı ovláda kompromitované zariadenia (BOT) a posiela im pokyny na spustenie jedného z útokov proti jednej alebo viacerım obetiam. Proces skenera prebieha nepretrite na kadom infikovanom PC pomocou protokolu telnet (na porte TCP 23 alebo 2323)
+Mirai má dve hlavné zloky, samotnı vírus a C\&C server, ktorı ovláda kompromitované zariadenia (BOT) a posiela im pokyny na spustenie jedného z útokov proti jednej alebo viacerım obetiam. Proces skenera prebieha nepretrite na kadom infikovanom zariadení pomocou protokolu telnet (na porte TCP 23 alebo 2323)
 
-CnC predstavuje jednoduché rozhranie príkazového riadku, ktoré umoòuje útoèníkovi urèi algoritmus, IP adresu obete a trvanie útoku. CnC tie èaká na to, aby jej existujúce BOT-y vrátili novoobjavené adresy zariadení a poverenia, ktoré pouíva na skopírovanie vírusového kódu a následne na vytváranie novıch BOT-ov.Algoritmy sú konfigurovate¾né z CnC, ale v predvolenom nastavení má \textit{Mirai} tendenciu náhodne rozde¾ova rôzne polia (ako sú èísla portov, poradové èísla, identifikátory atï.).
+C\&C predstavuje jednoduché rozhranie príkazového riadku, ktoré umoòuje útoèníkovi urèi algoritmus, IP adresu obete a trvanie útoku. C\&C tie èaká na to, aby jej existujúce BOT-y vrátili novoobjavené adresy zariadení, ktoré pouíva na ïalšie rozširovanie botnetu. Algoritmy sú konfigurovate¾né z C\&C, ale v predvolenom nastavení má \textit{Mirai} tendenciu náhodne rozde¾ova rôzne polia (ako sú èísla portov, poradové èísla, identifikátory atï.).
 
 \item
 \textbf{Osiris}
 \noindent \\
-Osiris je potomkom malvéru Kronos, ktorı sa zameriaval na bankovnívctvo. Podobne ako Kronos je Osiris modernejšou verziou bankového trójskeho koòa.\cite{osiris} Táto verzia malvéru vyuíva na skrıvanie metódu process hollowing. Umoòuje mu predsieranie legitımnych procesov v programe a tım sauje jeho detekciu, no niektoré antivírusy ho nie sú schopné detekova. Malvér spúša svoj útok vydávaním sa za legitímny spustite¾nı súbor. (Útoky zaznamená s malvérom Osiris boli dokumenty Microsoft Wordu.) Keï je spustenı malvér na infikovanie zariadenia vyuíva dinamické kninice, ktoré obsahujú škodlivı kód. Vydávanie sa za inı oficiálny softvér znaène sauje identifikáciu malvéru a obmedzuje monosti na zastavenie útoku.\cite{osiris2} Malvér v dokumetoch Word obsahoval aj makrá, ktoré po spustení stiahli další škodlivı malvér, ktorı umouje zahåti zariadenia, sai detekciu a rozširova útok.
+Osiris je odvodenı od malvéru Kronos, ktorı sa zameriaval na bankovnívctvo. Podobne ako Kronos, je Osiris modernejšou verziou bankového trójskeho koòa \cite{osiris}. Táto verzia malvéru vyuíva na skrıvanie metódu \textit{process hollowing}. Umoòuje mu vydáva sa za legitímne procesy. Malvér sa šíri vydávaním sa za legitímny spustite¾nı súbor (útoky zaznamenné s malvérom Osiris boli dokumenty Microsoft Word). Vydávanie sa za inı oficiálny softvér znaène sauje identifikáciu malvéru a obmedzuje monosti na zastavenie útoku \cite{osiris2}. Malvér v dokumetoch Word obsahoval aj makrá, ktoré po spustení stiahli další škodlivı malvér, ktorı umouje zahåti zariadenia alebo sai detekcu
 
 \item
 \textbf{Loki}
 \noindent \\
-Loki je ïalším potomkom staršieho malvéru Kronos, rovnako ako Osiris aj Loki vyuíva na svoje ukrytie metódy podobné process hollowing na zahltenie procesov a vydávanie sa za legitímny softvér. Loki sa zameriava na krádee osobnıch údajov, zaujíma sa najmä o prihlasovacie údaje a heslá. Od augusta 2018 a do súèasnosti sa Loki zameriava na firemné poštové schránky prostredníctvom phishingovıch a spamovıch e-mailov. Phishingové e-maily zahàòajú prílohu súboru s príponou .iso, ktorá sahuje a spúša škodlivı softvér Trojan, ktorı ukradne heslá z preh¾adávaèov, pošty, klientov File Transfer Protocol (FTP), aplikácií na odosielanie správ a kryptomennıch peòaeniek. \cite{Loki}
+Loki je ïalšou variáciou staršieho malvéru Kronos. Rovnako ako Osiris, aj Loki vyuíva na svoje ukrytie metódu \textit{process hollowing}. Loki sa zameriava na krádee osobnıch údajov ako napr. prihlasovacie údaje a heslá. Od augusta 2018 a do súèasnosti sa Loki zameriava na firemné poštové schránky prostredníctvom phishingovıch a spamovıch e-mailov. Phishingové e-maily zahàòajú prílohu súboru s príponou .iso, ktorá sahuje a spúša škodlivı softvér.
 \end{itemize}
+
+Celkovı preh¾ad pouítıch techník v súèasnım vzorkách škodlivého kódu môeme vidie v tabu¾ke è.\ref{modulyVlastnosti}.
 \begin{table}[!htbp]
 	\begin{center}
 		\begin{tabular}{p{4cm}|c|c|c|c|c|c|c|c}
