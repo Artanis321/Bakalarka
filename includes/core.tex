@@ -220,7 +220,7 @@ Doposia¾ známe existujúce riešenia na detekciu techniky \textit{process hollowin
 	\centering
 	\includegraphics[width=11cm]{img/Automat.jpg}
 	\caption{Koneènı stavovı automat reprezentujúci postupnos API volaní vedúcich k ukrytiu malvéru.}
-	\label{Automat}
+	\label{automat}
 \end{figure}
 
 Nami navrhnutı algoritmus na detekciu techniky \textit{process hollowing} je zaloenı na koneènom stavovom automate. Automat tvorí celkovo šes prechodovıch stavov (a jeden poèiatoènı a jeden koneènı stav). Cez tieto stavy postupne prechádzame pri zachytávaní niektorıch API volaní. Automat obsahuje nasledujúce stavy:
@@ -308,8 +308,7 @@ Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového autom
 \end{table}
 
 \section{Implementácia}\label{implementation}
-Struènı úvod do implementácie, programovací jazyk, vıvojové prostredie + jednoduchı diagram fungovania celého systému.\\
-\\
+
 Pre implementáciu riešenia sme zvolili programovanı jazyk C++, pretoe primárnym testovavím prostredím budú najèastejšie pouívané systémy Windows. Na simuláciu testovanie prostredia pouijeme \textbf{Virtual Box} v ktorom budeme simulova bené pouívanie systému.
 Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje pracova s najnovšími verziami systému a aj u¾ahèi jednuduchšiu implementáciu algoritmu.
 
@@ -320,7 +319,7 @@ Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje p
 	\label{UMLDiagram}
 \end{figure}
 
-Práca sa zaoberá návrhom a implementáciou spôsobu detegovania malvéru, ktorı na ukrytie svojej èinnosti v PC pouíva \textit{Process Hollowing}. Teda ukrıva svojú èinnos za iné bené programy, ktoré nie sú podozrivé. Aplikácia urèená na detegovanie takéhoto spôsobu ukrıvania malvéru bude bea v reálnom èase, teda je schopná detegova malvér poèas jeho behu. Vstupné dáta do tejto aplikácie budú predstavova volané API funkcie škodlivım softvérom a z tıchto API funkcií bude aplikácia vyhodnocova a poskytova vısledky èi v systéme operuje alebo neoperuje malvér. Aplikácia bude pozostáva z nasledujúcich èastí. Mutex, ktorı bude zabezpeèova plynulos a bezpeènos programu. Modul na injectovanie DLL, ktorı bude vklada DLL kninicu na odchytávanie volanıch API. Modul na vyhodnocovanie prítomnosti mavéru, ktorı sa skladá z viacerıch èastí. Modulu na naèítanie najnovších záznamov z DLL kninice. Koneèného stavového automatu reprezentovaného Maticou, oproti ktorej bude aplikácia porovnáva prechody medzi jednotlivımi stavmi pod¾a volanıch API. Archiváciou, ktorá zabezpeèí archiváciu dát po preèítaní najnovších záznamov z DLL kninice.  
+Práca sa zaoberá návrhom a implementáciou spôsobu detegovania techniky \textit{Process Hollowing}, ktorú vedia vyuíva niektoré malvéry. Aplikácia urèená na detegovanie, bude bea v reálnom èase, teda je schopná detegova \textit{Process Hollowing} poèas jeho behu. Vstupné dáta do tejto aplikácie budú predstavova volané API funkcie procesom a z tıchto API funkcií bude aplikácia vyhodnocova a poskytova vısledky. Aplikácia bude pozostáva z nasledujúcich èastí. Mutex, ktorı bude zabezpeèova plynulos a bezpeènos programu. Modul na injectovanie DLL, ktorı bude vklada DLL kninicu na odchytávanie volanıch API. Modul na vyhodnocovanie prítomnosti \textit{Process Hollowing-u}, ktorı sa skladá z viacerıch èastí. Modulu na naèítanie najnovších záznamov z DLL kninice. Koneèného stavového automatu reprezentovaného maticou, oproti ktorej bude aplikácia porovnáva prechody medzi jednotlivımi stavmi pod¾a volanıch API. Archiváciou, ktorá zabezpeèí archiváciu dát po preèítaní najnovších záznamov z DLL kninice. A vyhodnocovacou funckiou, ktorá bude vyhodnocova kedy sa prechodnı stav nastaví do koneèného stavu a oznaèí vzorku za pozitívnu. 
 \subsection{Algoritmus}
 
 \begin{figure}[!htbp]
@@ -331,11 +330,11 @@ Práca sa zaoberá návrhom a implementáciou spôsobu detegovania malvéru, ktorı na 
 \end{figure}
 \noindent
 \\
-Aplikácia na zaèiatku inicializuje mutex, ktorı slúi na bezpeèné zapisovanie a èítanie záznamov zo súboru. Následne aplikácia spustí modul na zber na dát, ktorı monitoruje aké API sa volajú v systéme Windows. Pre jednoduchšie monitorovanie vyuívame vo¾ne dostupnú aplikáciu \textit{Detours}. Aplikácia si nastaví poèiatoènú hodnutu prechodného stavu, ktorı slúi na vyhodnocovanie prítomnosti malvéru. Po nastavení všetkıch poèiatoènıch hodnôt aplikácia prejde na samotnú detegciu malvéru. Vlákno sa uspí na stanovenú dobu a po nastavení mutexu zaèína aplikácia samotnı proces detegovania. Aplikácia si naèíta najnovšie záznami z modulu na zber dát. Zo záznamu aplikácia vyberie volanú API funkciu a zisuje èi k danej API existuje hodnota v matici koneèného automatu. Ak áno, aplikácia zisuje aktuálny prechodnı stav a následne aj pomocou koneèného stavového automatu novú hodnotu do ktorej sa prechodnı stav následne zmení. Po vykonaní zmeny nastane kontrola na existenciu ïalších záznamov v súbore ak súbor obsahuje ïalšie záznami, naèíta si ïalší záznam a proces sa opakuje. Ak u aplikácia naèítala všetky záznami spraví sa archivácia záznamov a aplikácia vyhodnocuje prechodnı stav koneèného stavového automatu. Ak prechodnı stav nieje v koneènom stave mutex sa uvo¾ní a aplikácia èaká ïalšie záznami z modulu na zber dát a cyklus sa opakuje. Keï sa prechodnı stav dostane do konecného stavu aplikácia oznámi existenciu malvéru a ukonèí sa.  
+Aplikácia na zaèiatku inicializuje mutex, ktorı slúi slúi na koordináciu viacerıch procesov, ktoré vyadujú prístup k rovnakému objektu súèastne.  Následne aplikácia spustí modul na zber na dát, ktorı monitoruje aké API sa volajú v systéme Windows. Pre jednoduchšie monitorovanie vyuívame vo¾ne dostupnú kninicu \textit{Detours}. Aplikácia si nastaví poèiatoènú hodnutu prechodného stavu, ktorı slúi na vyhodnocovanie prítomnosti \textit{Process Hollowing-u}. Po nastavení všetkıch poèiatoènıch hodnôt aplikácia prejde na samotnú detekciu. Vlákno sa uspí na stanovenú dobu a po nastavení mutexu zaèína aplikácia samotnı proces detegovania. Aplikácia si naèíta najnovšie záznami z modulu na zber dát. Zo záznamu aplikácia vyberie volanú API funkciu a zisuje èi k danej API existuje hodnota v matici koneèného automatu. Ak áno, aplikácia zisuje aktuálny prechodnı stav a následne, pomocou koneèného stavového automatu novú hodnotu na ktorú sa prechodnı stav následne zmení. Po vykonaní zmeny nastane kontrola na existenciu ïalších záznamov v súbore ak súbor obsahuje ïalšie záznami, naèíta si ïalší záznam a proces sa opakuje. Ak u aplikácia naèítala všetky záznami spraví sa archivácia záznamov a aplikácia vyhodnocuje prechodnı stav koneèného stavového automatu. Ak prechodnı stav nieje v koneènom stave mutex sa uvo¾ní a aplikácia èaká na ïalšie záznami z modulu na zber dát a cyklus sa opakuje. Keï sa prechodnı stav dostane do koneèného stavu aplikácia oznámi existenciu \textit{Process Hollowing-u} a ukonèí sa.  
 \subsection{Modul na zber dát}
 \noindent
 
-Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funkcií ako môeme vydie na obrázku, ku ktorım je následne definované aj ich volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile}, ktoré sú následne pouité v aplikácii na detegovanie malvéru v beiacom procese. 
+Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funkcií, ku ktorım je následne definované aj ich pôvodné volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile}, ktoré sú následne pouité v aplikácii na detegovanie prítomnosti \textit{Process Hollowing-u} v beiacom procese. 
 
 \begin{lstlisting}[caption=Implementácia funkcie writeFunctionToFile.,label={vypis1}]
 void writeFunctionToFile(std::string originalFunkcion) 
@@ -358,7 +357,7 @@ void writeFunctionToFile(std::string originalFunkcion)
 	}
 }
 \end{lstlisting}
-Druhá èas aplikácie u slúi len na nahradenie pôvodnej volanej API funkcie, modifikovanou tou istou funkciou, ktorá je rozšírenia o zapisovanie volanej API do súboru. Pôvodnú funkciu \textit{SetThreadContext} urèenú na nastavenie \textit{Instriction Pointer} v tomto module nahradíme funkciou \textit{HookSetThreadContext}, ktorá okrem volania pôvodnej funkcie volá aj funkciu \textbf{writeFunctionToFile} na zapísanie API funkcie do predpripraveného súboru.
+Druhá èas aplikácie u slúi len na nahradenie pôvodnej volanej API funkcie (modifikovanou funkciou), ktorá je rozšírenia o zapisovanie volanej API do súboru. Pôvodnú funkciu \textit{SetThreadContext} urèenú na nastavenie \textit{Instriction Pointer} v tomto module nahradíme funkciou \textit{HookSetThreadContext}, ktorá okrem volania pôvodnej funkcie volá aj funkciu \textbf{writeFunctionToFile} na zapísanie API funkcie do predpripraveného súboru.
 \begin{lstlisting}[caption=Definícia API volania SetThreadContext.,label={vypiS3}]
 static BOOL(__stdcall *RealSetThreadContext)(HANDLE, const CONTEXT*) = SetThreadContext;
 
@@ -387,23 +386,43 @@ switch (ul_reason_for_call)
 }
 \end{lstlisting}
 
-\subsection{Detours}
-\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Je k dispozícii na základe \textit{Open source} licencie a je vo¾ne dostupnı pre komunitu.
-Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza pokyny cie¾ovej funkcie skokom na funkciu zadanú pouívate¾om. Kód cie¾ovej funkcie je modifikovanı v pamäti, nie na disku, èo umoòuje zachytávanie binárnych funkcií. \cite{detours} Po naèítaní do procesu môe kninica DLL obís akúko¾vek funkciu v procese, èi u v aplikácii alebo v systémovıch kniniciach, ako sú napríklad rozhrania Windows API.
-
-\subsection{Mutex}
-Mutex je synchronizaènı objekt, ktorı slúi na signalizáciu pouívania nejakého objektu v procesnom vlákne. Mutex slúi na koordináciu viacerıch aplikácií (dvoch vlákien), ktoré vyadujú prístup k rovnakému objektu súèastne. Napríklad aby sa zabránilo zápisu dvoch vlákien súèastne do zdie¾aného objektu alebo pamäti. Take kadá aplikácia alebo vlákno èaká na uvo¾nonenie mutexu, ktoré signalizuje, e daná pamä nieje vyuívaná a môe sa do nej bezpeène zapisova bez toho aby došlo zápisu dvoch aplikácii súèastne. V tejto aplikácii mutex slúi na zabránenie zapisovaniu záznamov do súboru modulom na zber dát a èítaním záznamov z toho istého súboru detegènou aplikáciou súèastne.
 \begin{lstlisting}[caption=Inicializácia mutexu.,label={vypiS5}]
 HANDLE mutexOnThreadSafe;
 mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
 
 \end{lstlisting}
 
+\subsection{Detours}
+\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Je k dispozícii na základe \textit{Open source} licencie a je vo¾ne dostupnı pre komunitu.
+Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza pokyny cie¾ovej funkcie skokom na pouívate¾om zadanú  funkciu. Kód cie¾ovej funkcie je modifikovanı v pamäti, nie na disku, èo umoòuje zachytávanie binárnych funkcií. \cite{detours} Po naèítaní do procesu môe DLL kninica obís akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API.
+
 \section{Vısledky}\label{results}
-Struènı úvod do testovania nami vytvoreného riešenia/riešení. Zoznam experimentov.
-Našu aplikáciu budeme testova vo \textit{Virtual Boxe}, na systéme Windows 10. Aplikáciu budeme testova na reálych vzorkách malvéru, ktoré vyuívajú \textit{Process Hollowing} na ukrytie svojej èinnosti. 
-\subsection{Experiment A}
-Detailnı popis experimentu, vısledky, úspešnos, graf, ko¾ko trval èas detegovania od spustenia experimentu a pod. To navrhneme pod¾a vısledkov implementácie.
-\subsection{Experiment B}
-\subsection{Porovnanie s existujúcimi riešeniami}
-Ak to bude moné. Ak nie spomenú e existujúce riešenia vyuívajú metódy, ktoré neumoòujú priame porovnanie a pod.
+Našu aplikáciu budeme testova vo \textit{Virtual Boxe}, na systéme Windows 10. Aplikáciu budeme testova na reálych vzorkách malvéru, ktoré vyuívajú \textit{Process Hollowing}. na ukrytie svojej èinnosti. Pred testami sme aplikáciu testovali na vzorke dostupnej na GitHube\cite{gitHub}, ktorá bola ukákou ako vyzerá \textit{Process Hollowing}
+\subsection{Experiment a vyhodnotenie}
+Experiment bude pozostáva z reálnych vzoriek malvérov, ktoré vvyuívajú \textit{Process Hollowing} na ukrytie svojej èinnosti. Vzorky vyh¾adáme na internetovıch stránkach VirusTotal\cite{virusTotal} a ANY.RUN\cite{anyRun}, kde sú vo¾ne dostupné. Na stránke VirusTotal sme schopní nájs potrebné heše, pomocou ktorıch sme schopní doh¾ada vzorky na ANY.RUN, ktoré môu vyuíva \textit{Process Hollowing}. 
+
+\begin{table}[!htbp]
+	\begin{center}
+		\begin{tabular}{p{4,5cm}|c|c|c}
+			\textbf{Názov vzorky} &  \textbf{MD5 Identifikátor}  & \textbf{Stav} & \textbf{Èas}\\ \hline
+			MSIL/Injector.DXQ & 706630a77f06ef8fb90eb312fa2cbfe6 & Y & 2,203s\\ \hline
+			MSIL/Kryptik.FQF & 3f385d11f6b438ea963cd49e818b9d90 & Y & 1,655s\\ \hline
+			MSIL/Injector.DXQ & 9e298807729dff89b56f68f4d42ffd93 & Y & 1,101s \\ \hline
+			Win32/Spy.Zbot.JF & 3cfc97f88e7b24d3ceecd4ba7054e138 & N & \\ \hline
+			Win32/Kryptik.AVWC & 0d42179ff6c448697b67056aecc91c67 & N & \\ \hline
+			Win32/Spy.Zbot.YW & EC2DACDBCF194C1E8C8DB2DBEC605B83 & N & \\ \hline
+			Win32/Kryptik.GLKL & 6c129b7ed58900286d6cd3a4e85ca15b & N & \\ \hline
+			Win32/Filecoder.Natas.A & f592e7faba96a23ee25ff25f3779f44f & N &\\ \hline	
+		\end{tabular}
+		\caption{Vybrané vzorky, stav a èas detegovania.}
+		\label{vzorky}
+	\end{center}
+\end{table}
+
+Tieto vzorky sme podrobili testom vo Virtual Boxe na operaènom systéme Windows 10. Do predprivaného adresára sme si pripravili aplikáciu ako aj vzorky. Po spustení \textbf{DetectionApp}, aplikácia injektovala DLL do vybranej vzorky a následne spustila detegovanie. Èasovı limit na jednú vzorku sme si stanovili na 5 minút. Ak za tento èas aplikácia neohlásila existenciu \textit{Process Hollowing-u} vzorku sme oznaèili ako negatívnua proces ukonèili. Kadá vzorka, kde aplikácia prešla koneènım automatom a do posledného stavu bola oznaèená ako pozitívna. Aplikácia vyhlásila existenciu \textit{Process Hollowing-u} a vypísala èas, ktorı ubehol od injektovania DLL kninice a po pozitívne oznaèenie. Jednotlivé vzorky, stavy(ak bola vzorka oznaèená Pozitívna/Negatívna) a èasy detegovania sú zaznaèené v tabu¾ke è. \ref{vzorky}.
+
+\subsection{Vyhodnotenie vısledkov testovania}
+
+Z nami vybranıch vzoriek aplikácia oznaèila za pozitívne tri vzorky, zvyšné oznaèila za negatívne. Ako si môeme všimnú v tabu¾ke è. \ref{vzorky} èas detegovania v prípade troch pozitívne oznaèenıch vzoriek bol krátky. Tieto tri vzorky boli algoritmom vyhodnotené ako pozitívne na prítomnos \textit{Process Hollowing-u}. Niektoré vybrané vzorky, ktoré boli oznaèené za negatívne, môu indikova neprítomnos \textit{Process Hollowing-u}.
+
+Dôvodov na oznaèenie vzoriek za negatívne aj keï zdroje ukazujú opak, môe by viacero. Samotná vzorka môe by len prechodné úloisko, ktoré môe vytvára novı proces, ktorı u ale \textit{Process Hollowing} vykoná v inom procese ako je nami sledovanı proces. Vzorka môe na svoju úspešnos potrebova internetové pripojenie kde si stiahne ïalšie potrebné veci, alebo kde môu by uloené ïalšie dáta poprípade inštrukcie potrebné na vykonanie procesu ale spojenie s danım serverom je neúspešné. Nami navrhnutı koneènı stavovı automat nemusí obsahova API, ktoré síce umoòia vytvori \textit{Process Hollowing} ale neumonia algoritmu detegova prechod do ïalšieho prechodového stavu.

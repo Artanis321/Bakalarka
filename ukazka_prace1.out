@@ -3,7 +3,7 @@
 \BOOKMARK [2][]{subsection.4}{Techniky ukr\375vania cinnosti}{section.3}% 3
 \BOOKMARK [2][]{subsection.5}{S\372casn\375 malv\351r}{section.3}% 4
 \BOOKMARK [1][]{section.7}{Process hollowing}{}% 5
-\BOOKMARK [2][]{subsection.8}{Princ\355p}{section.7}% 6
+\BOOKMARK [2][]{subsection.9}{Princ\355p}{section.7}% 6
 \BOOKMARK [2][]{subsection.10}{Vyu\236\355van\351 API funkcie}{section.7}% 7
 \BOOKMARK [1][]{section.11}{Existuj\372ce rie\235enia na detekciu}{}% 8
 \BOOKMARK [2][]{subsection.12}{PHDetection}{section.11}% 9
@@ -14,13 +14,11 @@
 \BOOKMARK [1][]{section.19}{Implement\341cia}{}% 14
 \BOOKMARK [2][]{subsection.21}{Algoritmus}{section.19}% 15
 \BOOKMARK [2][]{subsection.23}{Modul na zber d\341t}{section.19}% 16
-\BOOKMARK [2][]{subsection.68}{Detours}{section.19}% 17
-\BOOKMARK [2][]{subsection.69}{Mutex}{section.19}% 18
-\BOOKMARK [1][]{section.74}{V\375sledky}{}% 19
-\BOOKMARK [2][]{subsection.75}{Experiment A}{section.74}% 20
-\BOOKMARK [2][]{subsection.76}{Experiment B}{section.74}% 21
-\BOOKMARK [2][]{subsection.77}{Porovnanie s existuj\372cimi rie\235eniami}{section.74}% 22
-\BOOKMARK [1][]{section*.78}{Z\341ver}{}% 23
-\BOOKMARK [1][]{section*.79}{Zoznam pou\236itej literat\372ry}{}% 24
-\BOOKMARK [1][]{section*.80}{Pr\355lohy}{}% 25
-\BOOKMARK [1][]{section.82}{ \227trukt\372ra elektronick\351ho nosica}{}% 26
+\BOOKMARK [2][]{subsection.72}{Detours}{section.19}% 17
+\BOOKMARK [1][]{section.73}{V\375sledky}{}% 18
+\BOOKMARK [2][]{subsection.74}{Experiment a vyhodnotenie}{section.73}% 19
+\BOOKMARK [2][]{subsection.76}{Vyhodnotenie v\375sledkov testovania}{section.73}% 20
+\BOOKMARK [1][]{section*.77}{Z\341ver}{}% 21
+\BOOKMARK [1][]{section*.78}{Zoznam pou\236itej literat\372ry}{}% 22
+\BOOKMARK [1][]{section*.79}{Pr\355lohy}{}% 23
+\BOOKMARK [1][]{section.81}{ \227trukt\372ra elektronick\351ho nosica}{}% 24

@@ -3,26 +3,24 @@
 \contentsline {section}{\'{U}vod}{1}{section*.2}%
 \contentsline {section}{\numberline {1}Malv\'er}{2}{section.3}%
 \contentsline {subsection}{\numberline {1.1}Techniky ukr\'yvania \v cinnosti}{2}{subsection.4}%
-\contentsline {subsection}{\numberline {1.2}S\'u\v casn\'y malv\'er}{4}{subsection.5}%
+\contentsline {subsection}{\numberline {1.2}S\'u\v casn\'y malv\'er}{5}{subsection.5}%
 \contentsline {section}{\numberline {2}Process hollowing}{8}{section.7}%
-\contentsline {subsection}{\numberline {2.1}Princ\IeC {\'\i }p}{8}{subsection.8}%
-\contentsline {subsection}{\numberline {2.2}Vyu\v z\IeC {\'\i }van\'e API funkcie}{10}{subsection.10}%
-\contentsline {section}{\numberline {3}Existuj\'uce rie\v senia na detekciu}{12}{section.11}%
-\contentsline {subsection}{\numberline {3.1}PHDetection}{12}{subsection.12}%
-\contentsline {subsection}{\numberline {3.2}HollowFind}{12}{subsection.13}%
-\contentsline {section}{\numberline {4}Algoritmus na detekciu}{13}{section.14}%
-\contentsline {subsection}{\numberline {4.1}Kone\v cn\'y stavov\'y automat}{15}{subsection.16}%
+\contentsline {subsection}{\numberline {2.1}Princ\IeC {\'\i }p}{8}{subsection.9}%
+\contentsline {subsection}{\numberline {2.2}Vyu\v z\IeC {\'\i }van\'e API funkcie}{8}{subsection.10}%
+\contentsline {section}{\numberline {3}Existuj\'uce rie\v senia na detekciu}{11}{section.11}%
+\contentsline {subsection}{\numberline {3.1}PHDetection}{11}{subsection.12}%
+\contentsline {subsection}{\numberline {3.2}HollowFind}{11}{subsection.13}%
+\contentsline {section}{\numberline {4}Algoritmus na detekciu}{12}{section.14}%
+\contentsline {subsection}{\numberline {4.1}Kone\v cn\'y stavov\'y automat}{14}{subsection.16}%
 \contentsline {subsection}{\numberline {4.2}Matica kone\v cn\'eho stavov\'eho automatu}{15}{subsection.17}%
 \contentsline {section}{\numberline {5}Implement\'acia}{17}{section.19}%
 \contentsline {subsection}{\numberline {5.1}Algoritmus}{18}{subsection.21}%
 \contentsline {subsection}{\numberline {5.2}Modul na zber d\'at}{19}{subsection.23}%
-\contentsline {subsection}{\numberline {5.3}Detours}{21}{subsection.68}%
-\contentsline {subsection}{\numberline {5.4}Mutex}{21}{subsection.69}%
-\contentsline {section}{\numberline {6}V\'ysledky}{22}{section.74}%
-\contentsline {subsection}{\numberline {6.1}Experiment A}{22}{subsection.75}%
-\contentsline {subsection}{\numberline {6.2}Experiment B}{22}{subsection.76}%
-\contentsline {subsection}{\numberline {6.3}Porovnanie s existuj\'ucimi rie\v seniami}{22}{subsection.77}%
-\contentsline {section}{Z\'{a}ver}{23}{section*.78}%
-\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{24}{section*.79}%
-\contentsline {section}{Pr\'{i}lohy}{I}{section*.80}%
-\contentsline {section}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{section.82}%
+\contentsline {subsection}{\numberline {5.3}Detours}{21}{subsection.72}%
+\contentsline {section}{\numberline {6}V\'ysledky}{22}{section.73}%
+\contentsline {subsection}{\numberline {6.1}Experiment a vyhodnotenie}{22}{subsection.74}%
+\contentsline {subsection}{\numberline {6.2}Vyhodnotenie v\'ysledkov testovania}{23}{subsection.76}%
+\contentsline {section}{Z\'{a}ver}{24}{section*.77}%
+\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{25}{section*.78}%
+\contentsline {section}{Pr\'{i}lohy}{I}{section*.79}%
+\contentsline {section}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{section.81}%
