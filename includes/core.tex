@@ -219,44 +219,43 @@ Doposia¾ známe existujúce riešenia na detekciu techniky \textit{process hollowin
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=11cm]{img/Automat.jpg}
-	\caption{Koneènı stavovı automat.}
+	\caption{Koneènı stavovı automat reprezentujúci postupnos API volaní vedúcich k ukrytiu malvéru.}
 	\label{Automat}
 \end{figure}
 
-Navrhnutı algoritmus na detegciu malvéru vyuívajúceho na svoje ukrytie v systéme \textit{Process Hollowing}, tvorí 5 prechodnıch stavov. Cez tieto sa algoritmus dostáva vïaka vybranım Windows API funkciám. Tieto funkcie umoòujú sledova volania jednotlivıch procesov, kde by mohol ukry malvér svoju èinnos. Jednotlivé API tak môeme rozdeli do 5 skupín.
+Nami navrhnutı algoritmus na detekciu techniky \textit{process hollowing} je zaloenı na koneènom stavovom automate. Automat tvorí celkovo šes prechodovıch stavov (a jeden poèiatoènı a jeden koneènı stav). Cez tieto stavy postupne prechádzame pri zachytávaní niektorıch API volaní. Automat obsahuje nasledujúce stavy:
 \begin{itemize}
-\item
-\textbf{WAPI1}
-Sú API funkcie, ktoré umoòujú vytvára nové vlákna procesov alebo získa prístupy do u existujúcich vlákien. \\
-CreateThread,
-SuspendThread,
-CreateProcessA.
-\item
-\textbf{WAPI2}
-Predstavujú API primátrne urèené na odmapovanie pamäte existujúceho procesu. \\
-NtUnmapViewOfSection.
-\item
-\textbf{WAPI3}
-Predstavujú API, ktoré slúia na alokáciu pamäte pre dané vlákno alebo rozširujú virtuálnu pamä existujúceho procesu. \\
-VirtualAlloc,
-VirtualAllocEx.
-\item
-\textbf{WAPI4}
-Tieto funkcie umoòujú manipulova s pamäou. Ako je kopírovanie pamäte, zapisovanie do pamäte atï.. \\
-WriteProcessMemory,
-CopyMemory.
-\item
-\textbf{WAPI5}
-Tieto API funkcie nastavujú kontext daného vlákna a umoòujú nastavi \textit{Instruction Pointer}, ktorı pri volaní spustí aj funkcionalitu malvéru. \\
-SetThreadContext 
-\item
-\textbf{WAPI6}
-Poslednou skupinou sú API, ktoré spúšajú pozastavené vlákno alebo ukonèi funkcionalitu aktuálneho vlákna.\\
-ResumeThread,
-ExitThread.
+	\item \textbf{Vytvorenie pozastaveného procesu}
+	\item \textbf{Odmapovanie pamäte}
+	\item \textbf{Alokácia pamäte}
+	\item \textbf{Skopírovanie škodlivého kódu}
+	\item \textbf{Nastavenie IP}
+	\item \textbf{Spustenie procesu}
 \end{itemize}
 
-Algoritmus na detegovanie funguje na jednoduchom princípe. Podozrivı proces získa prístup do beiaceho vlákna legitímneho procesu. Vo vlákne daného procesu malvér alokuje virtuálnu pamä èím následne umoní do tejto pamäte zapísa svoj škodlivı kód. Poèas tıchto vıkonov operácií malvér volá jednotlivé API. Pri správnom odhade postupnosti volanıch API, je algoritmus schopnı vyhodnoti v reálnom èase èi v zariadení existuje hrozba v podobe malvéru a informova o tom uivate¾a.
+Vstupné symboly, ktoré spôsobujú prechody v koneènom automate sú v našom prípade API volania. Nami zvolené API volania môeme rozdeli do nasledujúcich skupín:
+
+\begin{itemize}
+\item
+\textbf{WAPI1} -
+sú API funkcie, ktoré umoòujú vytvára nové vlákna/procesy alebo získa prístupy do u existujúcich vlákien/procesov, t.j. \textit{CreateThread}, \textit{SuspendThread}, \textit{CreateProcessA}.
+\item
+\textbf{WAPI2} -
+predstavujú API volania primárne urèené na odmapovanie pamäte existujúceho procesu, t.j. \textit{NtUnmapViewOfSection}.
+\item
+\textbf{WAPI3} -
+volania slúiace na alokáciu pamäte vo virtuálnom adresnom priestore procesu, t.j. \textit{VirtualAlloc}, \textit{VirtualAllocEx}.
+\item
+\textbf{WAPI4} -
+tieto funkcie umoòujú manipulova s pamäou;kopírovanie pamäte, zapisovanie a èítanie, t.j. \textit{WriteProcessMemory}, \textit{CopyMemory}, \textit{ReadProcessMemory}.
+\item
+\textbf{WAPI5} - API volanie, ktoré nastavuje kontext daného vlákna a umoòujú nastavi IP - \textit{SetThreadContext}. 
+\item
+\textbf{WAPI6} -
+poslednou skupinou sú API volania, ktoré spúšajú pozastavené vlákno, t.j. \textit{ResumeThread}.
+\end{itemize}
+
+Algoritmus na detegovanie funguje na jednoduchom princípe. Podozrivú vzorku spustíme a zachytávame vyššie spomínané API volania. Na základe tıchto volaní postupne prechádzame stavmi koneèného automatu. Ak sa postupne dostaneme dostaneme do posledného stavu, prepokladáme e nastal \textit{process hollowing}. Celkové znázornenie automatu môeme vidie na obrázku è.\ref{automat}.
 
 \subsection{Koneènı stavovı automat}
 
@@ -276,7 +275,7 @@ Pod¾a toho, èi automat skonèí po preèítaní vstupe v stave, ktorı patrí do mnoin
 V našom prípade abecedu tvorí mnoina nami vybranıch API windows funkcií, ktoré by potenciálne mal najèastejšie vyuíva malvér vyuívajúci techniku \textit{Process Hollowing} na ukrytie svojej èinnosti. 
 
 \subsection{Matica koneèného stavového automatu}
-Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového automatu. tieto prechody sú definované ako volania vybranıch API, ktoré posúvajú automat cez jednotlivé stavy pod¾a toho v akom stave je aktuálne automat a do akého nového stavu sa automat dostane. Koneèná mnoina stavov je reprezentovaná stavmi {"štart","vytvorenie vlákna", "alokácia pamäte", "kopírovanie malvéru", "nastavenie IP", "spustenie vlákna" }. Poèiatoènı stav automatu je \textbf{štart} a koneènı stav je \textbf{spustenie vlákna}, ktorı oznamuje existenciu malvéru v zariadení.
+Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového automatu. Tieto prechody sú definované ako volania vybranıch API funkcií, ktoré posúvajú automat cez jednotlivé stavy pod¾a toho v akom stave je aktuálne automat a do akého nového stavu sa automat dostane. Koneèná mnoina stavov je reprezentovaná stavmi \textbf{štart}, \textbf{vytvorenie procesu}, \textbf{alokácia pamäte}, \textbf{kopírovanie malvéru}, \textbf{nastavenie IP} a \textbf{spustenie vlákna}. Poèiatoènı stav automatu je \textbf{štart} a koneènı stav je \textbf{process hollowing}, ktorı oznaèuje e nastalo injektovanie kódu.
 
 \begin{table}[!htbp]
 	\begin{center}
