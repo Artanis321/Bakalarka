@@ -397,32 +397,36 @@ mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
 Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza pokyny cie¾ovej funkcie skokom na pouívate¾om zadanú  funkciu. Kód cie¾ovej funkcie je modifikovanı v pamäti, nie na disku, èo umoòuje zachytávanie binárnych funkcií. \cite{detours} Po naèítaní do procesu môe DLL kninica obís akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API.
 
 \section{Vısledky}\label{results}
-Našu aplikáciu budeme testova vo \textit{Virtual Boxe}, na systéme Windows 10. Aplikáciu budeme testova na reálych vzorkách malvéru, ktoré vyuívajú \textit{Process Hollowing}. na ukrytie svojej èinnosti. Pred testami sme aplikáciu testovali na vzorke dostupnej na GitHube\cite{gitHub}, ktorá bola ukákou ako vyzerá \textit{Process Hollowing}
-\subsection{Experiment a vyhodnotenie}
-Experiment bude pozostáva z reálnych vzoriek malvérov, ktoré vvyuívajú \textit{Process Hollowing} na ukrytie svojej èinnosti. Vzorky vyh¾adáme na internetovıch stránkach VirusTotal\cite{virusTotal} a ANY.RUN\cite{anyRun}, kde sú vo¾ne dostupné. Na stránke VirusTotal sme schopní nájs potrebné heše, pomocou ktorıch sme schopní doh¾ada vzorky na ANY.RUN, ktoré môu vyuíva \textit{Process Hollowing}. 
+Našu aplikáciu sme testovali v prostredí \textit{Virtual Box}, na systéme Windows 10. Hlavnım cie¾om testov bolo vyskúša naše riešenie na reálnych vzorkách škodlivého kódu, ktorı vyuíva \textit{process hollowing}. Pred samotnımi testami s reálnymi vzorkami sme poèas vıvoja a experimentovania pracovali s ukákovou implementáciou metódy \textit{process hollowing}, dostupnej na \cite{gitHub}. Táto aplikácia dokáe injektova ¾ubovolnı spustite¾nı kód do procesu zadaného prostredníctvom argumentov príkazového riadku. Po dokonèení prvotnıch experimentov, kedy sme úspešne detegovali \textit{process hollowing} na testovacej aplikácii, sme sa posunuli na škodlivé vzorky. V nasledujúcej kapitole uvádzame popis experimentov so škodlovımi vzorkami a vısledky, ktoré sme dosiahli.
+
+\subsection{Škodlivé vzorky}
+
+Primárnym cie¾om experimentov bolo otestova, èi naše riešenie dokáe detegova injektovanie kódu pomocou techniky \textit{process hollowing} aj na reálnych vzorkách. Prvım krokom bolo získa nejaké vzorky, ktoré danú techniku vyuívajú. Tieto informácie sme získavali z rôznych blogov, resp. sluieb ktoré sa venujú dynamickej analıze malvéru v sandboxe ako napr. \textit{any.run}\cite{anyRun}. Samotné vzorky sme následne získavali z \cite{virusTotal, anyRun}. V tabu¾ke è.\ref{vzorky} môeme vidie vısledky, ktoré sme dosiahli.
 
 \begin{table}[!htbp]
 	\begin{center}
-		\begin{tabular}{p{4,5cm}|c|c|c}
-			\textbf{Názov vzorky} &  \textbf{MD5 Identifikátor}  & \textbf{Stav} & \textbf{Èas}\\ \hline
-			MSIL/Injector.DXQ & 706630a77f06ef8fb90eb312fa2cbfe6 & Y & 2,203s\\ \hline
-			MSIL/Kryptik.FQF & 3f385d11f6b438ea963cd49e818b9d90 & Y & 1,655s\\ \hline
-			MSIL/Injector.DXQ & 9e298807729dff89b56f68f4d42ffd93 & Y & 1,101s \\ \hline
-			Win32/Spy.Zbot.JF & 3cfc97f88e7b24d3ceecd4ba7054e138 & N & \\ \hline
-			Win32/Kryptik.AVWC & 0d42179ff6c448697b67056aecc91c67 & N & \\ \hline
-			Win32/Spy.Zbot.YW & EC2DACDBCF194C1E8C8DB2DBEC605B83 & N & \\ \hline
-			Win32/Kryptik.GLKL & 6c129b7ed58900286d6cd3a4e85ca15b & N & \\ \hline
-			Win32/Filecoder.Natas.A & f592e7faba96a23ee25ff25f3779f44f & N &\\ \hline	
+		\begin{tabular}{|p{4,5cm}|c|c|c|}
+			\hline
+			\textbf{Názov vzorky} &  \textbf{MD5}  & \textbf{Detekcia} & \textbf{Èas}\\ \hline
+			MSIL/Injector.DXQ & 706630a77f06ef8fb90eb312fa2cbfe6 & \cmark & 2,203 s\\ \hline
+			MSIL/Kryptik.FQF & 3f385d11f6b438ea963cd49e818b9d90 & \cmark & 1,655 s\\ \hline
+			MSIL/Injector.DXQ & 9e298807729dff89b56f68f4d42ffd93 & \cmark & 1,101 s \\ \hline
+			Win32/Spy.Zbot.JF & 3cfc97f88e7b24d3ceecd4ba7054e138 & \xmark & -\\ \hline
+			Win32/Kryptik.AVWC & 0d42179ff6c448697b67056aecc91c67 & \xmark & -\\ \hline
+			Win32/Spy.Zbot.YW & ec2dacdbcf194c1e8c8db2dbec605b83 & \xmark & -\\ \hline
+			Win32/Kryptik.GLKL & 6c129b7ed58900286d6cd3a4e85ca15b & \xmark & -\\ \hline
+			Win32/Filecoder.Natas.A & f592e7faba96a23ee25ff25f3779f44f & \xmark &-\\ \hline	
 		\end{tabular}
-		\caption{Vybrané vzorky, stav a èas detegovania.}
+		\caption{Vısledky experimentov so škodlivımi vzorkami.}
 		\label{vzorky}
 	\end{center}
 \end{table}
 
-Tieto vzorky sme podrobili testom vo Virtual Boxe na operaènom systéme Windows 10. Do predprivaného adresára sme si pripravili aplikáciu ako aj vzorky. Po spustení \textbf{DetectionApp}, aplikácia injektovala DLL do vybranej vzorky a následne spustila detegovanie. Èasovı limit na jednú vzorku sme si stanovili na 5 minút. Ak za tento èas aplikácia neohlásila existenciu \textit{Process Hollowing-u} vzorku sme oznaèili ako negatívnua proces ukonèili. Kadá vzorka, kde aplikácia prešla koneènım automatom a do posledného stavu bola oznaèená ako pozitívna. Aplikácia vyhlásila existenciu \textit{Process Hollowing-u} a vypísala èas, ktorı ubehol od injektovania DLL kninice a po pozitívne oznaèenie. Jednotlivé vzorky, stavy(ak bola vzorka oznaèená Pozitívna/Negatívna) a èasy detegovania sú zaznaèené v tabu¾ke è. \ref{vzorky}.
+Samotné experimenty prebiehali následovne. Do predpripraveného adresára sme si pripravili našu finálnu aplikáciu spolu so vzorkami. Našu aplikáciu sme spúšali vdy s jednou konkrétnou vzorkou. Po spustení, detekèná aplikácia injektovala nami vytvorenı DLL súbor, urèenı na sledovanie API volaní, do konkrétnej vzorky. Èasovı limit na jednu vzorku sme si stanovili na 5 minút. Ak za tento èas aplikácia nehlásila prítomnos techniky \textit{process hollowing}, vısledok detekcie sme oznaèili za negatívny a proces ukonèili. Kadá vzorka, ktorá sa dostala postupne do posledného stavu v koneènom automate bola oznaèená ako správne detegovaná.
 
-\subsection{Vyhodnotenie vısledkov testovania}
+\subsection{Vyhodnotenie}
 
-Z nami vybranıch vzoriek aplikácia oznaèila za pozitívne tri vzorky, zvyšné oznaèila za negatívne. Ako si môeme všimnú v tabu¾ke è. \ref{vzorky} èas detegovania v prípade troch pozitívne oznaèenıch vzoriek bol krátky. Tieto tri vzorky boli algoritmom vyhodnotené ako pozitívne na prítomnos \textit{Process Hollowing-u}. Niektoré vybrané vzorky, ktoré boli oznaèené za negatívne, môu indikova neprítomnos \textit{Process Hollowing-u}.
+Z nami vybranıch vzoriek aplikácia správne detegovala tri vzorky. Zvyšné vzorky však neboli detegované. Ako môeme vidie v tabu¾ke è.\ref{vzorky}, èas detekcie v prípade spomínanıch troch vzoriek bol krátky. Otázkou však ostávajú zvyšné vzorky, ktoré sa nám nepodarilo detegova. Príèin môe by viacero. Prvım dôvodom môe by, e vzorka pouívala urèitú variáciu techniky \textit{process hollowing}, s ktorou náš koneènı automat nepoèítal. Otázne môu by aj informácie uvedené v blogoch a skutoènos èi dané vzorky skutoène obsahovali injektovanie pomocou \textit{process hollowing}. 
 
-Dôvodov na oznaèenie vzoriek za negatívne aj keï zdroje ukazujú opak, môe by viacero. Samotná vzorka môe by len prechodné úloisko, ktoré môe vytvára novı proces, ktorı u ale \textit{Process Hollowing} vykoná v inom procese ako je nami sledovanı proces. Vzorka môe na svoju úspešnos potrebova internetové pripojenie kde si stiahne ïalšie potrebné veci, alebo kde môu by uloené ïalšie dáta poprípade inštrukcie potrebné na vykonanie procesu ale spojenie s danım serverom je neúspešné. Nami navrhnutı koneènı stavovı automat nemusí obsahova API, ktoré síce umoòia vytvori \textit{Process Hollowing} ale neumonia algoritmu detegova prechod do ïalšieho prechodového stavu.
+Jednou z príèin môe by taktie fakt, e niektoré vzorky nemusia vykonáva \textit{process hollowing} priamo. To znamená e daná vzorka môe napr. uklada spustite¾nı súbor na disk a ten následne spúša. Injektovanie môe by následne a v tom druhom procese, v ktorom u nemáme vloenı náš DLL súbor a teda nedokáeme sledova API volania. Niektoré vzorky taktie zvyknú sahova škodlivé súbory z URL adresy. Detailnejšou analızou sme sa však v práci nezaoberali.
+
