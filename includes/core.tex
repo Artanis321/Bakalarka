@@ -193,10 +193,6 @@ Zapisuje údaje do pamäti v zadanom procese. Celá oblas, do ktorej sa zapisuje, 
 \\
 Nastavuje kontext (t.j. obsah registrov) pre špecifikované vlákno.
 \item
-\textbf{ExitThread}
-\\
-Keï sa táto funkcia zavolá, všetky udalosti aktuálneho vlákna sa zrušia. Podobne všetky èakajúce vstupno-vıstupné udalosti iniciované vláknom sa zrušené a vlákno ukonèí svoju èinnos. 
-\item
 \textbf{NtUnmapViewOfSection}
 \\
 Odmapuje pamä vybraného procesu.
@@ -298,7 +294,6 @@ Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového autom
 			CopyMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
 			WriteProcessMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
 			ResumeThread & S0 & S1 & S2 & S3 & S4 & S6 & S6 \\ \hline
-			ExitThread & S0 & S1 & S2 & S3 & S4 & S6 & S6 \\ \hline
 			SetThreadPriority & S0 & S1 & S2 & S3 & S5 & S5 & S6 \\ \hline
 			
 		\end{tabular}
@@ -330,7 +325,7 @@ Práca sa zaoberá návrhom a implementáciou spôsobu detegovania techniky \textit{P
 \end{figure}
 \noindent
 \\
-Aplikácia na zaèiatku inicializuje mutex, ktorı slúi slúi na koordináciu viacerıch procesov, ktoré vyadujú prístup k rovnakému objektu súèastne.  Následne aplikácia spustí modul na zber na dát, ktorı monitoruje aké API sa volajú v systéme Windows. Pre jednoduchšie monitorovanie vyuívame vo¾ne dostupnú kninicu \textit{Detours}. Aplikácia si nastaví poèiatoènú hodnutu prechodného stavu, ktorı slúi na vyhodnocovanie prítomnosti \textit{Process Hollowing-u}. Po nastavení všetkıch poèiatoènıch hodnôt aplikácia prejde na samotnú detekciu. Vlákno sa uspí na stanovenú dobu a po nastavení mutexu zaèína aplikácia samotnı proces detegovania. Aplikácia si naèíta najnovšie záznami z modulu na zber dát. Zo záznamu aplikácia vyberie volanú API funkciu a zisuje èi k danej API existuje hodnota v matici koneèného automatu. Ak áno, aplikácia zisuje aktuálny prechodnı stav a následne, pomocou koneèného stavového automatu novú hodnotu na ktorú sa prechodnı stav následne zmení. Po vykonaní zmeny nastane kontrola na existenciu ïalších záznamov v súbore ak súbor obsahuje ïalšie záznami, naèíta si ïalší záznam a proces sa opakuje. Ak u aplikácia naèítala všetky záznami spraví sa archivácia záznamov a aplikácia vyhodnocuje prechodnı stav koneèného stavového automatu. Ak prechodnı stav nieje v koneènom stave mutex sa uvo¾ní a aplikácia èaká na ïalšie záznami z modulu na zber dát a cyklus sa opakuje. Keï sa prechodnı stav dostane do koneèného stavu aplikácia oznámi existenciu \textit{Process Hollowing-u} a ukonèí sa.  
+Aplikácia na zaèiatku inicializuje mutex, ktorı slúi na koordináciu viacerıch procesov, ktoré vyadujú prístup k rovnakému objektu súèastne. Po inicializácii si aplikácia vytvorí maticu koneèného stavového automatu, naèítaním jednotlivıch stavov a prechodovıch funkcií z konfiguraèného súboru \textbf{configuration.txt}. Súbor obsahuje zmeny stavov ktoré nastanú pri volaní jednotlivıch  API funkcií. Následne aplikácia spustí modul na zber dát, ktorı monitoruje aké API sa volajú v systéme Windows. Pre jednoduchšie monitorovanie vyuívame vo¾ne dostupnú kninicu \textit{Detours}. Aplikácia si nastaví poèiatoènú hodnutu prechodného stavu, ktorı slúi na vyhodnocovanie prítomnosti \textit{Process Hollowing-u}. Po nastavení všetkıch poèiatoènıch hodnôt aplikácia prejde na samotnú detekciu. Vlákno sa uspí na stanovenú dobu a po nastavení mutexu zaèína aplikácia samotnı proces detegovania. Aplikácia si naèíta najnovšie záznami z modulu na zber dát. Zo záznamu aplikácia vyberie volanú API funkciu a zisuje èi k danej API existuje hodnota v matici koneèného automatu. Ak áno, aplikácia zisuje aktuálny prechodnı stav a následne, pomocou koneèného stavového automatu novú hodnotu na ktorú sa prechodnı stav následne zmení. Po vykonaní zmeny nastane kontrola na existenciu ïalších záznamov v súbore ak súbor obsahuje ïalšie záznami, naèíta si ïalší záznam a proces sa opakuje. Ak u aplikácia naèítala všetky záznami spraví sa archivácia záznamov a aplikácia vyhodnocuje prechodnı stav koneèného stavového automatu. Ak prechodnı stav nieje v koneènom stave mutex sa uvo¾ní a aplikácia èaká na ïalšie záznami z modulu na zber dát a cyklus sa opakuje. Keï sa prechodnı stav dostane do koneèného stavu aplikácia oznámi existenciu \textit{Process Hollowing-u} a ukonèí sa.  
 \subsection{Modul na zber dát}
 \noindent
 
@@ -393,8 +388,14 @@ mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
 \end{lstlisting}
 
 \subsection{Detours}
-\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Je k dispozícii na základe \textit{Open source} licencie a je vo¾ne dostupnı pre komunitu.
-Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza pokyny cie¾ovej funkcie skokom na pouívate¾om zadanú  funkciu. Kód cie¾ovej funkcie je modifikovanı v pamäti, nie na disku, èo umoòuje zachytávanie binárnych funkcií. \cite{detours} Po naèítaní do procesu môe DLL kninica obís akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API.
+\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. Okrem základnıch funkcií Detours obsahuje funkcie na úpravu importnej tabu¾ky DLL ¾ubovo¾ného binárneho súboru, pripojenie ¾ubovo¾nıch údajov k existujúcim binárnym súborom a slúi na naèítanie DLL do nového procesu. \cite{detours} Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza volanie cie¾ovej funkcie skokom na pouívate¾om zadanú  funkciu. Kód cie¾ovej funkcie je modifikovanı v pamäti, nie na disku, èo umoòuje zachytávanie funkcií. \cite{detours} Po naèítaní do procesu môe DLL kninica nahradi akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=12cm]{img/Detours.jpg}
+	\caption{Ukáka pridania kninice Detours do aplikácie.}
+	\label{Detours}
+\end{figure}
 
 \section{Vısledky}\label{results}
 Našu aplikáciu sme testovali v prostredí \textit{Virtual Box}, na systéme Windows 10. Hlavnım cie¾om testov bolo vyskúša naše riešenie na reálnych vzorkách škodlivého kódu, ktorı vyuíva \textit{process hollowing}. Pred samotnımi testami s reálnymi vzorkami sme poèas vıvoja a experimentovania pracovali s ukákovou implementáciou metódy \textit{process hollowing}, dostupnej na \cite{gitHub}. Táto aplikácia dokáe injektova ¾ubovolnı spustite¾nı kód do procesu zadaného prostredníctvom argumentov príkazového riadku. Po dokonèení prvotnıch experimentov, kedy sme úspešne detegovali \textit{process hollowing} na testovacej aplikácii, sme sa posunuli na škodlivé vzorky. V nasledujúcej kapitole uvádzame popis experimentov so škodlovımi vzorkami a vısledky, ktoré sme dosiahli.

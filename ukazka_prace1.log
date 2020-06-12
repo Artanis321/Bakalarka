@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  11 JUN 2020 23:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  12 JUN 2020 19:58
 entering extended mode
 **./ukazka_prace1.tex
 (ukazka_prace1.tex
@@ -755,42 +755,56 @@ Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
 Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
-) (ukazka_prace1.aux
+)
+("D:\App Windows\mikteX\tex/latex/psnfss\pifont.sty"
+Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
+LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
+
+
+("D:\App Windows\mikteX\tex/latex/psnfss\upzd.fd"
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
+
+
+("D:\App Windows\mikteX\tex/latex/psnfss\upsy.fd"
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+)) (ukazka_prace1.aux
 
 LaTeX Warning: Label `UMLDiagram' multiply defined.
 
 )
 \openout1 = `ukazka_prace1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-5.
+8.
  ("D:\App Windows\mikteX\tex/latex/base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 25
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 28
 .
 
 ("D:\App Windows\mikteX\tex/latex/lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box35
-Package hyperref Info: Link coloring ON on input line 25.
+Package hyperref Info: Link coloring ON on input line 28.
 
 ("D:\App Windows\mikteX\tex/latex/hyperref\nameref.sty"
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -803,9 +817,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count138
 )
-LaTeX Info: Redefining \ref on input line 25.
-LaTeX Info: Redefining \pageref on input line 25.
-LaTeX Info: Redefining \nameref on input line 25.
+LaTeX Info: Redefining \ref on input line 28.
+LaTeX Info: Redefining \pageref on input line 28.
+LaTeX Info: Redefining \nameref on input line 28.
 
 (ukazka_prace1.out) (ukazka_prace1.out)
 \@outlinefile=\write3
@@ -849,34 +863,34 @@ Package caption Info: End \AtBeginDocument code.
 <includes/Zadanie.jpg, id=110, 360.74776pt x 484.209pt>
 File: includes/Zadanie.jpg Graphic file (type jpg)
 <use includes/Zadanie.jpg>
-Package pdftex.def Info: includes/Zadanie.jpg  used on input line 31.
+Package pdftex.def Info: includes/Zadanie.jpg  used on input line 34.
 (pdftex.def)             Requested size: 597.50787pt x 802.12433pt.
 
 Overfull \vbox (137.88849pt too high) has occurred while \output is active []
 
 
 [2 <./includes/Zadanie.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 32--32
+Underfull \hbox (badness 10000) in paragraph at lines 35--35
 
  []
 
 
-Underfull \hbox (badness 4886) in paragraph at lines 32--32
+Underfull \hbox (badness 4886) in paragraph at lines 35--35
 []\T1/lmr/m/n/12 Moderné tech-niky na ukrý-vanie £in-nosti
  []
 
 (includes/abstract.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--32
+Underfull \hbox (badness 10000) in paragraph at lines 1--35
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 33--33
+Underfull \hbox (badness 10000) in paragraph at lines 36--36
 
  []
 
 (includes/abstractEN.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--33
+Underfull \hbox (badness 10000) in paragraph at lines 1--36
 
  []
 
@@ -926,7 +940,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \openout6 = `ukazka_prace1.lot'.
 
  [6] (includes/AbbreviationsAndSymbols.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 38--38
+Underfull \hbox (badness 10000) in paragraph at lines 41--41
 
  []
 
@@ -979,7 +993,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--117
  []
 
 [7]
-<img/Diagram.jpg, id=250, 703.62875pt x 1106.1325pt>
+<img/Diagram.jpg, id=252, 703.62875pt x 1106.1325pt>
 File: img/Diagram.jpg Graphic file (type jpg)
 <use img/Diagram.jpg>
 Package pdftex.def Info: img/Diagram.jpg  used on input line 134.
@@ -995,35 +1009,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 155--161
  []
 
 [8] [9 <./img/Diagram.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 200--204
+Underfull \hbox (badness 10000) in paragraph at lines 196--200
 
  []
 
 [10]
 
-LaTeX Warning: Citation `phdetection' on page 11 undefined on input line 211.
+LaTeX Warning: Citation `phdetection' on page 11 undefined on input line 207.
 
 
-Overfull \hbox (3.80917pt too wide) in paragraph at lines 211--212
+Overfull \hbox (3.80917pt too wide) in paragraph at lines 207--208
 []\T1/lmr/m/it/12 PHDetection \T1/lmr/m/n/12 h©adá mod-uly, od ktorých závisí p
 ôvodný spustite©ný pro-gram [[]]. \T1/lmr/m/it/12 PHDe-
  []
 
 
-LaTeX Warning: Citation `hollowfind' on page 11 undefined on input line 215.
+LaTeX Warning: Citation `hollowfind' on page 11 undefined on input line 211.
 
 [11]
-<img/Automat.jpg, id=273, 511.9125pt x 1115.16624pt>
+<img/Automat.jpg, id=275, 511.9125pt x 1115.16624pt>
 File: img/Automat.jpg Graphic file (type jpg)
 <use img/Automat.jpg>
-Package pdftex.def Info: img/Automat.jpg  used on input line 221.
+Package pdftex.def Info: img/Automat.jpg  used on input line 217.
 (pdftex.def)             Requested size: 312.9803pt x 681.79889pt.
 
 
-LaTeX Warning: Float too large for page by 56.56303pt on input line 224.
+LaTeX Warning: Float too large for page by 56.56303pt on input line 220.
 
 
-Overfull \hbox (10.66806pt too wide) in paragraph at lines 240--243
+Overfull \hbox (10.66806pt too wide) in paragraph at lines 236--239
 \T1/lmr/m/n/12 získa´ prís-tupy do uº ex-is-tu-jú-cich vlákien/pro-cesov, t.j. 
 \T1/lmr/m/it/12 Cre-ateThread\T1/lmr/m/n/12 , \T1/lmr/m/it/12 Sus-pendThread\T1
 /lmr/m/n/12 ,
@@ -1033,59 +1047,71 @@ Overfull \hbox (10.66806pt too wide) in paragraph at lines 240--243
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 260.
+(hyperref)                removing `\textasciicaron' on input line 256.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--270
+Underfull \hbox (badness 10000) in paragraph at lines 260--266
 
  []
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 277.
+(hyperref)                removing `\textasciicaron' on input line 273.
 
 [14] [15] [16]
-<img/UML2.jpg, id=298, 785.93625pt x 532.99126pt>
+<img/UML2.jpg, id=300, 785.93625pt x 532.99126pt>
 File: img/UML2.jpg Graphic file (type jpg)
 <use img/UML2.jpg>
-Package pdftex.def Info: img/UML2.jpg  used on input line 317.
+Package pdftex.def Info: img/UML2.jpg  used on input line 312.
 (pdftex.def)             Requested size: 341.43306pt x 231.54842pt.
-<img/UML.jpg, id=299, 753.81625pt x 1059.96pt>
+<img/UML.jpg, id=301, 753.81625pt x 1059.96pt>
 File: img/UML.jpg Graphic file (type jpg)
 <use img/UML.jpg>
-Package pdftex.def Info: img/UML.jpg  used on input line 327.
+Package pdftex.def Info: img/UML.jpg  used on input line 322.
 (pdftex.def)             Requested size: 256.0748pt x 360.05815pt.
  [17 <./img/UML2.jpg>] [18 <./img/UML.jpg>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 339.
+nput line 334.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-39.
+34.
 
 ("D:\App Windows\mikteX\tex/latex/lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [19] [20]
 
-LaTeX Warning: Citation `detours' on page 21 undefined on input line 397.
-
-[21]
-
-LaTeX Warning: Citation `gitHub' on page 22 undefined on input line 400.
+LaTeX Warning: Citation `detours' on page 21 undefined on input line 391.
 
 
-LaTeX Warning: Citation `virusTotal' on page 22 undefined on input line 402.
+LaTeX Warning: Citation `detours' on page 21 undefined on input line 391.
+
+<img/Detours.jpg, id=360, 594.42075pt x 411.33675pt>
+File: img/Detours.jpg Graphic file (type jpg)
+<use img/Detours.jpg>
+Package pdftex.def Info: img/Detours.jpg  used on input line 395.
+(pdftex.def)             Requested size: 341.43306pt x 236.272pt.
+[21 <./img/Detours.jpg>]
+
+LaTeX Warning: Citation `gitHub' on page 22 undefined on input line 401.
 
 
-LaTeX Warning: Citation `anyRun' on page 22 undefined on input line 402.
-
-
-Overfull \hbox (3.71013pt too wide) in paragraph at lines 415--415
-[]\T1/lmr/m/n/12 Win32/Filecoder.Natas.A| 
+Overfull \hbox (7.36778pt too wide) in paragraph at lines 401--402
+[]\T1/lmr/m/n/12 Na²u ap-liká-ciu sme testo-vali v prostredí \T1/lmr/m/it/12 Vi
+r-tual Box\T1/lmr/m/n/12 , na sys-téme Win-dows 10. Hlavným
  []
 
 
-Overfull \hbox (14.56815pt too wide) in paragraph at lines 406--417
- [] 
+LaTeX Warning: Citation `anyRun' on page 22 undefined on input line 405.
+
+
+LaTeX Warning: Citation `virusTotal' on page 22 undefined on input line 405.
+
+
+LaTeX Warning: Citation `anyRun' on page 22 undefined on input line 405.
+
+
+Overfull \hbox (3.71013pt too wide) in paragraph at lines 419--419
+[]\T1/lmr/m/n/12 Win32/Filecoder.Natas.A| 
  []
 
 [22]) [23] (includes/conclusion.tex) [24
@@ -1108,20 +1134,20 @@ Overfull \hbox (14.56815pt too wide) in paragraph at lines 406--417
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 51.
+(hyperref)                removing `\textasciicaron' on input line 54.
 
 (includes/prilohaA.tex)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 52.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 55.
  [2
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 52.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
  (ukazka_prace1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 52.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 52.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 55.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 55.
 Package rerunfilecheck Info: File `ukazka_prace1.out' has not changed.
-(rerunfilecheck)             Checksum: AFCD266912BE025098060E212FA40083;1510.
+(rerunfilecheck)             Checksum: A0B9894B6012027F48CAEED54CAA4E7F;1482.
 
 
 LaTeX Warning: There were undefined references.
@@ -1129,26 +1155,27 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 52.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 55.
  ) 
 Here is how much of TeX's memory you used:
- 13307 strings out of 492450
- 194921 string characters out of 3132532
- 519312 words of memory out of 3000000
- 17215 multiletter control sequences out of 15000+200000
- 68829 words of font info for 46 fonts, out of 3000000 for 9000
+ 13364 strings out of 492450
+ 195732 string characters out of 3132532
+ 518312 words of memory out of 3000000
+ 17259 multiletter control sequences out of 15000+200000
+ 69519 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,11n,65p,1584b,1864s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 48i,11n,65p,1834b,1969s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/App Windows/mikteX/fonts/enc/dvips/lm/lm-ec.enc}{D:/App Windows/mikteX/fo
 nts/enc/dvips/lm/lm-mathit.enc}{D:/App Windows/mikteX/fonts/enc/dvips/lm/lm-rm.
 enc}{D:/App Windows/mikteX/fonts/enc/dvips/lm/lm-ts1.enc}<D:/App Windows/mikteX
 /fonts/type1/public/lm/lmbx12.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/
 lmcsc10.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmmi12.pfb><D:/App Win
 dows/mikteX/fonts/type1/public/lm/lmr12.pfb><D:/App Windows/mikteX/fonts/type1/
-public/lm/lmri12.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on ukazka_prace1.pdf (36 pages, 621747 bytes).
+public/lm/lmri12.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmtt10.pfb><D
+:/App Windows/mikteX/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on ukazka_prace1.pdf (36 pages, 787209 bytes).
 PDF statistics:
- 451 PDF objects out of 1000 (max. 8388607)
- 132 named destinations out of 1000 (max. 500000)
- 218 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 459 PDF objects out of 1000 (max. 8388607)
+ 133 named destinations out of 1000 (max. 500000)
+ 223 words of extra memory for PDF output out of 10000 (max. 10000000)
 

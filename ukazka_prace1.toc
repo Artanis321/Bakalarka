@@ -17,10 +17,10 @@
 \contentsline {subsection}{\numberline {5.1}Algoritmus}{18}{subsection.21}%
 \contentsline {subsection}{\numberline {5.2}Modul na zber d\'at}{19}{subsection.23}%
 \contentsline {subsection}{\numberline {5.3}Detours}{21}{subsection.72}%
-\contentsline {section}{\numberline {6}V\'ysledky}{22}{section.73}%
-\contentsline {subsection}{\numberline {6.1}Experiment a vyhodnotenie}{22}{subsection.74}%
-\contentsline {subsection}{\numberline {6.2}Vyhodnotenie v\'ysledkov testovania}{23}{subsection.76}%
-\contentsline {section}{Z\'{a}ver}{24}{section*.77}%
-\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{25}{section*.78}%
-\contentsline {section}{Pr\'{i}lohy}{I}{section*.79}%
-\contentsline {section}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{section.81}%
+\contentsline {section}{\numberline {6}V\'ysledky}{22}{section.74}%
+\contentsline {subsection}{\numberline {6.1}\v Skodliv\'e vzorky}{22}{subsection.75}%
+\contentsline {subsection}{\numberline {6.2}Vyhodnotenie}{23}{subsection.77}%
+\contentsline {section}{Z\'{a}ver}{24}{section*.78}%
+\contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{25}{section*.79}%
+\contentsline {section}{Pr\'{i}lohy}{I}{section*.80}%
+\contentsline {section}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{section.82}%
