@@ -107,17 +107,18 @@ Loki je ïalšou variáciou staršieho malvéru Kronos. Rovnako ako Osiris, aj Loki v
 Celkovı preh¾ad pouítıch techník v súèasnım vzorkách škodlivého kódu môeme vidie v tabu¾ke è.\ref{modulyVlastnosti}.
 \begin{table}[!htbp]
 	\begin{center}
-		\begin{tabular}{p{4cm}|c|c|c|c|c|c|c|c}
-			& \multicolumn{7}{c}%
+		\begin{tabular}{|p{6cm}|c|c|c|c|c|c|c|c|}
+			\hline
+			& \multicolumn{7}{c|}%
 			{\textbf{Technika ukrıvania}}\\ \hline
 			\textbf{Názov malvéru} &\begin{sideways} Sodinokibi \end{sideways} &\begin{sideways} Emotet \end{sideways} &\begin{sideways} ZeuS \end{sideways} & \begin{sideways} Dridex \end{sideways} & \begin{sideways} Mirai \end{sideways} & \begin{sideways} Osiris \end{sideways}  & \begin{sideways} Loki \end{sideways} \\ \hline
-			DLL Injection & & X & X & & X & &	\\ \hline
-			Process hollowing & & & & & & X & X	\\ \hline
-			Thread Execution Hijacking & & & & & & & 	\\ \hline
-			Portable Executable Injection  & X & & & X & & &	\\ \hline
-			Hook injection  & & & & & & &	\\ \hline
-			APC Injection  & & & & & & &	\\ \hline
-			Extra windows memory injection & & & & & & &	\\ \hline
+			\textit{DLL Injection} & & \xmark & \xmark & & \xmark & &	\\ \hline
+			\textit{Process hollowing} & & & & & & \xmark & \xmark	\\ \hline
+			\textit{Thread Execution Hijacking} & & & & & & & 	\\ \hline
+			\textit{Portable Executable Injection}  & \xmark & & & \xmark & & &	\\ \hline
+			\textit{Hook injection}  & & & & & & &	\\ \hline
+			\textit{APC Injection}  & & & & & & &	\\ \hline
+			\textit{Extra windows memory injection} & & & & & & &	\\ \hline
 		\end{tabular}
 	\caption{Techniky ukrıvania èinnosti vyuívané súèasnım malvérom.}
 \label{modulyVlastnosti}
@@ -214,7 +215,7 @@ Doposia¾ známe existujúce riešenia na detekciu techniky \textit{process hollowin
 \noindent
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=11cm]{img/Automat.jpg}
+	\includegraphics[width=10cm]{img/Automat.jpg}
 	\caption{Koneènı stavovı automat reprezentujúci postupnos API volaní vedúcich k ukrytiu malvéru.}
 	\label{automat}
 \end{figure}
@@ -255,28 +256,30 @@ Algoritmus na detegovanie funguje na jednoduchom princípe. Podozrivú vzorku spus
 
 \subsection{Koneènı stavovı automat}
 
-Koneènı automat je teoretickı vıpoètovı model pouívanı v informatike na štúdium rôznych formálych jazykoch. Popisuje ve¾mi jednoduchı poèítaè, ktorı môe by v jednom z nieko¾kıch stavov, medzi ktorımi prechádza na základe symbolov, ktoré èíta zo vstupu. Mnoina stavov je koneèná , koneènı automat nemá iadnu ïalšiu pamä, okrem informácie o aktuálnom stave. V informatike sa rozlišuje okrem základného deterministického èi nedeterministického automatu tie Mealyho a Moorov automat.
+Koneènı automat je teoretickı vıpoètovı model pouívanı v informatike na štúdium rôznych formálych jazykoch. Popisuje ve¾mi jednoduchı poèítaè, ktorı môe by v jednom z nieko¾kıch stavov, medzi ktorımi prechádza na základe symbolov, ktoré èíta zo vstupu. Mnoina stavov je koneèná. Automat nemá iadnu ïalšiu pamä, okrem informácie o aktuálnom stave. V informatike sa rozlišuje okrem základného deterministického èi nedeterministického automatu tie Mealyho a Moorov automat.
 
-Koneènı automat je definovanı ako usporiadaná pätica (S, $\Sigma$ , $\sigma$, s, F) kde:\\
-S je koneèná neprázdna mnoina stavov. \\
-$\Sigma$ je koneèná neprázdna mnoina vstupnıch symbolov, nazıvaná abeceda.\\
-$\sigma$ je prechodová funkcia respektíve prechodová tabu¾ka popisujúca prechod medzi jednotlivımi stavmi.\\
-s je poèatoèná stav patriaci do mnoiny stavov S.\\
-F je mnoina finálych akceptujúcich stavov.\\
+Koneènı automat je definovanı ako usporiadaná pätica ($\Sigma$, $K$, $q_0$, $\delta$, $F$) kde:
 
-Na zaèiatku sa automat nachádza v definovanom poèiatoènom stave. Ïalej v kadom kroku preèíta jeden symbol zo vstupu a prejde do stavu, ktorı je danı hodnotou, ktorá v prechodovej tabu¾ke zodpovedá aktuálnemu stavu a preèítanému symbolu. Potom pokraèuje èítaním ïalšieho symbolu zo vstupu, ïalším prechodom pod¾a prechodovej tabu¾ky atï.
+\begin{itemize}
+	\item $\Sigma$ je koneèná neprázdna mnoina vstupnıch symbolov, nazıvanıch aj abeceda. V našom prípade sa jedná o jednotlivé API volania.
+	\item $K$ je koneèná mnoina stavov ako napr. \textbf{alokácia pamäte} alebo \textbf{process hollowing}.
+	\item $q_0$ je poèiaènı stav a platí $q_0 \in K$. V prípade našeho automatu sa jedná o stav \textbf{štart}, v ktorom sa èaká na prvé vstupné symboly, ktoré reprezentujú napr. vytvorenie pozastaveného vlákna.
+	\item $\delta$ je prechodová funkcia, popisujúca prechod medzi jednotlivımi stavmi. Platí: $\delta: K \times \Sigma \to K$.
+	\item $F$ je moina finálnych akceptaènıch stavov. V našom automate predstavuje stav, v ktorom detegujeme \textit{process hollowing}.
+\end{itemize}
 
-Pod¾a toho, èi automat skonèí po preèítaní vstupe v stave, ktorı patrí do mnoiny prijímajúcich stavov, platí, e automat buï danı vstup prijal, alebo neprijal. Mnoina všetkıch reazcov, ktoré danı automat príjme, tvorí regulárny jazyk.
+Na zaèiatku sa automat nachádza v definovanom poèiatoènom stave. Ïalej, v kadom kroku preèíta jeden symbol zo vstupu a prejde do stavu, ktorı je danı hodnotou, ktorá v prechodovej tabu¾ke zodpovedá aktuálnemu stavu a preèítanému symbolu. Potom pokraèuje èítaním ïalšieho symbolu zo vstupu a ïalším prechodom pod¾a prechodovej tabu¾ky.
 
-V našom prípade abecedu tvorí mnoina nami vybranıch API windows funkcií, ktoré by potenciálne mal najèastejšie vyuíva malvér vyuívajúci techniku \textit{Process Hollowing} na ukrytie svojej èinnosti. 
+Pod¾a toho, èi automat skonèí po preèítaní vstupe v stave, ktorı patrí do mnoiny akceptaènıch stavov, platí, e automat buï danı vstup prijal, alebo neprijal. Mnoina všetkıch reazcov, ktoré danı automat príjme, tvorí regulárny jazyk.
 
 \subsection{Matica koneèného stavového automatu}
-Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového automatu. Tieto prechody sú definované ako volania vybranıch API funkcií, ktoré posúvajú automat cez jednotlivé stavy pod¾a toho v akom stave je aktuálne automat a do akého nového stavu sa automat dostane. Koneèná mnoina stavov je reprezentovaná stavmi \textbf{štart}, \textbf{vytvorenie procesu}, \textbf{alokácia pamäte}, \textbf{kopírovanie malvéru}, \textbf{nastavenie IP} a \textbf{spustenie vlákna}. Poèiatoènı stav automatu je \textbf{štart} a koneènı stav je \textbf{process hollowing}, ktorı oznaèuje e nastalo injektovanie kódu.
+Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového automatu. Tieto prechody sú definované ako volania vybranıch API funkcií, ktoré posúvajú automat cez jednotlivé stavy pod¾a toho v akom stave je aktuálne automat a do akého nového stavu sa automat dostane. Koneèná mnoina stavov je reprezentovaná stavmi \textbf{štart}, \textbf{vytvorenie procesu}, \textbf{alokácia pamäte}, \textbf{kopírovanie malvéru}, \textbf{nastavenie IP} a \textbf{spustenie vlákna}. Poèiatoènı stav automatu je \textbf{štart} a koneènı stav je \textbf{process hollowing}, ktorı oznaèuje e nastalo injektovanie kódu. Maticu prechodov mono vidie v tabu¾ke è.\ref{maticaPrechodov}.
 
 \begin{table}[!htbp]
 	\begin{center}
-		\begin{tabular}{p{5cm}|c|c|c|c|c|c|c}
-			& \multicolumn{7}{c}%
+		\begin{tabular}{|p{5cm}|c|c|c|c|c|c|c|}
+			\hline
+			& \multicolumn{7}{c|}%
 			{\textbf{Prechodové stavy}}\\ \hline
 			\textbf{Volané API funkcie} &\begin{sideways} Štart \end{sideways} &\begin{sideways} Vytvorenie procesu/ Získanie prístupu do procesu \end{sideways} &\begin{sideways} Odmapovanie pamäte existujúceho procesu \end{sideways} &\begin{sideways} Alokácia virtuálnej pamäte \end{sideways} & \begin{sideways} Kopírovanie malvéru do alokovanej pamäte \end{sideways} & \begin{sideways} Nastavenie IP na spustenie malvéru \end{sideways} & \begin{sideways} Spustenie vlákna/ Spustenie pozastaveného procesu \end{sideways}  \\ \hline
 			Skratky stavov & S0 & S1 & S2 & S3 & S4 & S5 & S6 \\ \hline
@@ -297,7 +300,7 @@ Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového autom
 			SetThreadPriority & S0 & S1 & S2 & S3 & S5 & S5 & S6 \\ \hline
 			
 		\end{tabular}
-		\caption{Matica prechodov medzi stavmi pri volaniach API.}
+		\caption{Matica prechodov medzi stavmi pri API volaniach.}
 		\label{maticaPrechodov}
 	\end{center}
 \end{table}
