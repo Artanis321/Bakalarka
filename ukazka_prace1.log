@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  13 JUN 2020 20:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  13 JUN 2020 23:39
 entering extended mode
 **./ukazka_prace1.tex
 (ukazka_prace1.tex
@@ -985,7 +985,7 @@ oré umoº¬uje úto£níkovi
  []
 
 [6] [7]
-<img/Diagram.jpg, id=257, 703.62875pt x 1106.1325pt>
+<img/Diagram.jpg, id=255, 703.62875pt x 1106.1325pt>
 File: img/Diagram.jpg Graphic file (type jpg)
 <use img/Diagram.jpg>
 Package pdftex.def Info: img/Diagram.jpg  used on input line 135.
@@ -1019,7 +1019,7 @@ Overfull \hbox (3.80917pt too wide) in paragraph at lines 208--209
 LaTeX Warning: Citation `hollowfind' on page 11 undefined on input line 212.
 
 [11]
-<img/Automat.jpg, id=280, 511.9125pt x 1115.16624pt>
+<img/Automat.jpg, id=278, 511.9125pt x 1115.16624pt>
 File: img/Automat.jpg Graphic file (type jpg)
 <use img/Automat.jpg>
 Package pdftex.def Info: img/Automat.jpg  used on input line 218.
@@ -1043,12 +1043,12 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                removing `\textasciicaron' on input line 275.
 
 [14] [15] [16]
-<img/UML2.jpg, id=308, 693.59125pt x 372.39125pt>
+<img/UML2.jpg, id=306, 693.59125pt x 372.39125pt>
 File: img/UML2.jpg Graphic file (type jpg)
 <use img/UML2.jpg>
 Package pdftex.def Info: img/UML2.jpg  used on input line 315.
 (pdftex.def)             Requested size: 341.43306pt x 183.31995pt.
-<img/UML.jpg, id=309, 753.81625pt x 964.60374pt>
+<img/UML.jpg, id=307, 753.81625pt x 964.60374pt>
 File: img/UML.jpg Graphic file (type jpg)
 <use img/UML.jpg>
 Package pdftex.def Info: img/UML.jpg  used on input line 326.
@@ -1060,12 +1060,12 @@ LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
  ("D:\App Windows\mikteX\tex/latex/lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [17 <./img/UML2.jpg>] [18 <./img/UML.jpg>]
-<img/configuration.png, id=321, 473.77pt x 169.63374pt>
+<img/configuration.png, id=319, 473.77pt x 169.63374pt>
 File: img/configuration.png Graphic file (type png)
 <use img/configuration.png>
 Package pdftex.def Info: img/configuration.png  used on input line 341.
 (pdftex.def)             Requested size: 284.52756pt x 101.87679pt.
-<img/Result.jpg, id=324, 174.05025pt x 146.34676pt>
+<img/Result.jpg, id=322, 174.05025pt x 146.34676pt>
 File: img/Result.jpg Graphic file (type jpg)
 <use img/Result.jpg>
 Package pdftex.def Info: img/Result.jpg  used on input line 352.
@@ -1073,38 +1073,32 @@ Package pdftex.def Info: img/Result.jpg  used on input line 352.
  [19 <./img/configuration.png> <./img/Result.jpg>]
 [20]
 
-LaTeX Warning: Citation `detours' on page 21 undefined on input line 415.
+LaTeX Warning: Citation `detours' on page 21 undefined on input line 413.
 
 
-LaTeX Warning: Citation `detours' on page 21 undefined on input line 415.
+LaTeX Warning: Citation `detours' on page 21 undefined on input line 413.
 
-[21]
-<img/Detours.jpg, id=380, 594.42075pt x 411.33675pt>
-File: img/Detours.jpg Graphic file (type jpg)
-<use img/Detours.jpg>
-Package pdftex.def Info: img/Detours.jpg  used on input line 420.
-(pdftex.def)             Requested size: 341.43306pt x 236.272pt.
- [22 <./img/Detours.jpg>]
+[21] [22]
 
-LaTeX Warning: Citation `gitHub' on page 23 undefined on input line 426.
+LaTeX Warning: Citation `gitHub' on page 23 undefined on input line 418.
 
 
-Overfull \hbox (7.36778pt too wide) in paragraph at lines 426--427
+Overfull \hbox (7.36778pt too wide) in paragraph at lines 418--419
 []\T1/lmr/m/n/12 Na²u ap-liká-ciu sme testo-vali v prostredí \T1/lmr/m/it/12 Vi
 r-tual Box\T1/lmr/m/n/12 , na sys-téme Win-dows 10. Hlavným
  []
 
 
-LaTeX Warning: Citation `anyRun' on page 23 undefined on input line 430.
+LaTeX Warning: Citation `anyRun' on page 23 undefined on input line 422.
 
 
-LaTeX Warning: Citation `virusTotal' on page 23 undefined on input line 430.
+LaTeX Warning: Citation `virusTotal' on page 23 undefined on input line 422.
 
 
-LaTeX Warning: Citation `anyRun' on page 23 undefined on input line 430.
+LaTeX Warning: Citation `anyRun' on page 23 undefined on input line 422.
 
 
-Overfull \hbox (3.71013pt too wide) in paragraph at lines 444--444
+Overfull \hbox (3.71013pt too wide) in paragraph at lines 436--436
 []\T1/lmr/m/n/12 Win32/Filecoder.Natas.A| 
  []
 
@@ -1141,7 +1135,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 55.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 55.
 Package rerunfilecheck Info: File `ukazka_prace1.out' has not changed.
-(rerunfilecheck)             Checksum: 76BFAFF871CA83FDC6EADFBBD872C836;1482.
+(rerunfilecheck)             Checksum: 895B8AB1F5532F8AE9F15B84BBD41374;1482.
 
 
 LaTeX Warning: There were undefined references.
@@ -1149,13 +1143,13 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 55.
  ) 
 Here is how much of TeX's memory you used:
- 13379 strings out of 492450
- 195986 string characters out of 3132532
- 517312 words of memory out of 3000000
- 17268 multiletter control sequences out of 15000+200000
+ 13357 strings out of 492450
+ 195717 string characters out of 3132532
+ 515312 words of memory out of 3000000
+ 17250 multiletter control sequences out of 15000+200000
  69519 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,11n,65p,1636b,1247s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 48i,11n,65p,1298b,1247s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/App Windows/mikteX/fonts/enc/dvips/lm/lm-ec.enc}{D:/App Windows/mikteX/fo
 nts/enc/dvips/lm/lm-mathsy.enc}{D:/App Windows/mikteX/fonts/enc/dvips/lm/lm-rm.
 enc}{D:/App Windows/mikteX/fonts/enc/dvips/lm/lm-mathit.enc}{D:/App Windows/mik
@@ -1166,9 +1160,9 @@ dows/mikteX/fonts/type1/public/lm/lmmi12.pfb><D:/App Windows/mikteX/fonts/type1
 App Windows/mikteX/fonts/type1/public/lm/lmri12.pfb><D:/App Windows/mikteX/font
 s/type1/public/lm/lmsy10.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmtt1
 0.pfb><D:/App Windows/mikteX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on ukazka_prace1.pdf (37 pages, 823010 bytes).
+Output written on ukazka_prace1.pdf (37 pages, 656292 bytes).
 PDF statistics:
- 486 PDF objects out of 1000 (max. 8388607)
- 136 named destinations out of 1000 (max. 500000)
- 233 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 481 PDF objects out of 1000 (max. 8388607)
+ 133 named destinations out of 1000 (max. 500000)
+ 228 words of extra memory for PDF output out of 10000 (max. 10000000)
 

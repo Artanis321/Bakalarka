@@ -367,8 +367,6 @@ void writeFunctionToFile(std::string originalFunkcion)
 	
 	if (ret == WAIT_OBJECT_0)
 	{
-		time_t now = time(NULL);
-		tm* ltm = localtime(&now);
 		std::ofstream myFile("api_data.txt", std::ofstream::app | std::ofstream::out);
 		
 		if (myFile.is_open())
@@ -412,15 +410,9 @@ switch (ul_reason_for_call)
 
 \subsection{Detours}
 
-\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. \cite{detours} Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza volanie cie¾ovej funkcie skokom na pouívate¾om zadanú funkciu. Okrem základnıch funkcií obsahuje Detours aj funkcie na úpravu importnej tabu¾ky DLL ¾ubovo¾ného binárneho súboru, pripojenie ¾ubovo¾nıch segmentov údajov k existujúcim binárnym súborom a na naèítanie DLL do nového procesu.\cite{detours} Po naèítaní do procesu môe DLL kninica nahradi akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API. 
+\textit{Detours} je kninica urèená na monitorovanie API volaní v systéme Windows. \cite{detours} Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza volanie cie¾ovej funkcie skokom na pouívate¾om zadanú funkciu. Okrem základnıch funkcií obsahuje Detours aj funkcie na úpravu importnej tabu¾ky DLL ¾ubovo¾ného binárneho súboru, pripojenie ¾ubovo¾nıch segmentov údajov k existujúcim binárnym súborom a na naèítanie DLL do nového procesu.\cite{detours} Po naèítaní do procesu môe DLL kninica nahradi akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API. 
 
 Naša aplikácia vyuíva \textit{Detours} pre jednoduchšie sledovanie API volaní v module na zber dát. Okrem sledovania nám umoòuje nahrádza pôvodné API nami vybranımi a modifikovanımi API funkciami, ktoré sú obsiahnuté v DLL kninici \textbf{Hook.dll}. Tieto funkcie je moné ve¾mi jednoduchım spôsobom nahradi ako ukazujeme vo vıpise è. 4.
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=12cm]{img/Detours.jpg}
-	\caption{Ukáka pridania kninice Detours do modulu na zber dát.}
-	\label{Detours}
-\end{figure}
 
 \section{Vısledky}\label{results}
 Našu aplikáciu sme testovali v prostredí \textit{Virtual Box}, na systéme Windows 10. Hlavnım cie¾om testov bolo vyskúša naše riešenie na reálnych vzorkách škodlivého kódu, ktorı vyuíva \textit{process hollowing}. Pred samotnımi testami s reálnymi vzorkami sme poèas vıvoja a experimentovania pracovali s ukákovou implementáciou metódy \textit{process hollowing}, dostupnej na \cite{gitHub}. Táto aplikácia dokáe injektova ¾ubovolnı spustite¾nı kód do procesu zadaného prostredníctvom argumentov príkazového riadku. Po dokonèení prvotnıch experimentov, kedy sme úspešne detegovali \textit{process hollowing} na testovacej aplikácii, sme sa posunuli na škodlivé vzorky. V nasledujúcej kapitole uvádzame popis experimentov so škodlovımi vzorkami a vısledky, ktoré sme dosiahli.
