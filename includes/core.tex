@@ -295,6 +295,7 @@ Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového autom
 			VirtualAlloc & S0 & S1 & S3 & S3 & S4 & S5 & S6 \\ \hline
 			VirtualAllocEx & S0 & S1 & S3 & S3 & S4 & S5 & S6 \\ \hline
 			CopyMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
+			ReadProcessMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
 			WriteProcessMemory & S0 & S1 & S2 & S4 & S4 & S5 & S6 \\ \hline
 			ResumeThread & S0 & S1 & S2 & S3 & S4 & S6 & S6 \\ \hline
 			SetThreadPriority & S0 & S1 & S2 & S3 & S5 & S5 & S6 \\ \hline
@@ -307,32 +308,57 @@ Matica reprezentuje prechody medzi jednotlivımi stavmi koneèného stavového autom
 
 \section{Implementácia}\label{implementation}
 
-Pre implementáciu riešenia sme zvolili programovanı jazyk C++, pretoe primárnym testovavím prostredím budú najèastejšie pouívané systémy Windows. Na simuláciu testovanie prostredia pouijeme \textbf{Virtual Box} v ktorom budeme simulova bené pouívanie systému.
-Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje pracova s najnovšími verziami systému a aj u¾ahèi jednuduchšiu implementáciu algoritmu.
+Pre implementáciu riešenia sme zvolili programovanı jazyk C++, pretoe primárnym testovavím prostredím budú najèastejšie pouívané systémy Windows. Na simuláciu testovanie prostredia pouijeme \textbf{Virtual Box} v ktorom budeme simulova bené pouívanie systému. Zvolené vıvojové prostredie je \textbf{Visual Studio 2019}, ktoré nám umoòuje pracova s najnovšími verziami systému a aj u¾ahèi jednuduchšiu implementáciu algoritmu.
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=12cm]{img/UML2.jpg}
 	\caption{Moduly aplikácie}
-	\label{UMLDiagram}
+	\label{modul}
 \end{figure}
 
-Práca sa zaoberá návrhom a implementáciou spôsobu detegovania techniky \textit{Process Hollowing}, ktorú vedia vyuíva niektoré malvéry. Aplikácia urèená na detegovanie, bude bea v reálnom èase, teda je schopná detegova \textit{Process Hollowing} poèas jeho behu. Vstupné dáta do tejto aplikácie budú predstavova volané API funkcie procesom a z tıchto API funkcií bude aplikácia vyhodnocova a poskytova vısledky. Aplikácia bude pozostáva z nasledujúcich èastí. Mutex, ktorı bude zabezpeèova plynulos a bezpeènos programu. Modul na injectovanie DLL, ktorı bude vklada DLL kninicu na odchytávanie volanıch API. Modul na vyhodnocovanie prítomnosti \textit{Process Hollowing-u}, ktorı sa skladá z viacerıch èastí. Modulu na naèítanie najnovších záznamov z DLL kninice. Koneèného stavového automatu reprezentovaného maticou, oproti ktorej bude aplikácia porovnáva prechody medzi jednotlivımi stavmi pod¾a volanıch API. Archiváciou, ktorá zabezpeèí archiváciu dát po preèítaní najnovších záznamov z DLL kninice. A vyhodnocovacou funckiou, ktorá bude vyhodnocova kedy sa prechodnı stav nastaví do koneèného stavu a oznaèí vzorku za pozitívnu. 
+Aplikácia sa skladá z troch základnıch modulov. DLL kninice \textbf{Hook.dll}, ktorá slúi na zachytávanie API volaní vo vybranom procese. Volanú API ochytí, zapíše do súboru a zavolá pôvodne volanú funkciu. ïalším modulom je \textbf{Modul na injektovanie DLL kninice do vzorky}, cez ktorú bolú následne sledované API. Poslednım modulom je \textbf{Koneènı automat}, ktorı je repezentovanı maticou stavov a funkciami urèujúce prechody medzi stavmi koneèného automatu. Samotná detekèná aplikácia pri behu injektuje pri behu DLL do vzorky, odchytené API volania vyhodnocuje pod¾a koneèného automatu. Ak je automat v koneènom stave aplikácia oznámi existenciu techniky \textit{Process Hollowing} a ukonèí èinnos. 
+
 \subsection{Algoritmus}
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=9cm]{img/UML.jpg}
+	\includegraphics[width=12cm]{img/UML.jpg}
 	\caption{UML diagram vyvıjaného algoritmu.}
 	\label{UMLDiagram}
 \end{figure}
-\noindent
-\\
-Aplikácia na zaèiatku inicializuje mutex, ktorı slúi na koordináciu viacerıch procesov, ktoré vyadujú prístup k rovnakému objektu súèastne. Po inicializácii si aplikácia vytvorí maticu koneèného stavového automatu, naèítaním jednotlivıch stavov a prechodovıch funkcií z konfiguraèného súboru \textbf{configuration.txt}. Súbor obsahuje zmeny stavov ktoré nastanú pri volaní jednotlivıch  API funkcií. Následne aplikácia spustí modul na zber dát, ktorı monitoruje aké API sa volajú v systéme Windows. Pre jednoduchšie monitorovanie vyuívame vo¾ne dostupnú kninicu \textit{Detours}. Aplikácia si nastaví poèiatoènú hodnutu prechodného stavu, ktorı slúi na vyhodnocovanie prítomnosti \textit{Process Hollowing-u}. Po nastavení všetkıch poèiatoènıch hodnôt aplikácia prejde na samotnú detekciu. Vlákno sa uspí na stanovenú dobu a po nastavení mutexu zaèína aplikácia samotnı proces detegovania. Aplikácia si naèíta najnovšie záznami z modulu na zber dát. Zo záznamu aplikácia vyberie volanú API funkciu a zisuje èi k danej API existuje hodnota v matici koneèného automatu. Ak áno, aplikácia zisuje aktuálny prechodnı stav a následne, pomocou koneèného stavového automatu novú hodnotu na ktorú sa prechodnı stav následne zmení. Po vykonaní zmeny nastane kontrola na existenciu ïalších záznamov v súbore ak súbor obsahuje ïalšie záznami, naèíta si ïalší záznam a proces sa opakuje. Ak u aplikácia naèítala všetky záznami spraví sa archivácia záznamov a aplikácia vyhodnocuje prechodnı stav koneèného stavového automatu. Ak prechodnı stav nieje v koneènom stave mutex sa uvo¾ní a aplikácia èaká na ïalšie záznami z modulu na zber dát a cyklus sa opakuje. Keï sa prechodnı stav dostane do koneèného stavu aplikácia oznámi existenciu \textit{Process Hollowing-u} a ukonèí sa.  
+Aplikácia na zaèiatku inicializuje mutex, ktorı slúi na koordináciu viacerıch procesov, ktoré vyadujú prístup k rovnakému objektu súèastne. 
+
+\begin{lstlisting}[caption=Inicializácia mutexu.,label={vypiS5}]
+HANDLE mutexOnThreadSafe;
+mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
+\end{lstlisting}
+
+Po inicializácii si aplikácia vytvorí maticu koneèného stavového automatu, naèítaním jednotlivıch stavov a prechodovıch funkcií z konfiguraèného súboru \textbf{configuration.txt}.
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=10cm]{img/configuration.png}
+	\caption{Ukáka konfiguraèného súboru pre API ResumeThread.}
+	\label{Config}
+\end{figure}
+
+Konfiguraènı súbor na obrázku è.\ref{Config} sa skladá z troch ståpcov a obsahuje definíciu prechodov pre kadú nami vybranú API funkciu. Prvı ståpec definuje stav pred volaním API funkcie. Prostrednı ståpec reprezentuje API funckiu cez ktorú sa automat dostane do ïalšieho stavu. Poslednı ståpec reprezentuje novı stav koneèného automatu. 
+ 
+Následne aplikácia spustí modul na zber dát, ktorı monitoruje aké API sa volajú vo vzorke. Pre jednoduchšie monitorovanie vyuívame vo¾ne dostupnú kninicu \textit{Detours}. Aplikácia si nastaví poèiatoènú hodnutu prechodného stavu, ktorı slúi na vyhodnocovanie prítomnosti \textit{Process Hollowing-u}. Po nastavení všetkıch poèiatoènıch hodnôt aplikácia prejde na samotnú detekciu. Vlákno sa uspí na stanovenú dobu a po nastavení mutexu zaèína aplikácia samotnı proces detegovania. Aplikácia si naèíta najnovšie záznami z modulu na zber dát. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=9cm]{img/Result.jpg}
+	\caption{Ukáka súboru s API funkciami z modulu na zber dát.}
+	\label{Result}
+\end{figure}
+
+Zo záznamu aplikácia vyberie volanú API funkciu a zisuje èi k danej API existuje hodnota v matici koneèného automatu. Ak áno, aplikácia zisuje aktuálny stav a následne, pomocou koneèného stavového automatu aj novú hodnotu stavu. Ak súbor obsahuje ïalšie záznami, naèíta si ïalší záznam a proces sa opakuje. Aplikácia následne vykoná archiváciu záznamov a vyhodnotí èi je automat v koneènom stave. Ak automat nie je v koneènom stave mutex sa uvo¾ní a aplikácia èaká na ïalšie záznami z modulu na zber dát a cyklus sa opakuje. Ak sa automat nachádza v koneènom stave aplikácia ohlási existenciu techniky \textit{Process Hollowing} a aplikácia ukonèí svojú èinnos.  
 \subsection{Modul na zber dát}
 \noindent
 
-Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funkcií, ku ktorım je následne definované aj ich pôvodné volanie. Okrem volania konkrétnej API funkcie aj do pripraveného textového súboru zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile}, ktoré sú následne pouité v aplikácii na detegovanie prítomnosti \textit{Process Hollowing-u} v beiacom procese. 
+Modul na zber dát predstavuje DLL kninicu (\textbf{Hook.dll}) vyuívanú na vloenie do vybraného procesu, cez ktorú sa následne odchytávajú vybrané API funkcie zapísaním do textového súboru. Modul sa skladá z dvoch èastí. Prvá èas predstavuje definície vybranıch API funkcií, ku ktorım je následne definované aj ich pôvodné volanie. Okrem volania konkrétnej API funkcie zapíše èas a volanú API funkciu vo \textbf{writeFunctionToFile} do pripraveného textového súboru obrázok è.\ref{Result}.
 
 \begin{lstlisting}[caption=Implementácia funkcie writeFunctionToFile.,label={vypis1}]
 void writeFunctionToFile(std::string originalFunkcion) 
@@ -347,15 +373,15 @@ void writeFunctionToFile(std::string originalFunkcion)
 		
 		if (myFile.is_open())
 		{
-			myFile << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << ";" + originalFunkcion << endl;
+			myFile << Id << ";" + originalFunkcion << endl;
 			myFile.close();
 		}
-		
+		Id++;
 		ReleaseMutex(hMutex);
 	}
 }
 \end{lstlisting}
-Druhá èas aplikácie u slúi len na nahradenie pôvodnej volanej API funkcie (modifikovanou funkciou), ktorá je rozšírenia o zapisovanie volanej API do súboru. Pôvodnú funkciu \textit{SetThreadContext} urèenú na nastavenie \textit{Instriction Pointer} v tomto module nahradíme funkciou \textit{HookSetThreadContext}, ktorá okrem volania pôvodnej funkcie volá aj funkciu \textbf{writeFunctionToFile} na zapísanie API funkcie do predpripraveného súboru.
+Druhá èas aplikácie nahrádza volanie pôvodnej API funkcie modifikovanou funkciou. Pôvodnú funkciu \textit{SetThreadContext} nahradíme funkciou \textit{HookSetThreadContext}, ktorá okrem volania pôvodnej funkcie volá aj funkciu \textbf{writeFunctionToFile}.
 \begin{lstlisting}[caption=Definícia API volania SetThreadContext.,label={vypiS3}]
 static BOOL(__stdcall *RealSetThreadContext)(HANDLE, const CONTEXT*) = SetThreadContext;
 
@@ -384,19 +410,15 @@ switch (ul_reason_for_call)
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption=Inicializácia mutexu.,label={vypiS5}]
-HANDLE mutexOnThreadSafe;
-mutexOnThreadSafe = CreateMutex(NULL, FALSE, TEXT("MutexOnThreadSafe"));
-
-\end{lstlisting}
-
 \subsection{Detours}
-\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. Okrem základnıch funkcií Detours obsahuje funkcie na úpravu importnej tabu¾ky DLL ¾ubovo¾ného binárneho súboru, pripojenie ¾ubovo¾nıch údajov k existujúcim binárnym súborom a slúi na naèítanie DLL do nového procesu. \cite{detours} Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza volanie cie¾ovej funkcie skokom na pouívate¾om zadanú  funkciu. Kód cie¾ovej funkcie je modifikovanı v pamäti, nie na disku, èo umoòuje zachytávanie funkcií. \cite{detours} Po naèítaní do procesu môe DLL kninica nahradi akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API. 
 
+\textit{Detours} je kninica urèená na monitorovanie a inštruovanie API volaní v systéme Windows. \cite{detours} Táto kninica podporuje rovnako 32 tak aj 64 bitovú verziu Windowsu. \textit{Detours} u¾ahèuje prácu vıvojárom, ktorı pracujú s rozhraním API volaní. Kninica sa aplikuje dynamicky za behu programu. Detours nahrádza volanie cie¾ovej funkcie skokom na pouívate¾om zadanú funkciu. Okrem základnıch funkcií obsahuje Detours aj funkcie na úpravu importnej tabu¾ky DLL ¾ubovo¾ného binárneho súboru, pripojenie ¾ubovo¾nıch segmentov údajov k existujúcim binárnym súborom a na naèítanie DLL do nového procesu.\cite{detours} Po naèítaní do procesu môe DLL kninica nahradi akúko¾vek funkciu v procese, ako sú napríklad rozhrania Windows API. 
+
+Naša aplikácia vyuíva \textit{Detours} pre jednoduchšie sledovanie API volaní v module na zber dát. Okrem sledovania nám umoòuje nahrádza pôvodné API nami vybranımi a modifikovanımi API funkciami, ktoré sú obsiahnuté v DLL kninici \textbf{Hook.dll}. Tieto funkcie je moné ve¾mi jednoduchım spôsobom nahradi ako ukazujeme vo vıpise è. 4.
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=12cm]{img/Detours.jpg}
-	\caption{Ukáka pridania kninice Detours do aplikácie.}
+	\caption{Ukáka pridania kninice Detours do modulu na zber dát.}
 	\label{Detours}
 \end{figure}
 
