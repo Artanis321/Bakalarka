@@ -2,12 +2,57 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: ukazka_prace1.aux
 The style file: FEIstyle.bst
 Database file #1: includes/bibliography.bib
 Warning--entry type for "malvare" isn't style-file defined
---line 12 of file includes/bibliography.bib
+--line 11 of file includes/bibliography.bib
 Warning--entry type for "sinobiki" isn't style-file defined
---line 20 of file includes/bibliography.bib
+--line 17 of file includes/bibliography.bib
+Warning--entry type for "osiris" isn't style-file defined
+--line 23 of file includes/bibliography.bib
+Warning--entry type for "osiris2" isn't style-file defined
+--line 30 of file includes/bibliography.bib
+Warning--entry type for "zeus2" isn't style-file defined
+--line 37 of file includes/bibliography.bib
+Warning--entry type for "emotet" isn't style-file defined
+--line 43 of file includes/bibliography.bib
+Warning--entry type for "mirai" isn't style-file defined
+--line 49 of file includes/bibliography.bib
+Warning--entry type for "endgame" isn't style-file defined
+--line 55 of file includes/bibliography.bib
+Warning--entry type for "emotet2" isn't style-file defined
+--line 61 of file includes/bibliography.bib
+Warning--entry type for "phdetection" isn't style-file defined
+--line 68 of file includes/bibliography.bib
+Warning--entry type for "hollowfind" isn't style-file defined
+--line 74 of file includes/bibliography.bib
+Warning--entry type for "detours" isn't style-file defined
+--line 80 of file includes/bibliography.bib
 Warning--entry type for "winapi" isn't style-file defined
---line 94 of file includes/bibliography.bib
-Warning--I didn't find a database entry for "phdetection"
-Warning--I didn't find a database entry for "hollowfind"
-Warning--I didn't find a database entry for "detours"
-(There were 6 warnings)
+--line 86 of file includes/bibliography.bib
+Warning--entry type for "dridex" isn't style-file defined
+--line 92 of file includes/bibliography.bib
+I was expecting a `,' or a `}'---line 102 of file includes/bibliography.bib
+ :   
+ :   note = "[Online; cit. 2020-04-01]"
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "hollowing" isn't style-file defined
+--line 105 of file includes/bibliography.bib
+Warning--entry type for "anyRun" isn't style-file defined
+--line 112 of file includes/bibliography.bib
+Warning--entry type for "virusTotal" isn't style-file defined
+--line 118 of file includes/bibliography.bib
+Warning--entry type for "gitHub" isn't style-file defined
+--line 124 of file includes/bibliography.bib
+Warning--to sort, need author or key in malvare
+Warning--to sort, need author or key in endgame
+Warning--to sort, need author or key in sinobiki
+Warning--to sort, need author or key in emotet
+Warning--to sort, need author or key in zeus2
+Warning--to sort, need author or key in mirai
+Warning--to sort, need author or key in winapi
+Warning--to sort, need author or key in phdetection
+Warning--to sort, need author or key in hollowfind
+Warning--to sort, need author or key in detours
+Warning--to sort, need author or key in gitHub
+Warning--to sort, need author or key in anyRun
+Warning--to sort, need author or key in virusTotal
+(There was 1 error message)

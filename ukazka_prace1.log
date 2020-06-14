@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  14 JUN 2020 16:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  14 JUN 2020 19:44
 entering extended mode
 **./ukazka_prace1.tex
 (ukazka_prace1.tex
@@ -857,7 +857,7 @@ Package caption Info: End \AtBeginDocument code.
 
 
 {C:/Users/Lukas/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [1]
-<includes/Zadanie.jpg, id=114, 360.74776pt x 484.209pt>
+<includes/Zadanie.jpg, id=118, 360.74776pt x 484.209pt>
 File: includes/Zadanie.jpg Graphic file (type jpg)
 <use includes/Zadanie.jpg>
 Package pdftex.def Info: includes/Zadanie.jpg  used on input line 34.
@@ -960,7 +960,13 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
 3.
 ("D:\App Windows\mikteX\tex/latex/lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [2]
+)
+Overfull \hbox (5.87888pt too wide) in paragraph at lines 26--28
+\T1/lmr/m/n/12 je ukry´ ²kodlivý kód do ex-is-tu-júce pro-cesu, z ktorého sa ná
+sledne bude vykonáva´[[]].
+ []
+
+[2]
 Overfull \hbox (5.51805pt too wide) in paragraph at lines 31--32
 []\T1/lmr/m/n/12 Do vir-tuál-neho adres-ného priestoru le-git-ím-neho pro-cesu 
 nakopíruje svoj ²kodlivý
@@ -985,7 +991,7 @@ oré umoº¬uje úto£níkovi
  []
 
 [6] [7]
-<img/Diagram.jpg, id=260, 703.62875pt x 1106.1325pt>
+<img/Diagram.jpg, id=265, 703.62875pt x 1106.1325pt>
 File: img/Diagram.jpg Graphic file (type jpg)
 <use img/Diagram.jpg>
 Package pdftex.def Info: img/Diagram.jpg  used on input line 135.
@@ -1006,20 +1012,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 197--201
  []
 
 [10]
-
-LaTeX Warning: Citation `phdetection' on page 11 undefined on input line 208.
-
-
-Overfull \hbox (3.80917pt too wide) in paragraph at lines 208--209
+Overfull \hbox (3.30916pt too wide) in paragraph at lines 208--209
 []\T1/lmr/m/it/12 PHDetection \T1/lmr/m/n/12 h©adá mod-uly, od ktorých závisí p
 ôvodný spustite©ný pro-gram [[]]. \T1/lmr/m/it/12 PHDe-
  []
 
-
-LaTeX Warning: Citation `hollowfind' on page 11 undefined on input line 212.
-
 [11]
-<img/Automat.jpg, id=283, 511.9125pt x 1115.16624pt>
+<img/Automat.jpg, id=292, 511.9125pt x 1115.16624pt>
 File: img/Automat.jpg Graphic file (type jpg)
 <use img/Automat.jpg>
 Package pdftex.def Info: img/Automat.jpg  used on input line 218.
@@ -1043,13 +1042,13 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                removing `\textasciicaron' on input line 275.
 
 [14] [15] [16]
-<img/UML2.jpg, id=312, 693.59125pt x 372.39125pt>
+<img/UML2.jpg, id=321, 693.59125pt x 372.39125pt>
 File: img/UML2.jpg Graphic file (type jpg)
 <use img/UML2.jpg>
 Package pdftex.def Info: img/UML2.jpg  used on input line 315.
 (pdftex.def)             Requested size: 341.43306pt x 183.31995pt.
  [17 <./img/UML2.jpg>]
-<img/UML.jpg, id=319, 753.81625pt x 964.60374pt>
+<img/UML.jpg, id=328, 753.81625pt x 964.60374pt>
 File: img/UML.jpg Graphic file (type jpg)
 <use img/UML.jpg>
 Package pdftex.def Info: img/UML.jpg  used on input line 333.
@@ -1062,43 +1061,27 @@ LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
 ("D:\App Windows\mikteX\tex/latex/lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [18 <./img/UML.jpg>]
-<img/configuration.png, id=325, 473.77pt x 169.63374pt>
+<img/configuration.png, id=334, 473.77pt x 169.63374pt>
 File: img/configuration.png Graphic file (type png)
 <use img/configuration.png>
 Package pdftex.def Info: img/configuration.png  used on input line 347.
 (pdftex.def)             Requested size: 284.52756pt x 101.87679pt.
-<img/Result.jpg, id=328, 174.05025pt x 146.34676pt>
+<img/Result.jpg, id=337, 174.05025pt x 146.34676pt>
 File: img/Result.jpg Graphic file (type jpg)
 <use img/Result.jpg>
 Package pdftex.def Info: img/Result.jpg  used on input line 356.
 (pdftex.def)             Requested size: 256.0748pt x 215.33704pt.
  [19 <./img/configuration.png> <./img/Result.jpg>] [20] [21]
 
-LaTeX Warning: Citation `detours' on page 22 undefined on input line 426.
-
-
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
 (hyperref)                removing `\textasciicaron' on input line 428.
 
 [22]
-
-LaTeX Warning: Citation `gitHub' on page 23 undefined on input line 433.
-
-
 Overfull \hbox (7.36778pt too wide) in paragraph at lines 433--434
 []\T1/lmr/m/n/12 Na²u ap-liká-ciu sme testo-vali v prostredí \T1/lmr/m/it/12 Vi
 r-tual Box\T1/lmr/m/n/12 , na sys-téme Win-dows 10. Hlavným
  []
-
-
-LaTeX Warning: Citation `anyRun' on page 23 undefined on input line 437.
-
-
-LaTeX Warning: Citation `virusTotal' on page 23 undefined on input line 437.
-
-
-LaTeX Warning: Citation `anyRun' on page 23 undefined on input line 437.
 
 
 Overfull \hbox (3.71013pt too wide) in paragraph at lines 451--451
@@ -1108,11 +1091,76 @@ Overfull \hbox (3.71013pt too wide) in paragraph at lines 451--451
 [23]) [24] (includes/conclusion.tex) [25
 
 
-] (ukazka_prace1.bbl) [26
+] (ukazka_prace1.bbl
+Underfull \hbox (badness 1590) in paragraph at lines 29--34
+\T1/lmr/m/n/12 The Code Tells Us.  [][]$\T1/lmtt/m/n/12 https : / / www . mcafe
+e . com / blogs / other -[] blogs / mcafee -[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+\T1/lmtt/m/n/12 labs / mcafee -[] atr -[] analyzes -[] sodinokibi -[] aka -[] r
+evil -[] ransomware -[] as -[] a -[]
+ []
+
+
+Underfull \hbox (badness 4013) in paragraph at lines 52--57
+\T1/lmr/m/n/12 Pro-cess In-jec-tion Tech-niques.  [][]$\T1/lmtt/m/n/12 https : 
+/ / www . endgame . com / blog / technical -[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--57
+\T1/lmtt/m/n/12 blog / ten -[] process -[] injection -[] techniques -[] technic
+al -[] survey -[] common -[] and -[]
+ []
+
+
+Underfull \hbox (badness 4013) in paragraph at lines 70--73
+[]\T1/lmr/m/n/12 Zeus Virus.  [][]$\T1/lmtt/m/n/12 https : / / usa . kaspersky 
+. com / resource -[] center / threats / zeus -[]
+ []
+
+
+Underfull \hbox (badness 6412) in paragraph at lines 75--80
+[]\T1/lmr/m/sc/12 Cimpanu, C.  \T1/lmr/m/n/12 Emotet, to-day's most dan-ger-ous
+ bot-net, comes back
+ []
+
+
+Underfull \hbox (badness 3965) in paragraph at lines 75--80
+\T1/lmr/m/n/12 to life.  [][]$\T1/lmtt/m/n/12 https : / / www . zdnet . com / a
+rticle / emotet -[] todays -[] most -[] dangerous -[]
+ []
+
+[26
 
 
 ]
-(ukazka_prace1.pri)
+Underfull \hbox (badness 2980) in paragraph at lines 82--87
+[]\T1/lmr/m/sc/12 Lewis, N.  \T1/lmr/m/n/12 What new tech-nique does the Osiris
+ bank-ing Tro-jan use?
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--87
+[][]$\T1/lmtt/m/n/12 https : / / searchsecurity . techtarget . com / answer / W
+hat -[] new -[] technique -[] does -[]
+ []
+
+
+Underfull \hbox (badness 5637) in paragraph at lines 89--94
+[]\T1/lmr/m/sc/12 Osborne, C.  \T1/lmr/m/n/12 New Dridex mal-ware strain avoids
+ an-tivirus soft-ware.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--94
+[][]$\T1/lmtt/m/n/12 https : / / www . zdnet . com / article / new -[] dridex -
+[] malware -[] strain -[] avoids -[]
+ []
+
+) [27] (ukazka_prace1.pri)
 \tf@pri=\write8
 \openout8 = `ukazka_prace1.pri'.
 
@@ -1127,29 +1175,34 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
 (hyperref)                removing `\textasciicaron' on input line 54.
 
-(includes/prilohaA.tex)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 55.
- [2
+(includes/prilohaA.tex) [2
+
+
+] (includes/prilohaB.tex
+Overfull \hbox (5.3587pt too wide) in paragraph at lines 8--9
+[]\T1/lmr/bx/n/12 Hook\ \T1/lmr/m/n/12 - prie£i-nok ob-sahu-júci zdro-jevé kódy
+ ku vy-gen-erov-naiu kniºnice Hook.dll
+ []
+
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 56.
+ [3
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 56.
  (ukazka_prace1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 55.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 55.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 56.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 56.
 Package rerunfilecheck Info: File `ukazka_prace1.out' has not changed.
-(rerunfilecheck)             Checksum: 58D6D3227DE7EC19B873AE3FA001FD3E;1549.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 55.
+(rerunfilecheck)             Checksum: 4DB296732DA6718BCD2F6E3B0764FFAA;1614.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 56.
  ) 
 Here is how much of TeX's memory you used:
- 13359 strings out of 492450
- 195745 string characters out of 3132532
+ 13381 strings out of 492450
+ 196039 string characters out of 3132532
  519312 words of memory out of 3000000
- 17251 multiletter control sequences out of 15000+200000
+ 17260 multiletter control sequences out of 15000+200000
  69519 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,11n,65p,1298b,1245s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1162,10 +1215,11 @@ dows/mikteX/fonts/type1/public/lm/lmmi12.pfb><D:/App Windows/mikteX/fonts/type1
 /public/lm/lmr12.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmr8.pfb><D:/
 App Windows/mikteX/fonts/type1/public/lm/lmri12.pfb><D:/App Windows/mikteX/font
 s/type1/public/lm/lmsy10.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmtt1
-0.pfb><D:/App Windows/mikteX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on ukazka_prace1.pdf (37 pages, 661095 bytes).
+0.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmtt12.pfb><D:/App Windows/m
+ikteX/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on ukazka_prace1.pdf (39 pages, 699885 bytes).
 PDF statistics:
- 494 PDF objects out of 1000 (max. 8388607)
- 134 named destinations out of 1000 (max. 500000)
- 236 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 557 PDF objects out of 1000 (max. 8388607)
+ 144 named destinations out of 1000 (max. 500000)
+ 244 words of extra memory for PDF output out of 10000 (max. 10000000)
 

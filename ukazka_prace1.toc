@@ -25,3 +25,4 @@
 \contentsline {section}{Zoznam pou\v {z}itej literat\'{u}ry}{26}{section*.78}%
 \contentsline {section}{Pr\'{i}lohy}{I}{section*.79}%
 \contentsline {section}{\numberline {A} \v Strukt\'ura elektronick\'eho nosi\v ca}{II}{section.81}%
+\contentsline {section}{\numberline {B} Technick\'a dokument\'acia}{III}{section.84}%
