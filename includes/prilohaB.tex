@@ -12,11 +12,11 @@ Technická dokumentácia k jednotlivım adresátom
 		\item \textbf{configuration.txt} - obsahuje definíciu matice koneèného stavového automatu so stavmi a prechodmi medzi jednotlivımi stavmi.
 		\item \textbf{configFile.txt} - súbor na urèenie cesty ku testovacej vzorke pre aplikáciu na testovanie. POZOR! Nutné zada celú cestu aj so vzorkou!
 		\item \textbf{archive.txt} - súbor urèenı na archiváciu záznamov.
-		\item \textbf{hookAplicationResult.txt} - súbor urèenı na uchovávanie záznamov z modulu na zber dát pred ich ïalším spracovaním 
+		\item \textbf{hookAplicationResult.txt} - súbor urèenı na uchovávanie záznamov z modulu na zber dát pred ich ïalším spracovaním. 
 	\end{itemize} 
 	\item \textbf{Detours\textbackslash} - adresár s \textit{Detours} kninicou. Na pouívanie tejto kninice je nutné ju extrahova. Ideálne do "C:\" prieèinka. 
 	
-	Kninicu je nutné prida aj do príslušného \textit{Solution} aplikácie. V sekcii \textbf{Properties\textbackslash Configuration Propertied\textbackslash VC++Directories} pridáme cestu k prieèinku include do "Include Directiories" z kninice detours v extrahovanom adresáry napr. "C:\textbackslash detours\textbackslash Detours-master\textbackslash include;". A cestu k prieèinu library do "Library Directiories" pod¾a toho o akú aplikáciu pôjde napr. pre 32 bitovú "C:\textbackslash detours\textbackslash Detours-master\textbackslash lib.X86"
+	Kninicu je nutné prida aj do príslušného \textit{Solution} aplikácie. V sekcii \textbf{Properties\textbackslash Configuration Propertied\textbackslash VC++Directories} pridáme cestu k prieèinku include do "Include Directiories" z kninice detours v extrahovanom adresáry napr. "C:\textbackslash detours\textbackslash Detours-master\textbackslash include;". A cestu k prieèinu library do "Library Directiories" pod¾a toho o akú aplikáciu pôjde napr. pre 32 bitovú "C:\textbackslash detours\textbackslash Detours-master\textbackslash lib.X86".
 	
 	V sekcii \textbf{Properties\textbackslash Configuration Propertied\textbackslash Linker\textbackslash Input} do "Additional Dependencies" pridáme nízov kninice detours "detours.lib".
 \end{itemize}
