@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  14 JUN 2020 20:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  14 JUN 2020 21:28
 entering extended mode
 **./ukazka_prace1.tex
 (ukazka_prace1.tex
@@ -1077,12 +1077,6 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
 (hyperref)                removing `\textasciicaron' on input line 428.
 
-
-Overfull \hbox (5.17969pt too wide) in paragraph at lines 430--431
-\T1/lmr/m/n/12 Toto po-radie volaných API ur£uje ex-is-ten-ciu tech-niky \T1/lm
-r/m/it/12 pro-cess hol-low-ing \T1/lmr/m/n/12 v pro-cese. Kone£ný
- []
-
 [22]
 Overfull \hbox (7.36778pt too wide) in paragraph at lines 433--434
 []\T1/lmr/m/n/12 Na²u ap-liká-ciu sme testo-vali v prostredí \T1/lmr/m/it/12 Vi
@@ -1229,9 +1223,9 @@ App Windows/mikteX/fonts/type1/public/lm/lmri12.pfb><D:/App Windows/mikteX/font
 s/type1/public/lm/lmsy10.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmtt1
 0.pfb><D:/App Windows/mikteX/fonts/type1/public/lm/lmtt12.pfb><D:/App Windows/m
 ikteX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on ukazka_prace1.pdf (39 pages, 699559 bytes).
+Output written on ukazka_prace1.pdf (39 pages, 698961 bytes).
 PDF statistics:
- 556 PDF objects out of 1000 (max. 8388607)
+ 555 PDF objects out of 1000 (max. 8388607)
  144 named destinations out of 1000 (max. 500000)
  244 words of extra memory for PDF output out of 10000 (max. 10000000)
 
